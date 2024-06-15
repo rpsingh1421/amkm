@@ -9,6 +9,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import TermsAndConditions from "./TermsAndConditions";
 import { ArrowBack } from "@mui/icons-material";
+import Image from "next/image";
 
 const Donordetails = () => {
     const {donorDetailsInitialState,donorDetails,setDonorDetails,step,setStep} = useContext(DonorDetailContext);

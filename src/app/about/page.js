@@ -123,7 +123,7 @@ const About = () => {
           </Box>
         </Box>
       </Paper>
-      <Image width={100} height={100} className="w-full" src="/project-work/p4_image.jpg"/>
+      <Image width={100} height={100} alt="about_amkm" className="w-full" src="/project-work/p4_image.jpg"/>
     </MainLayout>
   )
 }
