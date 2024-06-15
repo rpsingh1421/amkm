@@ -16,7 +16,7 @@ export default async function NotFound() {
                             <Typography className="text-center text-6xl font-extrabold">404</Typography>
                         </Box>
                         <Box className="mt-[-50px]">
-                            <Typography className="text-5xl font-bold"> Look like you're lost</Typography>
+                            <Typography className="text-5xl font-bold"> Look like you&apos;re lost</Typography>
                             <Typography className='text-xl my-[1%]'>the page you are looking for not avaible!</Typography>
                             <Link href="/" className="inline-block text-[#fff] py-[10px] px-[20px] bg-[#39ac31] my-[20px]">Go to Home</Link>
                         </Box>
