@@ -1,3 +1,5 @@
+// src/app/[...not_found].js
+
 // import {notFound} from "next/navigation"
 
 // export default function NotFoundCatchAll() {
@@ -5,7 +7,7 @@
 // }
 
 
-// pages/[...not_found].js
+
 
 // export async function generateStaticParams() {
 //   // Return an array of parameters for dynamic routes.
