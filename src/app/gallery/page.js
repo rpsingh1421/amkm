@@ -2,6 +2,7 @@ import { Box, Card, Typography } from '@mui/material'
 import React from 'react'
 import GalleryBody from './GalleryBody'
 import MainLayout from '../components/Layout/MainLayout'
+import GIveUsHand from '../components/GiveUsHand'
 
 
 const GalleryPage = () => {
@@ -9,6 +10,7 @@ const GalleryPage = () => {
     <MainLayout>
       <Box className="hidden bg-cover bg-[url('/gallery_banner1.png')] h-[30vh] sm:flex items-center"></Box>
       <GalleryBody/>
+      <GIveUsHand/>
     </MainLayout>
   )
 }

@@ -3,13 +3,14 @@ import React from 'react'
 import MailForm from '../contact/MailForm'
 import MainLayout from '../components/Layout/MainLayout'
 import Image from 'next/image'
+import GIveUsHand from '../components/GiveUsHand'
 
 const volunteerPage = () => {
   return (
     <MainLayout>
     
       <Box className="relative h-fit">
-      <Image width={100} height={100} alt='amkm_page_banner' src='/amkm_page_banner.png'className='w-full'/>
+      <Image width={2000} height={100} alt='amkm_page_banner' src='/amkm_page_banner.png' className='w-full'/>
         <Typography component={'h2'} className='text-center font-bold font-sans text-3xl sm:text-5xl text-white absolute left-0 right-0 m-auto top-[10%] sm:top-1/2'>Become Volunteer</Typography>
       </Box>
       <Box className="sm:w-[85%] m-auto py-5 px-[5%] sm:px-0">
@@ -23,6 +24,7 @@ const volunteerPage = () => {
             <MailForm/>
         </Box>
       </Box>
+      <GIveUsHand/>
     </MainLayout>
   )
 }

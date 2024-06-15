@@ -7,16 +7,16 @@ const page = () => {
   return (
     <MainLayout>
       <Box className="relative">
-        <Image width={100} height={100} alt='page_banner' src='/leadership_story_bg1.jpg'/>
+        <Image width={1000} height={100} alt='page_banner' className='w-full' src='/leadership_story_bg1.jpg'/>
         <Box className='absolute top-[35%] left-0 right-0 text-center'>
             <Typography component={'h2'} className='text-5xl md:text-9xl font-bold'>LEADERSHIP</Typography>
             <Typography component={'h2'} className='text-2xl sm:text-4xl font-bold'>AMKM - &quot;AAO MILKAR KAREN MADAD&quot; (ORG.) </Typography>
         </Box>
       </Box>
       <Box>
-        <Image width={100} height={100} src='/team/amkm_team1.jpg' alt='amkm_team'/>
-        <Image width={100} height={100} src='/team/amkm_team2.jpg' alt='amkm_team'/>
-        <Image width={100} height={100} src='/team/amkm_team3.jpg' alt='amkm_team'/>
+        <Image width={1000} height={100} className='w-full' src='/team/amkm_team1.jpg' alt='amkm_team'/>
+        <Image width={1000} height={100} className='w-full' src='/team/amkm_team2.jpg' alt='amkm_team'/>
+        <Image width={1000} height={100} className='w-full' src='/team/amkm_team3.jpg' alt='amkm_team'/>
       </Box>
     </MainLayout>
   )

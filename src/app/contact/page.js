@@ -8,12 +8,13 @@ import CopyRight from "../components/CopyRight"
 import Footer from "../components/Footer"
 import MainLayout from "../components/Layout/MainLayout"
 import Image from "next/image"
+import GIveUsHand from "../components/GiveUsHand"
 
 const ContactPage = () => {
   return (
     <MainLayout>
       <Box className="relative h-fit">
-      <Image width={100} height={100} alt="banner" src="/amkm_page_banner.png"className="w-full"/>
+      <Image width={2000} height={100} alt="banner" src="/amkm_page_banner.png"className="w-full"/>
         <Typography className="text-center font-bold font-sans text-5xl text-white absolute left-0 right-0 m-auto top-[10%] sm:top-1/2">Contact Us</Typography>
       </Box>
       <Box className="lg:w-[80%] m-auto relative py-[2%]">
@@ -58,7 +59,7 @@ const ContactPage = () => {
           </iframe>
         </Box>
       </Paper>
-      
+      <GIveUsHand/>
     </MainLayout>
   )
 }
