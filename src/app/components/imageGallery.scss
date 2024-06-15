@@ -1,0 +1,52 @@
+.photo_gallery{
+    height: 100vh;
+    background: #f1f1f1;
+    .gallery_section{
+        width: 100%;
+        height: 75%;
+        justify-content: space-around;
+        --cards-text-color: #fff;
+        --cards-closed-size: 10rem;
+        --animation-speed-normal: .5s;
+        --animation-speed-fast: .25s;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        width: 100%;
+        padding: 3% 0;
+    }
+    
+    
+    .card {
+        
+        width:10%;
+        position: relative;
+        z-index: 1;
+                    /* property name | duration | behavior */
+        transition:  var(--animation-speed-normal) linear;
+        cursor: pointer
+    }
+    
+    .card__image {
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        opacity: .6;
+        border-radius: 10px
+    }
+    
+    
+    
+    .card[active] img {
+        opacity: 1;
+        // width:45%;
+    }
+    .card[active] {
+        // opacity: 1;
+        width:45%;
+    }
+}
