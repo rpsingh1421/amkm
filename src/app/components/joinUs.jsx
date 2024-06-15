@@ -25,14 +25,14 @@ const JoinUsSection = () => {
           </Box>
           <Box className="sm:w-[60%] flex gap-[1%] h-max">
             <Box className="w-1/2 rounded-xl">
-              <Image width={"100"} height={"100"} 
+              <Image width={100} height={200} 
                 src="/joinus/joinUs1.jpg"
                 alt="Joining Image 1"
                 className="w-full h-full rounded-xl"
               />
             </Box>
             <Box className="w-1/2">
-              <Image width={"100"} height={"100"} 
+              <Image width={225} height={100} 
                 src="/joinus/joinUs2.jpg"
                 alt="Joining Image 2"
                 className="w-full h-full rounded-xl"

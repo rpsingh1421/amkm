@@ -15,17 +15,17 @@ export default function Home() {
     <Box>
       <TopBar/>
       <Box className="sm:relative">
-        {/* <Box className="sm:absolute top-0 w-full z-[1]">
+        <Box className="sm:absolute top-0 w-full z-[1]">
           <NavBar/> 
-        </Box> */}
+        </Box>
       {/* =============Banner Section==========================*/}
-        {/* <Banner/> */}
+        <Banner/>
       {/* =============Banner Section==========================*/}
       </Box>
-      {/* <NgoProfile/> */}
-      {/* <ImageGallery/> */}
-      {/* <Team/> */}
-      {/* <JoinUsSection/> */}
+      <NgoProfile/>
+      <ImageGallery/>
+      <Team/>
+      <JoinUsSection/>
       <Footer/>
       <CopyRight/>
     </Box>
