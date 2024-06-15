@@ -7,7 +7,7 @@ const page = () => {
   return (
     <MainLayout>
       <Box className="relative">
-        <Image width={100} height={100} src='/leadership_story_bg1.jpg'/>
+        <Image width={100} height={100} alt='page_banner' src='/leadership_story_bg1.jpg'/>
         <Box className='absolute top-[35%] left-0 right-0 text-center'>
             <Typography component={'h2'} className='text-5xl md:text-9xl font-bold'>LEADERSHIP</Typography>
             <Typography component={'h2'} className='text-2xl sm:text-4xl font-bold'>AMKM - &quot;AAO MILKAR KAREN MADAD&quot; (ORG.) </Typography>

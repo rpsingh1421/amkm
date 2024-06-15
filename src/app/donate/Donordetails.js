@@ -320,7 +320,7 @@ const Donordetails = () => {
         />
         
         <Box className="my-[3%] text-center">
-            <img src="/payment-mode-strip.png" alt="payment-strip" className="m-auto w-fit"/>
+            <Image width={100} height={100} src="/payment-mode-strip.png" alt="payment-strip" className="m-auto w-fit"/>
             <Typography className="text-xs">We accept all major payment methods</Typography>
         </Box>
         <Box className="flex">

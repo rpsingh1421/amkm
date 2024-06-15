@@ -2,12 +2,13 @@
 import { Box, Paper, Typography } from "@mui/material"
 import React from "react"
 import MainLayout from "../components/Layout/MainLayout"
+import Image from "next/image"
 
 const page = () => {
   return (
     <MainLayout>
       <Box className="relative">
-        <img src="/banner/amkm_story_banner.png"/>
+        <Image width={100} height={100} alt='story_banner' src="/banner/amkm_story_banner.png"/>
         <Box className="absolute top-[35%] left-0 right-0 text-center">
             <Typography component={"h2"} className="text-3xl md:text-6xl lg:text-9xl font-bold text-white">WHO WE ARE</Typography>
             <Typography component={"h2"} className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">AMKM - &quot;AAO MILKAR KAREN MADAD&quot; (ORG.) </Typography>
@@ -18,7 +19,7 @@ const page = () => {
           <Box className="container mx-auto p-4">
             <Box className="flex flex-col sm:flex-row">
               <Box className="sm:flex-shrink-0 sm:w-[40%]">
-                <img
+                <Image width={100} height={100}
                   src="/p15_image.png"
                   alt="Descriptive Alt Text"
                   className="w-full h-auto sm:mr-4 mb-4 sm:mb-0 rounded-xl"
@@ -36,7 +37,7 @@ const page = () => {
                 <Typography>Founder of the organization, Anurag Singh, along with his friend Rohit, started the village conscious in the early days and made the people aware and turned their children into education and enrolled them in schools. When awareness campaign was going on in village-village, only then the founder of the institution got information about the problems of women, after which a women cell team was formed to listen to the problems of women in the presence of all the members. Whose national president Smriti Prabha, was vice-president, K. Anuradha, who is still in office. These people expanded their team and added other girls, which are mainly active members like Vijaya, Anju, Shivangi, Sudha, Kajal, Pooja, Ekta etc.</Typography>
               </Box>
               <Box className="sm:flex-shrink-0 sm:w-[40%]">
-                <img
+                <Image width={100} height={100}
                   src="/project-work/p31_image.png"
                   alt="Descriptive Alt Text"
                   className="w-full h-auto sm:mr-4 mb-4 sm:mb-0 rounded-xl"
@@ -48,7 +49,7 @@ const page = () => {
           <Box className="container mx-auto p-4">
             <Box className="flex flex-col sm:flex-row">
               <Box className="sm:flex-shrink-0 sm:w-[40%]">
-                <img
+                <Image width={100} height={100}
                   src="/project-work/p59_image.png"
                   alt="Descriptive Alt Text"
                   className="w-full h-auto sm:mr-4 mb-4 sm:mb-0 rounded-xl"
@@ -65,7 +66,7 @@ const page = () => {
                 <Typography>Many academies had been opened in the beginning days which had to be stopped due to financial problems.Presently, many other types of activities are being done in addition to studying academy children of the institute such as photography, music, preparation for cultural programs, making paintings, evacuation rallies etc.</Typography>
               </Box>
               <Box className="sm:flex-shrink-0 sm:w-1/2">
-                <img
+                <Image width={100} height={100}
                   src="/project-work/p89_image.jpg"
                   alt="Descriptive Alt Text"
                   className="w-full h-auto sm:mr-4 mb-4 sm:mb-0 rounded-xl"
@@ -77,7 +78,7 @@ const page = () => {
           <Box className="container mx-auto p-4">
             <Box className="flex flex-col sm:flex-row">
               <Box className="sm:flex-shrink-0 sm:w-[40%]">
-                <img
+                <Image width={100} height={100}
                   src="/project-work/p97_image.jpg"
                   alt="Descriptive Alt Text"
                   className="w-full h-auto sm:mr-4 mb-4 sm:mb-0 rounded-xl"
@@ -96,7 +97,7 @@ const page = () => {
                 <Typography>Given the work of the institute, the founder of the institution was named for the &quot;Swayam Festival Award-2013&quot; of the Gaon Connection Foundation. And the rural program of the same foundation was honored at the district level to take part in &quot;Swayam Festival&quot;.</Typography>
               </Box>
               <Box className="sm:flex-shrink-0 sm:w-1/2">
-                <img
+                <Image width={100} height={100}
                   src="/project-work/p93_image.jpg"
                   alt="Descriptive Alt Text"
                   className="w-full h-auto sm:mr-4 mb-4 sm:mb-0 rounded-xl"
@@ -108,7 +109,7 @@ const page = () => {
           <Box className="container mx-auto p-4">
             <Box className="flex flex-col sm:flex-row">
               <Box className="sm:flex-shrink-0 sm:w-1/2">
-                <img
+                <Image width={100} height={100}
                   src="/project-work/p34_image.png"
                   alt="Descriptive Alt Text"
                   className="w-full h-auto sm:mr-4 mb-4 sm:mb-0 rounded-xl"

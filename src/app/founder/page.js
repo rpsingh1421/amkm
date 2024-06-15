@@ -5,16 +5,17 @@ import NavBar from "../components/NavBar"
 import Footer from "../components/Footer"
 import CopyRight from "../components/CopyRight"
 import MainLayout from "../components/Layout/MainLayout"
+import Image from "next/image"
 
 const page = () => {
   return (
     <MainLayout>
       <Box>
-        <img src="/founder_bg.png" alt="founder_bg.png" className="w-full"/>
+        <Image width={100} height={100} src="/founder_bg.png" alt="founder_bg.png" className="w-full"/>
         <Box className="w-[90%] m-auto p-[3%]">
             <Box className="lg:flex gap-[2%]">
                 <Box className="lg:w-1/3">
-                    <img src="/founder/founder_amkm_anurag1.jpg" alt="founder_anurag" className="rounded-xl"/>
+                    <Image width={100} height={100} src="/founder/founder_amkm_anurag1.jpg" alt="founder_anurag" className="rounded-xl"/>
                 </Box>
                 <Box className="lg:w-2/3">
                     <Typography className="mb-[2%] text-base font-semibold text-[#9e9f9f]">Anurag, a victim of paralysis since childhood, is determined to always take the children of his area forward, regardless of his illness. They want that as today their body is helpless due to a major disease and it is not becoming an obstacle in their work, in the same way poverty should not become an obstacle in the education of any child.</Typography>
@@ -30,13 +31,13 @@ const page = () => {
                     <Typography className="mb-[2%] text-base font-semibold text-[#9e9f9f]">In these difficult moments ofAnurag, his best friend Sumit Gupta tried a lot to save him. Anurag&apos;s eyes fill with tears when he tells that he lost his friend in a road accident in the year 2014 but his words “Life never ends with some problems” this sentence gave me courage and I named “Come help together” Opened an institution of Open heart surgery done in November- 2018-</Typography>
                 </Box>
                 <Box className="sm:w-1/3">
-                    <img src="/founder/founder_amkm_anurag2.jpg" alt="founder_anurag" className="rounded-xl mt-[3%]"/>
-                    <img src="/founder/founder_amkm_anurag6.jpg" alt="founder_anurag" className="rounded-xl mt-[3%]"/>
+                    <Image width={100} height={100} src="/founder/founder_amkm_anurag2.jpg" alt="founder_anurag" className="rounded-xl mt-[3%]"/>
+                    <Image width={100} height={100} src="/founder/founder_amkm_anurag6.jpg" alt="founder_anurag" className="rounded-xl mt-[3%]"/>
                 </Box>
             </Box>
             <Box className="lg:flex gap-[2%]">
                 <Box className="sm:w-1/3">
-                    <img src="/founder/founder_amkm_anurag3.jpg" alt="founder_anurag" className="rounded-xl"/>
+                    <Image width={100} height={100} src="/founder/founder_amkm_anurag3.jpg" alt="founder_anurag" className="rounded-xl"/>
                 </Box>
                 <Box className="lg:w-2/3">
                     <Typography className="mb-[2%] text-base font-semibold text-[#9e9f9f]">When Anurag had just started running the institute, his mother had welcomed and supported his decision in the family, but in February 2017, his mother went into a coma and died untimely on 13 August 2017. Anurag&apos;s troubles did not stop here, he came to know of a serious heart ailment sometime after his mother&apos;s death. And despite getting treatment in many big hospitals of Delhi, he did not get rest, after which the doctors performed a very complicated open heart surgery in November 2018 to save his life. Most of the cost of his surgery was borne by his colleague Dr. Rajesh Anuragi in the institute and Professor Rajkumar of Delhi University.</Typography>
@@ -48,7 +49,7 @@ const page = () => {
                     <Typography className="mb-[2%] text-base font-semibold text-[#9e9f9f]">Anurag has also opened a sports academy for the girl students studying in his institute, in which girls play cricket. Anurag says that this task was not easy for him, he took the help of his girls team for this and explained to the girls&apos; families, then the girls went today. Net practice and plays cricket on the field.</Typography>
                 </Box>
                 <Box className="sm:w-1/3">
-                    <img src="/founder/founder_amkm_anurag4.jpg" alt="founder_anurag" className="rounded-xl"/>
+                    <Image width={100} height={100} src="/founder/founder_amkm_anurag4.jpg" alt="founder_anurag" className="rounded-xl"/>
                 </Box>
             </Box>
             <Typography className="mb-[2%] text-base font-semibold">The children of the institute go to the zoo and on picnics-</Typography>
@@ -56,7 +57,7 @@ const page = () => {
                     <Typography className="mb-[2%] text-base font-semibold text-[#9e9f9f]">The youngest of five brothers and two sisters, Anurag tells about himself, “I am the youngest of five brothers and two sisters. I was paralyzed six months after birth. Continuous treatment went on and I was fine at the age of one and a half years. The paralysis was cured, but from the age of three, I started having seizures. My studies never stopped even after the treatment. After passing the 10th examination in the year 2006, the mental balance was completely restored. messed with.&quot; He further explains, &quot;Along with studies, these children are made to do various activities from time to time, which make them happy, coming among these children, I forget my illness and feel happy.&quot; Invest money from your salary</Typography>
             <Box className="lg:flex gap-[2%]">
                 <Box className="sm:w-1/3">
-                    <img src="/founder/founder_amkm_anurag5.jpg" alt="founder_anurag" className="rounded-xl"/>
+                    <Image width={100} height={100} src="/founder/founder_amkm_anurag5.jpg" alt="founder_anurag" className="rounded-xl"/>
                 </Box>
                 <Box className="lg:w-2/3">
                     <Typography className="font-bold text-3xl">&quot;Let&apos;s help together&quot; </Typography>

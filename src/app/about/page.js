@@ -7,12 +7,13 @@ import Footer from "../components/Footer"
 import ShortContent from "../story/ShortContent"
 import ShortStory from "../founder/ShortStory"
 import MainLayout from "../components/Layout/MainLayout"
+import Image from "next/image"
 
 const About = () => {
   return (
     <MainLayout>
       <Box className="relative h-fit">
-        <img src="/amkm_page_banner.png"className="w-full"/>
+      <Image width={100} height={100} alt="banner" src="/amkm_page_banner.png" className="w-full"/>
         <Typography className="text-center font-bold font-sans text-5xl text-white absolute left-0 right-0 m-auto top-[10%] sm:top-1/2">About Us</Typography>
       </Box>
       <Paper className="my-[2%] py-[2%]">
@@ -55,27 +56,27 @@ const About = () => {
         <Box className="sm:flex w-[90%] gap-[2%] m-auto">
            <ShortContent/>         
           <Box className="sm:w-1/2">
-            <img src="/aboutimg1.png" alt="about_image" className="rounded-xl"/>
+            <Image width={100} height={100} src="/aboutimg1.png" alt="about_image" className="rounded-xl"/>
           </Box>
         </Box>
       </Paper>
       <Paper className="sm:flex gap-[3%] p-[3%]">
         <Paper className="sm:w-1/3">
-          <img src="/project-work/p61_image.png" alt="vision_img" className="w-full h-1/3"/>
+          <Image width={100} height={100} src="/project-work/p61_image.png" alt="vision_img" className="w-full h-1/3"/>
           <Box className="p-[3%]">
             <Typography className="font-bold text-3xl">VISION</Typography>
             <Typography className="p-[2%] text-sm font-semibold text-[#9e9f9f]">TO ACTIVELY CONTRIBUTE TO THE SOCIAL AND ECONOMIC DEVELOPMENT OF THE COMMUNITIES IN WHICH WE OPERATE AND TO BE AN ORGANIZATION THAT CONTI NUALLY RESPOND TO THE CHANGING SOCI AL REALITIES THROUGH THE DEVELOPMENT AND APPLICATION OF KNOWLEDGE, TOWARDS DEVELOPMENT OF SUSTAI NABLE SOCIETY THAT PROMOTE AND PROTECTS THE EQUALITY, SOCIAL JUSTICE AND HUMAN RI GHTS FOR ALL.</Typography>
           </Box>
         </Paper>
          <Paper className="sm:w-1/3">
-          <img src="/project-work/p77_image.png" alt="" className="w-full h-1/3"/>
+          <Image width={100} height={100} src="/project-work/p77_image.png" alt="" className="w-full h-1/3"/>
           <Box className="p-[3%]">
             <Typography className="font-bold text-3xl">MISSION</Typography>
             <Typography className="p-[2%] text-sm font-semibold text-[#9e9f9f]">THE MAIN FUNCTION OF THIS ORGANIZATION IS TO HELP THE POORS, EDUCATE THEM AND MARGINED CHILDREN ETC. SO FAR, HUNDREDS OF POOR CHI LDREN HAVE BEEN EDUCATING WITH THE HARD WORK OF THIS ORGANIZATION. IN RECENT DAYS, THE ORGANIZATION HAS OPENED AN ACADEMY IN VILL. - DEVIDAS,POST-SAHAR,DISTT. - AURAIYA(U. P. ),206248. ABOUT 150 CHI LDREN ARE STUDYI NG.</Typography>
           </Box>
         </Paper>
          <Paper className="sm:w-1/3">
-          <img src="/project-work/p93_image.jpg" alt="" className="w-full h-1/3"/>
+          <Image width={100} height={100} src="/project-work/p93_image.jpg" alt="" className="w-full h-1/3"/>
           <Box className="p-[3%]">
             <Typography className="font-bold text-3xl">BELIEVES</Typography>
             <Box>
@@ -96,7 +97,7 @@ const About = () => {
         </Box>
         <Box className="flex w-[90%] gap-[2%] m-auto">
           <Box className="w-1/2">
-            <img src="/project-work/p49_image.png" alt="p49_image" className="rounded-xl h-[85%]"/>
+            <Image width={100} height={100} src="/project-work/p49_image.png" alt="p49_image" className="rounded-xl h-[85%]"/>
           </Box>
           <Box className="w-1/2">
             <Typography className="mb-[2%] text-base font-semibold text-[#9e9f9f]">We want to build a school. In this school, poor and destitute children can study free of cost and build their bright future.</Typography>
@@ -118,11 +119,11 @@ const About = () => {
         <Box className="sm:flex w-[90%] gap-[2%] m-auto">
           <ShortStory/>         
           <Box className="sm:w-1/2">
-            <img src="/project-work/p19_image.png" alt="about_image" className="rounded-xl"/>
+            <Image width={100} height={100} src="/project-work/p19_image.png" alt="about_image" className="rounded-xl"/>
           </Box>
         </Box>
       </Paper>
-      <img className="w-full" src="/project-work/p4_image.jpg"/>
+      <Image width={100} height={100} className="w-full" src="/project-work/p4_image.jpg"/>
     </MainLayout>
   )
 }
