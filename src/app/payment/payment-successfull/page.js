@@ -49,7 +49,7 @@ const paymentSuccessfulPage = () => {
         <Typography className='block text-[#fc6539] mb-3 text-9xl font-serif'>“</Typography>
         <Typography className='font-bold text-2xl'>If we all do something, <br/>then together there is no problem <br/>that we cannot solve!</Typography>
         <Image width={100} height={100} src='/signature_founder.png' alt='signature_of_founder_amkm' className='w-fit m-auto h-[100px]'/>
-        <Typography className="text-bold text-base my-[2%]">FounderName</Typography>
+        <Typography className="text-bold text-base my-[2%]">Anurag Singh</Typography>
         <Typography className='font-bold text-base text-[#fc6539]'>Founder, AAO MILKE KAREIN MADAD</Typography>
       </Box>
       <Box className="bg-cover bg-[url('/project-work/p57_image.jpg')] h-[100vh]"> </Box>
