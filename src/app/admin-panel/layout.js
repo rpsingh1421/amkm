@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
 
 // src/app/layout.js
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL),
+  // metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL),
   title: {
     default: "AMKM || AAO MILKAR KAREN MADAD",
     template: "%s ||AMKM Official website",
