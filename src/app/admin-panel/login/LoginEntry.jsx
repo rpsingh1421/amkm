@@ -2,7 +2,7 @@
 "use client"
 
 import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi'
-// import {  useAuth } from '@/context/AuthContext'
+import { useAuth } from '@/context/AuthContext'
 import { Box, Button, TextField, Typography } from '@mui/material'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -10,7 +10,7 @@ import { useContext, useLayoutEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 const LoginEntry = () => {
-    // const {authenticatedUser, setAuthenticatedUser} = useAuth();
+    const {authenticatedUser, setAuthenticatedUser} = useAuth();
     // console.log("authenticatedUser:",authenticatedUser);
     const api = defaultNodeApi(); // Get the Axios instance
     const loginCredentialsInitial = {
@@ -29,9 +29,9 @@ const LoginEntry = () => {
         console.log("login credentials",loginCredentials);
         const response = await api.post('/rest-api/auth/login',loginCredentials);
         console.log("loginresponse",response);
-        // if(response.data.status){
-        //     setAuthenticatedUser(response.data.body);
-        // }
+        if(response.data.status){
+            setAuthenticatedUser(response.data.body);
+        }
     }
   return (
     <Box component='form' className='p-[5%]' onSubmit={handleSubmit(submitHandler)}>
