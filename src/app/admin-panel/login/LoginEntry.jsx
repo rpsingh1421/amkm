@@ -4,6 +4,7 @@
 import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi'
 import { useAuth } from '@/context/AuthContext'
 import { Box, Button, TextField, Typography } from '@mui/material'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useContext, useLayoutEffect, useState } from 'react'
@@ -35,7 +36,7 @@ const LoginEntry = () => {
     }
   return (
     <Box component='form' className='p-[5%]' onSubmit={handleSubmit(submitHandler)}>
-        <Box className="mb-[3%]"><img src='/aaomilkar_logo.png' className='w-[20%] m-auto'/></Box>
+        <Box className="mb-[3%]"><Image width={100} height={100} alt='logo' src='/aaomilkar_logo.png' className='w-[20%] m-auto'/></Box>
         <TextField
             fullWidth
             className='my-[2%]'

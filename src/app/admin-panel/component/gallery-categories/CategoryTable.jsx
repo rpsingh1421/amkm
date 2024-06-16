@@ -71,9 +71,6 @@ const CategoryTable = () => {
             },
           }
       ];
-    useEffect(()=>{
-      fetchCategoryList();
-    },[])
   return (
     <Box className="w-max">
         <Box className="bg-slate-600 text-center">

@@ -1,4 +1,5 @@
 import { Box } from '@mui/material'
+import Image from 'next/image';
 import React from 'react'
 
 const PreviewImage = (props) => {
@@ -7,7 +8,7 @@ const PreviewImage = (props) => {
 
     return (
       <Box className="w-1/3">
-        <img src={file ? file.preview : defaultImage} className="w-1/2" alt={fieldName} />
+        <Image width={100} height={100} src={file ? file.preview : defaultImage} className="w-1/2" alt={fieldName} />
       </Box>
     );
   };

@@ -33,7 +33,7 @@ const Banner = () => {
                 />
                 <span>
                     {/* <FolderOpen color='inherit' className='text-black bg-yellow-500'/> */}
-                    <Image src='/open-folder-icon.jpg' width={30} height={30} className='cursor-pointer'/>
+                    <Image src='/open-folder-icon.jpg' alt='folder_icon' width={30} height={30} className='cursor-pointer'/>
                 </span>
             </Box>
         </Box>

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useContext } from 'react'
 import { StepperContext } from "./RegisterPage";
 import SubmitButton from "./SubmitButton";
+import Image from "next/image";
 // import { StepperContext, UploadedFileContext } from './Register'
 // import SubmitButton from './SubmitButton'
 
@@ -57,19 +58,19 @@ const PreviewUserData = () => {
           <Box className="flex gap-[3%] border-b-2">
             <Typography className="text-base font-bold w-1/4 border-r-2 p-[1%]">User Photo</Typography>
             <Box className="w-[70%] p-[1%]">
-              <img src={uploadedFiles.find(item=>item.fieldName=="profile_image").preview} alt="" className="w-1/3"/>  
+              <Image width={100} height={100} src={uploadedFiles.find(item=>item.fieldName=="profile_image").preview} alt="" className="w-1/3"/>  
             </Box>
           </Box>
           <Box className="flex gap-[3%] border-b-2">
             <Typography className="text-base font-bold w-1/4 border-r-2 p-[1%]">Aadhaar Image</Typography>
             <Box className="w-[70%] p-[1%]">
-            <img src={uploadedFiles.find(item=>item.fieldName=="aadhar_image").preview} alt="" className="w-1/3"/> 
+            <Image width={100} height={100} src={uploadedFiles.find(item=>item.fieldName=="aadhar_image").preview} alt="" className="w-1/3"/> 
             </Box>
           </Box>
           <Box className="flex gap-[3%]">
             <Typography className="text-base font-bold w-1/4 border-r-2 p-[1%]">Pancard Image</Typography>
             <Box className="w-[70%] p-[1%]">
-            <img src={uploadedFiles.find(item=>item.fieldName=="pancard_image").preview} alt="" className="w-1/3"/> 
+            <Image width={100} height={100} src={uploadedFiles.find(item=>item.fieldName=="pancard_image").preview} alt="" className="w-1/3"/> 
             </Box>
           </Box>
       </Box>
