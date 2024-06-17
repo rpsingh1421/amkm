@@ -10,20 +10,20 @@ export async function GET(){
 }
 export async function POST (request){
     const receivedData = await request.json();
-    const registeredUser = await ContactDirectory.find({
-        $or: [
-            {
-                email:userData.member_email
-            },
-            {
-               contact: userData.contact
-            }
-        ]
-    });
-    if(registeredUser.length>0){
-        return NextResponse.json({message:'email or phone is already registered with us',status:false})
-    }
-    else{
+    // const registeredUser = await ContactDirectory.find({
+    //     $or: [
+    //         {
+    //             email:userData.member_email
+    //         },
+    //         {
+    //            contact: userData.contact
+    //         }
+    //     ]
+    // });
+    // if(registeredUser.length>0){
+    //     return NextResponse.json({message:'email or phone is already registered with us',status:false})
+    // }
+    // else{
         try {
             const savedteamMember = await TeamMemberModel.create(receivedData);
             /*=======save contact details in contactdirectory starts=========== */
@@ -38,7 +38,7 @@ export async function POST (request){
             console.error(error);
             return NextResponse.json({error:error},{status:200})
         }
-    }
+    // }
 
 //   return NextResponse.json({cody:receivedData,message:"post data received successfully",status:true},{status:200})
 }
