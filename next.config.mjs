@@ -8,9 +8,9 @@ const nextConfig = {
     //       }
     //     ];
     //   }
-    // images: {
-    //     domains: ['storage.amkmofficial.com'],
-    //   },
+    images: {
+        domains: ['store.amkmofficial.com'],
+      },
 };
 
 export default nextConfig;

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const NgoProfile = () => {
+  const storePath = process.env.NEXT_PUBLIC_STORE_URL;
   return (
     <Box className="py-12">
       <Box className="w-4/5 mx-auto">
@@ -13,7 +14,7 @@ const NgoProfile = () => {
           <Box className="sm:w-1/2">
             <Box className="joining-img rounded-xl">
             <Image 
-                src="/project-work/p14_image.jpg"
+                src={`${storePath}/project-work/p14_image.jpg`}
                 alt="about Image "
                 className="w-full rounded-xl"
                 width={500}
