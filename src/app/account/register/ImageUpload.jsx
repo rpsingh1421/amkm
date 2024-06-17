@@ -10,6 +10,8 @@ import SubmitButton from "./SubmitButton";
 // import Image from "next/image"
 // import { Maximize } from "@mui/icons-material"
 
+const storePath = process.env.NEXT_PUBLIC_STORE_URL;
+
 
 const ImageUpload = () => {
     const {activeStep,handleBack,handleNext,uploadedFiles,setUploadedFiles}=useContext(StepperContext);
