@@ -7,6 +7,7 @@ import ImageUpload from './ImageUpload';
 import PreviewUserData from './PreviewUserData';
 import RegistrationResult from './RegistrationResult';
 import axios from 'axios';
+import ProcessingDialog from '@/app/components/ProcessingDialog';
 
 const steps = ['Basic Details', 'Upload Documents', 'Preview & final Submit','Result'];
 const StepperContext = createContext();
@@ -42,34 +43,76 @@ const RegisterPage = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-  const onFinalSubmit=async()=>{
+  // const onFinalSubmit=async()=>{
+  //   const formData = new FormData();
+  //   formData.append('userData',JSON.stringify(userData));
+  //   uploadedFiles.map(item=>formData.append(item.fieldName,item.file))
+  //   console.log('submitted Data',uploadedFiles);
+  //   try {
+  //     const response = await axios.post('/rest-api/team-members', formData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data'
+  //       }
+  //     });
+  //     if(response.data.status){
+  //       console.log(response);
+  //       const responseData = response.data.body;
+  //       setRegistrationResponse((pre)=>{
+  //           return {...pre,
+  //             email:responseData.member_email,
+  //             phoneNumber:responseData.contact,
+  //             password:userData.password,              
+  //           }
+  //       })
+  //       handleNext();
+  //   }
+  //   } catch (error) {
+  //     console.error('Error submitting form:', error);
+  //   }
+  //   // handleNext();
+  // }
+
+  const [loading, setLoading] = useState(false);
+  const onFinalSubmit = async () => {
+    
     const formData = new FormData();
-    formData.append('userData',JSON.stringify(userData));
-    uploadedFiles.map(item=>formData.append(item.fieldName,item.file))
-    console.log('submitted Data',uploadedFiles);
+    formData.append('userData', userData.member_name);
+    uploadedFiles.map(item => formData.append(item.fieldName, item.file));
+    console.log('submitted Data', uploadedFiles);
+    setLoading(true); // Start loading
     try {
-      const response = await axios.post('/rest-api/team-members', formData, {
+      const response = await axios.post('https://store.amkmofficial.com/team-members.php', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
       if(response.data.status){
-        console.log(response);
-        const responseData = response.data.body;
-        setRegistrationResponse((pre)=>{
-            return {...pre,
-              email:responseData.member_email,
-              phoneNumber:responseData.contact,
-              password:userData.password,              
-            }
+        const savedFiles = response.data.body;
+        savedFiles.map((item)=>{
+          setUserData((pre)=>({...pre,[item.key]:item.path}));
         })
-        handleNext();
-    }
+        console.log("userData:",userData);
+        // const response = await axios.post('/rest-api/team-members',userData);
+        // if(response.data.status){
+        //   console.log(response);
+        //   const responseData = response.data.body;
+        //   setRegistrationResponse((pre)=>{
+        //       return {...pre,
+        //         email:responseData.member_email,
+        //         phoneNumber:responseData.contact,
+        //         password:userData.password,              
+        //       }
+        //   })
+        //   handleNext();
+        // }
+      }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Error uploading files:', error);
+    }finally {
+      setLoading(false); // End loading
     }
-    // handleNext();
-  }
+  };
+  
   return (
     <>
       <Box className="">
@@ -101,6 +144,7 @@ const RegisterPage = () => {
         </Paper>
       </Box>
       <InstructionDialog openInstructionDialog={openInstructionDialog} setOpenInstructionDialog={setOpenInstructionDialog} />
+      {loading && <ProcessingDialog/>}
     </>
   )
 }

@@ -9,7 +9,7 @@ const PreviewImage = (props) => {
 
     return (
       <Box className="w-1/3">
-        <Image width={100} height={100} src={file ? storePath+file.preview : storePath+defaultImage} className="w-1/2" alt={fieldName} />
+        <Image width={100} height={100} src={file ? file.preview : storePath+defaultImage} className="w-1/2" alt={fieldName} />
       </Box>
     );
   };

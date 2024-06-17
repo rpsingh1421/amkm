@@ -26,7 +26,7 @@ const InstructionDialog = (props) => {
           </Box>
           <Box>
             <FormControlLabel 
-              control={<Checkbox defaultChecked checked={acceptInstructions} onChange={()=>setAcceptInstructions(!acceptInstructions)}/>} 
+              control={<Checkbox checked={acceptInstructions} onChange={()=>setAcceptInstructions(!acceptInstructions)}/>} 
               label="I have read instructions carefully." 
             />
           </Box>
