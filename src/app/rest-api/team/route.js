@@ -23,9 +23,22 @@ export async function POST (request){
     if(registeredUser.length>0){
         return NextResponse.json({message:'email or phone is already registered with us',status:false})
     }
-    // else{
+    else{
+        try {
+            const savedteamMember = await TeamMemberModel.create(receivedData);
+            /*=======save contact details in contactdirectory starts=========== */
+            const contactData = {};
+            contactData.email = savedteamMember.member_email;
+            contactData.contact = savedteamMember.contact;
+            contactData.user = savedteamMember._id;
+            await ContactDirectory.create(contactData);
+            /*=======save contact details in contactdirectory ends=========== */
+            return NextResponse.json({message:"you are succesfully registerd as team member",status:true,body:savedteamMember},{status:200})
+        } catch (error) {
+            console.error(error);
+            return NextResponse.json({error:error},{status:200})
+        }
+    }
 
-    // }
-
-  return NextResponse.json({cody:receivedData,message:"post data received successfully",status:true},{status:200})
+//   return NextResponse.json({cody:receivedData,message:"post data received successfully",status:true},{status:200})
 }
