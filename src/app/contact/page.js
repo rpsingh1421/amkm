@@ -10,11 +10,12 @@ import MainLayout from "../components/Layout/MainLayout"
 import Image from "next/image"
 import GIveUsHand from "../components/GiveUsHand"
 
+const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const ContactPage = () => {
   return (
     <MainLayout>
       <Box className="relative h-fit">
-      <Image width={2000} height={100} alt="banner" src="/amkm_page_banner.png"className="w-full"/>
+      <Image width={2000} height={100} alt="banner" src={`${storePath}/amkm_page_banner.png`} className="w-full"/>
         <Typography className="text-center font-bold font-sans text-5xl text-white absolute left-0 right-0 m-auto top-[10%] sm:top-1/2">Contact Us</Typography>
       </Box>
       <Box className="lg:w-[80%] m-auto relative py-[2%]">

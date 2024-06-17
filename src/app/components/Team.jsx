@@ -6,6 +6,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 // import FounderImage from "../../../public//team/anurag_founder.jpeg"
 
+const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const Team = () => {
   const navigate = useRouter();
   return (
@@ -17,7 +18,7 @@ const Team = () => {
         </Box>
       <Box className="flex justify-around lg:w-3/4 m-auto gap-5">
         <Paper className="rounded-xl w-1/2 sm:w-1/4 py-[3%]">
-          <Image src="/team/anurag_founder.jpeg" alt="founder_image"  className="w-1/2 m-auto rounded-full" width={"100"} height={"100"}/>
+          <Image src={`${storePath}/team/anurag_founder.jpeg`} alt="founder_image"  className="w-1/2 m-auto rounded-full" width={"100"} height={"100"}/>
           <Box className="text-center">
             <Box className="my-[5%]">
               <Typography className="font-bold text-sm md:base lg:text-xl">Anurag Singh</Typography>
@@ -25,20 +26,20 @@ const Team = () => {
             </Box>
             <Box className="flex gap-[1%] justify-center">
               <Link href="https://www.facebook.com/anurags091" target="block" className="relative w-10 ">
-                  <Image src="/social_media/facebook.png" className="relative" width={30} height={30} alt="Instagram Logo" />
+                  <Image src={`${storePath}/social_media/facebook.png`} className="relative" width={30} height={30} alt="Instagram Logo" />
               </Link>
               <Link href="https://www.instagram.com/anurags091" target="block" className="relative w-10 ">
-                  <Image src="/social_media/instagram.png" className="relative" width={30} height={30} alt="Instagram Logo" />
+                  <Image src={`${storePath}/social_media/instagram.png`} className="relative" width={30} height={30} alt="Instagram Logo" />
               </Link>
 
               <Link href="https://www.x.com/anurags091" target="block" className="relative w-10 ">
-                  <Image src="/social_media/twitter.png" className="relative" width={30} height={30} alt="Instagram Logo" />
+                  <Image src={`${storePath}/social_media/twitter.png`} className="relative" width={30} height={30} alt="Instagram Logo" />
               </Link>
             </Box>
           </Box>
         </Paper>
         <Paper className="rounded-xl w-1/2 sm:w-1/4 py-[3%]">
-          <Image src="/team/RajeshAnuragi_president.jpeg" className="w-1/2 m-auto rounded-full" width={"100"} height={"100"} alt='amkm_president_image'/>
+          <Image src={`${storePath}/team/RajeshAnuragi_president.jpeg`} className="w-1/2 m-auto rounded-full" width={"100"} height={"100"} alt='amkm_president_image'/>
           <Box className="text-center">
             <Box className="my-[5%]">
               <Typography className="font-bold text-sm md:base lg:text-xl">Dr. Rajesh Anuragi</Typography>
@@ -46,20 +47,20 @@ const Team = () => {
             </Box>
             <Box className="flex gap-[1%] justify-center">
               <Link href="https://www.facebook.com/dranuragirajesh" target="block" className="relative w-10 ">
-                  <Image src="/social_media/facebook.png" className="relative" width={30} height={30} alt="Instagram Logo" />
+                  <Image src={`${storePath}/social_media/facebook.png`} className="relative" width={30} height={30} alt="Instagram Logo" />
               </Link>
               <Link href="https://www.instagram.com/anuragiofficial" target="block" className="relative w-10 ">
-                  <Image src="/social_media/instagram.png" className="relative" width={30} height={30} alt="Instagram Logo" />
+                  <Image src={`${storePath}/social_media/instagram.png`} className="relative" width={30} height={30} alt="Instagram Logo" />
               </Link>
 
               <Link href="https://www.x.com/anuragiofficial " target="block" className="relative w-10 ">
-                  <Image src="/social_media/twitter.png" className="relative" width={30} height={30} alt="Instagram Logo" />
+                  <Image src={`${storePath}/social_media/twitter.png`} className="relative" width={30} height={30} alt="Instagram Logo" />
               </Link>
             </Box>
           </Box>
         </Paper>
         <Paper className="hidden sm:block rounded-xl w-1/2 sm:w-1/4 py-[3%]">
-          <Image src="/team/rohit.jpeg" className="w-1/2 m-auto rounded-full" width={"100"} height={"100"} alt="Vice_President" />
+          <Image src={`${storePath}/team/rohit.jpeg`} className="w-1/2 m-auto rounded-full" width={"100"} height={"100"} alt="Vice_President" />
           <Box className="text-center">
             <Box className="my-[5%]">
               <Typography className="font-bold text-sm md:base lg:text-xl">Rohit Verma</Typography>
@@ -67,20 +68,20 @@ const Team = () => {
             </Box>
             <Box className="flex gap-[1%] justify-center">
               <Link href="https://www.facebook.com/rohit.rajput.7161953" target="block" className="relative w-10 ">
-                  <Image src="/social_media/facebook.png" className="relative" width={30} height={30} alt="Instagram Logo" />
+                  <Image src={`${storePath}/social_media/facebook.png`} className="relative" width={30} height={30} alt="Instagram Logo" />
               </Link>
               <Link href="https://www.instagram.com/rohithindu6086" target="block" className="relative w-10 ">
-                  <Image src="/social_media/instagram.png" className="relative" width={30} height={30} alt="Instagram Logo" />
+                  <Image src={`${storePath}/social_media/instagram.png`} className="relative" width={30} height={30} alt="Instagram Logo" />
               </Link>
 
               <Link href="https://x.com/Rohitverma99176" target="block" className="relative w-10 ">
-                  <Image src="/social_media/twitter.png" className="relative" width={30} height={30} alt="Instagram Logo" />
+                  <Image src={`${storePath}/social_media/twitter.png`} className="relative" width={30} height={30} alt="Instagram Logo" />
               </Link>
             </Box> 
           </Box>
         </Paper>
         <Paper className="hidden sm:block rounded-xl w-1/2 sm:w-1/4 py-[3%]">
-          <Image src="/team/YashKumar_treasure.jpeg" className="w-1/2 m-auto rounded-full" width={"100"} height={"100"} alt="treasure_image" />
+          <Image src={`${storePath}/team/YashKumar_treasure.jpeg`} className="w-1/2 m-auto rounded-full" width={"100"} height={"100"} alt="treasure_image" />
           <Box className="text-center">
             <Box className="my-[5%]">
               <Typography className="font-bold text-sm md:base lg:text-xl">Yash Kumar</Typography>
@@ -88,14 +89,14 @@ const Team = () => {
             </Box>
             <Box className="flex gap-[1%] justify-center">
               <Link href="https://www.facebook.com/yash.kumar.7169" target="block" className="relative w-10 ">
-                  <Image src="/social_media/facebook.png" className="relative" width={30} height={30} alt="Instagram Logo" />
+                  <Image src={`${storePath}/social_media/facebook.png`} className="relative" width={30} height={30} alt="Instagram Logo" />
               </Link>
               <Link href="https://www.instagram.com/94yashkumar" target="block" className="relative w-10 ">
-                  <Image src="/social_media/instagram.png" className="relative" width={30} height={30} alt="Instagram Logo" />
+                  <Image src={`${storePath}/social_media/instagram.png`} className="relative" width={30} height={30} alt="Instagram Logo" />
               </Link>
 
               <Link href="#" target="block" className="relative w-10 ">
-                  <Image src="/social_media/twitter.png" className="relative" width={30} height={30} alt="Instagram Logo" />
+                  <Image src={`${storePath}/social_media/twitter.png`} className="relative" width={30} height={30} alt="Instagram Logo" />
               </Link>
             </Box> 
           </Box>

@@ -3,6 +3,7 @@ import { Box, Button, Dialog, DialogContent, IconButton } from '@mui/material'
 import Image from 'next/image';
 import React, { useState } from 'react'
 
+const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const ViewImage = (props) => {
     const {imagePath,openImageDialog,setOpenImageDialog} =props;
     // const [openImageDialog,setOpenImageDialog] = useState(false)
@@ -24,7 +25,7 @@ const ViewImage = (props) => {
         </Box>
       <DialogContent>
         <Box>
-          <Image width={"100"} height={"100"} src={imagePath} alt='gallery_image'  className={zoom&&zoomImage}/>
+          <Image width={"100"} height={"100"} src={storePath+imagePath} alt='gallery_image'  className={zoom&&zoomImage}/>
         </Box>
       </DialogContent>
     </Dialog>

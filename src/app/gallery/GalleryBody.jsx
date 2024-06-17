@@ -7,6 +7,7 @@ import ProjectGallery from './ProjectGallery';
 import AllImage from './AllImage';
 import VideoGallery from './VideoGallery';
 
+const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const GalleryBody = () => {
     const [value, setValue] = useState('two');
 

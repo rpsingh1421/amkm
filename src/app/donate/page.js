@@ -2,11 +2,11 @@ import { Box, Paper, Typography } from '@mui/material'
 import React from 'react'
 import PaymentForm from './PaymentForm'
 import MainLayout from '../components/Layout/MainLayout'
-
+const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const Donate = () => {
   return (
     <MainLayout>
-      <Box className="bg-cover bg-[url('/project-work/p58_image.jpg')] ">
+      <Box className="bg-cover" style={{backgroundImage: `url(${storePath}/project-work/p58_image.jpg)`}}  >
         <Box className="sm:flex w-[90%] py-[3%] m-auto gap-5">
           <Box className="sm:w-1/2">
             <Paper className="text-center mb-[3%] p-[3%] bg-gray-300 opacity-75 rounded-2xl">

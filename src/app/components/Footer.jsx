@@ -5,11 +5,12 @@ import Link from 'next/link';
 const Footer = () => {
     const storePath = process.env.NEXT_PUBLIC_STORE_URL;
   return (
-    <Box className={`bg-cover bg-[url(${storePath}/footer/footerbackground.jpg)]`}>
+    <Box className="bg-cover bg-[url('/footer/footerbackground.jpg')]" style={{backgroundImage: `url(${storePath}/footer/footerbackground.jpg)`,width: '100%'}}
+    >
       <Box className="w-full bg-[#000000eb] sm:flex gap-5 justify-around p-5">
         <Box className='hidden sm:block sm:w-2/5'>
             <Box className="flex gap-2">
-                <Image width={"100"} height={"100"} src='/aaomilkar.jpeg' alt='amkm_logo' className='w-14 rounded-full'/>
+                <Image width={"100"} height={"100"} src={`${storePath}/aaomilkar.jpeg`} alt='amkm_logo' className='w-14 rounded-full'/>
                 <Typography className='font-bold text-white text-2xl self-center'>AAO MILKAR KAREN MADAD</Typography>
             </Box>
             <Box className="my-2">

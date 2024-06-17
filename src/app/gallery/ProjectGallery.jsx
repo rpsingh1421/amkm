@@ -2,6 +2,7 @@
 import { Box, Card, Typography } from '@mui/material'
 import React, { useState } from 'react'
 
+const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const ProjectGallery = () => {
     const [rowCount,setRowCount] = useState(1);
     // const imagelist = [...images];

@@ -4,11 +4,11 @@ import GalleryBody from './GalleryBody'
 import MainLayout from '../components/Layout/MainLayout'
 import GIveUsHand from '../components/GiveUsHand'
 
-
+const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const GalleryPage = () => {
   return (
     <MainLayout>
-      <Box className="hidden bg-cover bg-[url('/gallery_banner1.png')] h-[30vh] sm:flex items-center"></Box>
+      <Box className="hidden bg-cover h-[30vh] sm:flex items-center" style={{ backgroundImage: `url(${storePath}/gallery_banner1.png)`, width: '100%'}} ></Box>
       <GalleryBody/>
       <GIveUsHand/>
     </MainLayout>

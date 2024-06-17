@@ -3,6 +3,7 @@ import { Box, Card, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import ViewImage from '../components/ViewImage'
 
+const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const NewsImage = () => {
     const [rowCount,setRowCount] = useState(1);
     

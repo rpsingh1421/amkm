@@ -4,11 +4,12 @@ import React from "react"
 import MainLayout from "../components/Layout/MainLayout"
 import Image from "next/image"
 
+const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const page = () => {
   return (
     <MainLayout>
       <Box className="relative">
-        <Image width={1000} height={100} alt='story_banner' src="/banner/amkm_story_banner.png" className="w-full"/>
+        <Image width={1000} height={100} alt='story_banner' src={`${storePath}/banner/amkm_story_banner.png`} className="w-full"/>
         <Box className="absolute top-[35%] left-0 right-0 text-center">
             <Typography component={"h2"} className="text-3xl md:text-6xl lg:text-9xl font-bold text-white">WHO WE ARE</Typography>
             <Typography component={"h2"} className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">AMKM - &quot;AAO MILKAR KAREN MADAD&quot; (ORG.) </Typography>
@@ -20,7 +21,7 @@ const page = () => {
             <Box className="flex flex-col sm:flex-row">
               <Box className="sm:flex-shrink-0 sm:w-[40%]">
                 <Image width={300} height={100}
-                  src="/p15_image.png"
+                  src={`${storePath}/p15_image.png`}
                   alt="Descriptive Alt Text"
                   className="w-full h-auto sm:mr-4 mb-4 sm:mb-0 rounded-xl"
                 />
@@ -38,7 +39,7 @@ const page = () => {
               </Box>
               <Box className="sm:flex-shrink-0 sm:w-[40%]">
                 <Image width={300} height={100}
-                  src="/project-work/p31_image.png"
+                  src={`${storePath}/project-work/p31_image.png`}
                   alt="Descriptive Alt Text"
                   className="w-full h-auto sm:mr-4 mb-4 sm:mb-0 rounded-xl"
                 />
@@ -50,7 +51,7 @@ const page = () => {
             <Box className="flex flex-col sm:flex-row">
               <Box className="sm:flex-shrink-0 sm:w-[40%]">
                 <Image width={300} height={100}
-                  src="/project-work/p59_image.png"
+                  src={`${storePath}/project-work/p59_image.png`}
                   alt="Descriptive Alt Text"
                   className="w-full h-auto sm:mr-4 mb-4 sm:mb-0 rounded-xl"
                 />
@@ -67,7 +68,7 @@ const page = () => {
               </Box>
               <Box className="sm:flex-shrink-0 sm:w-1/2">
                 <Image width={300} height={100}
-                  src="/project-work/p89_image.jpg"
+                  src={`${storePath}/project-work/p89_image.jpg`}
                   alt="Descriptive Alt Text"
                   className="w-full h-auto sm:mr-4 mb-4 sm:mb-0 rounded-xl"
                 />
@@ -79,7 +80,7 @@ const page = () => {
             <Box className="flex flex-col sm:flex-row">
               <Box className="sm:flex-shrink-0 sm:w-[40%]">
                 <Image width={300} height={100}
-                  src="/project-work/p97_image.jpg"
+                  src={`${storePath}/project-work/p97_image.jpg`}
                   alt="Descriptive Alt Text"
                   className="w-full h-auto sm:mr-4 mb-4 sm:mb-0 rounded-xl"
                 />
@@ -98,7 +99,7 @@ const page = () => {
               </Box>
               <Box className="sm:flex-shrink-0 sm:w-1/2">
                 <Image width={300} height={100}
-                  src="/project-work/p93_image.jpg"
+                  src={`${storePath}/project-work/p93_image.jpg`}
                   alt="Descriptive Alt Text"
                   className="w-full h-auto sm:mr-4 mb-4 sm:mb-0 rounded-xl"
                 />
@@ -110,7 +111,7 @@ const page = () => {
             <Box className="flex flex-col sm:flex-row">
               <Box className="sm:flex-shrink-0 sm:w-1/2">
                 <Image width={300} height={100}
-                  src="/project-work/p34_image.png"
+                  src={`${storePath}/project-work/p34_image.png`}
                   alt="Descriptive Alt Text"
                   className="w-full h-auto sm:mr-4 mb-4 sm:mb-0 rounded-xl"
                 />
