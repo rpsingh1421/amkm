@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
 }
 
 export const metadata = {
-  // metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL),
+  metadataBase: new URL('https://amkmofficial.com'),
   //If not configured, metadataBase has a default value
 // When VERCEL_URL is detected: https://${process.env.VERCEL_URL} otherwise it falls back to http://localhost:${process.env.PORT || 3000}.
   
@@ -32,19 +32,17 @@ title: {
   /**======================================== */
 
   openGraph: {
-    // title: 'Next.js',
-    // description: 'The React Framework for the Web',
-    // url: 'https://nextjs.org',
-    // siteName: 'Next.js',
-    // type: 'article',
-    // publishedTime: '2023-01-01T00:00:00.000Z',
-    // authors: ['Seb', 'Josh'],
+    title: 'AMKM Official website',
+    description: 'Aao Milkar Karen Madad (Organization) is a non-governmental organization that works to impart education to poor children as well as work on issues of women as well.',
+    url: 'https://amkmofficial.com',
+    siteName: 'AMKM',
+    authors: ['Ram Pratap Singh'],
     images: [
       {
         url: '/opengraph-image.png', // This is relative to the metadataBase
         width: 800,
         height: 600,
-        alt: 'An example image',
+        alt: 'opengraph-image',
       },
     ],
     locale: 'en_US',
@@ -55,19 +53,20 @@ title: {
 
   twitter: {
     card: 'summary_large_image',
+    title: 'AMKM Official website',
+    description: 'Aao Milkar Karen Madad (Organization) is a non-governmental organization that works to impart education to poor children as well as work on issues of women as well.',
+    creator: 'Ram Pratap Singh',
     images: [
       {
         url: '/opengraph-image.png', // This is relative to the metadataBase
+        alt: 'opengraph-image',
       },
     ],
   },
-
   /**====================OR==================== */
 
   // twitter: {
-  //   card: 'app',
-  //   title: 'Next.js',
-  //   description: 'The React Framework for the Web',
+  
   //   siteId: '1467726470533754880',
   //   creator: '@nextjs',
   //   creatorId: '1467726470533754880',
@@ -91,19 +90,19 @@ title: {
 
   /**======================================== */
 
-  // robots: {
-  //   index: false,
-  //   follow: true,
-  //   nocache: true,
-  //   googleBot: {
-  //     index: true,
-  //     follow: false,
-  //     noimageindex: true,
-  //     'max-video-preview': -1,
-  //     'max-image-preview': 'large',
-  //     'max-snippet': -1,
-  //   },
-  // },
+  robots: {
+    index: true,
+    follow: true,
+    //   nocache: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 
   /**======================================== */
 
@@ -125,37 +124,54 @@ title: {
   //     },
   //   ],
   // },
-
+  icons: {
+    icon: [
+      { url: '/icon.png' },
+      new URL('/icon.png', 'https://amkmofficial.com'),
+      { url: '/icon.png', media: '(prefers-color-scheme: dark)' },
+    ],
+    shortcut: ['/shortcut-icon.png'],
+    apple: [
+      { url: '/apple-touch-icon.png' },
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      {
+        rel: 'apple-touch-icon-precomposed',
+        url: '/apple-touch-icon.png',
+      },
+    ],
+  },
    /**======================================== */
 
-  // manifest: 'https://nextjs.org/manifest.json',
+   manifest: 'https://amkmofficial.com/manifest.json',
 
   /**======================================== */
 
-  // verification: {
-  //   google: 'google',
-  //   yandex: 'yandex',
-  //   yahoo: 'yahoo',
-  //   other: {
-  //     me: ['my-email', 'my-link'],
-  //   },
-  // },
+  verification: {
+    google: 'google-verification-code',
+    yandex: 'yandex-verification-code',
+    yahoo: 'yahoo-verification-code',
+    other: {
+      me: ['my-email', 'my-link'],
+    },
+  },
 
   /**======================================== */
 
-  // alternates: {
-  //   canonical: 'https://nextjs.org',
-  //   languages: {
-  //     'en-US': 'https://nextjs.org/en-US',
-  //     'de-DE': 'https://nextjs.org/de-DE',
-  //   },
+  alternates: {
+    canonical: 'https://amkmofficial.com',
+    languages: {
+      'en-US': 'https://amkmofficial.com/en-US',
+      'de-DE': 'https://amkmofficial.com/de-DE',
+    },
   //   media: {
   //     'only screen and (max-width: 600px)': 'https://nextjs.org/mobile',
   //   },
   //   types: {
   //     'application/rss+xml': 'https://nextjs.org/rss',
   //   },
-  // },
+  },
 
   /**======================================== */
 
@@ -188,11 +204,11 @@ title: {
 
   /**======================================== */
   
-  // category: 'technology',
+  category: 'non-profit',
 
   /**======================================== */
   
-  // other: {
-  //   custom: 'meta',
-  // },
+  other: {
+    custom: 'meta',
+  },
 };
