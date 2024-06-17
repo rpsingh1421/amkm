@@ -3,7 +3,8 @@
 import Link from 'next/link'
 import { headers } from 'next/headers'
 import { Box, Typography } from '@mui/material'
- 
+
+const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 export default async function NotFound() {
  
   return (
@@ -12,7 +13,7 @@ export default async function NotFound() {
             <Box className="w-1/2 m-auto">	
                 <Box className="col-sm-12 ">
                     <Box className="col-sm-10 col-sm-offset-1  text-center">
-                        <Box className="bg-[url('/page_404.gif')] bg-center h-[400px]">
+                        <Box className="bg-center h-[400px]" style={{backgroundImage: `url(${storePath}/page_404.gif)`,width: '100%'}}>
                             <Typography className="text-center text-6xl font-extrabold">404</Typography>
                         </Box>
                         <Box className="mt-[-50px]">
