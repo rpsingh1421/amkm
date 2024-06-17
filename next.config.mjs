@@ -8,6 +8,9 @@ const nextConfig = {
     //       }
     //     ];
     //   }
+    // images: {
+    //     domains: ['storage.amkmofficial.com'],
+    //   },
 };
 
 export default nextConfig;
