@@ -20,7 +20,7 @@ const RegistrationResult = ({registrationResponse}) => {
           <Typography className="font-semibold text-sm w-2/3 p-[2%]">{registrationResponse && registrationResponse.password}</Typography>
         </Box>
       </Box>
-      <Typography className="font-semibold text-center">use these credentials to login.....<span><Link underline='none' href='/account/login' target="_blank" className='text-[#0866ff]'>click here</Link></span></Typography>
+      <Typography className="font-semibold text-center">use these credentials to login.....<span><Link underline='none' href='/admin-panel/login' target="_blank" className='text-[#0866ff]'>click here</Link></span></Typography>
         
     </Paper>
   )
