@@ -92,19 +92,19 @@ const RegisterPage = () => {
           setUserData((pre)=>({...pre,[item.key]:item.path}));
         })
         console.log("userData:",userData);
-        // const response = await axios.post('/rest-api/team-members',userData);
-        // if(response.data.status){
-        //   console.log(response);
-        //   const responseData = response.data.body;
-        //   setRegistrationResponse((pre)=>{
-        //       return {...pre,
-        //         email:responseData.member_email,
-        //         phoneNumber:responseData.contact,
-        //         password:userData.password,              
-        //       }
-        //   })
-        //   handleNext();
-        // }
+        const response = await axios.post('/rest-api/team',userData);
+        if(response.data.status){
+          console.log(response);
+          const responseData = response.data.body;
+          setRegistrationResponse((pre)=>{
+              return {...pre,
+                email:responseData.member_email,
+                phoneNumber:responseData.contact,
+                password:userData.password,              
+              }
+          })
+          handleNext();
+        }
       }
     } catch (error) {
       console.error('Error uploading files:', error);
