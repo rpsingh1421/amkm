@@ -6,7 +6,7 @@ import { createAccessToken, createRefreshToken } from "../../token/tokenHandler"
 
 await connect()
 
-export async function POST (request,response){
+export async function POST (request){
     const receivedloginData = await request.json();
     console.log('received loginData',receivedloginData)
     // const {email,phone,password} = await request.json();
