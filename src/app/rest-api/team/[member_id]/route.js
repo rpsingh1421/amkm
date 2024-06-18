@@ -97,5 +97,14 @@ export async function PUT(request,{params}){
     if (!isValidObjectId(_id)) {
         return NextResponse.json({ error: "Invalid id format" }, { status: 400 });
     }
+    let teamMember;
+    try {
+        teamMember = await TeamMemberModel.findById(id);
+        if (!teamMember) {
+            return NextResponse.json({status:false, message: `user not found with id:${_id}` }, { status: 404 });
+        }
+    } catch (error) {
+        return NextResponse.json({ status:false,message: "Error finding user" }, { status: 500 });
+    }
     return NextResponse.json({status:true,body:{id:_id,receivedData:receivedData},message:"editing team member"},{status:200})
 }
