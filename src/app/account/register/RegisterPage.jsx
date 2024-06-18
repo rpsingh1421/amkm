@@ -88,6 +88,7 @@ const RegisterPage = () => {
       });
       if(fileUploadResponse.data.status){
         const savedFiles = fileUploadResponse.data.body;
+        console.log("savedFiles:",savedFiles)
         savedFiles.map((item)=>{
           setUserData((pre)=>({...pre,[item.key]:item.path}));
         })
