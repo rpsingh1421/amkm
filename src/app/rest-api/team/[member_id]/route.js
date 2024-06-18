@@ -92,6 +92,7 @@ export async function GET(request,{params}){
 export async function PUT(request,{params}){
 
     const _id = params.member_id;
+    const receivedData = request.json();
 
-    return NextResponse.json({status:true,body:_id,message:"editing team member"},{status:200})
+    return NextResponse.json({status:true,body:{id:_id,receivedData:receivedData},message:"editing team member"},{status:200})
 }
