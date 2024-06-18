@@ -111,23 +111,15 @@ export async function PUT(request,{params}){
     
     let registeredContactDetails;
     if(teamMember.member_email != receivedData.member_email){
-        try {
-            registeredContactDetails = await ContactDirectory.find({email:receivedData.member_email})
-            if (registeredContactDetails) {
-                return NextResponse.json({status:false,message:`provided email:${receivedData.member_email} already registered`},{status:405})
-            }
-        } catch (error) {
-            return NextResponse.json({ status:false,message: "Error finding contatct directory by email" }, { status: 500 });
+        registeredContactDetails = await ContactDirectory.find({email:receivedData.member_email})
+        if (registeredContactDetails) {
+            return NextResponse.json({status:false,message:`provided email:${receivedData.member_email} already registered`},{status:405})
         }
     }
     if (teamMember.contact != receivedData.contact) {
-        try {
-            registeredContactDetails = await ContactDirectory.find({contact:receivedData.contact});
-            if (registeredContactDetails) {
-                return NextResponse.json({status:false,message:`provided phone:${receivedData.contact} already registered`},{status:405})
-            }
-        } catch (error) {
-            return NextResponse.json({ status:false,message: "Error finding contatct directory by phone" }, { status: 500 });
+        registeredContactDetails = await ContactDirectory.find({contact:receivedData.contact});
+        if (registeredContactDetails) {
+            return NextResponse.json({status:false,message:`provided phone:${receivedData.contact} already registered`},{status:405})
         }
     }
     const updatedTeamMember =await TeamMemberModel.findByIdAndUpdate(_id,receivedData,{new:true});
