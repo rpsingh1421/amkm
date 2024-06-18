@@ -88,11 +88,13 @@ const RegisterPage = () => {
       });
       if(fileUploadResponse.data.status){
         const savedFiles = fileUploadResponse.data.body;
-        // savedFiles.map((item)=>{
-        //   setUserData((pre)=>({...pre,[item.key]:item.path}));
-        // })
+        savedFiles.map((item)=>{
+          setUserData((pre)=>({...pre,[item.key]:item.path}));
+        })
         console.log("fileUploadResponse:",fileUploadResponse);
-        // const response = await axios.post('/rest-api/team-members',userData);
+        const response = await axios.post('/rest-api/team',userData);
+        console.log("user data send to save:",userData);
+        console.log("user data saved response from api:",response);
         // if(response.data.status){
         //   console.log(response);
         //   const responseData = response.data.body;
