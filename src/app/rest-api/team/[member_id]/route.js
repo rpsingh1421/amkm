@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 import TeamMemberModel from "../../models/memberModel";
 import connect from "@/utils/dbConnect";
+import ContactDirectory from "../../models/contactModel";
 
 
 await connect();
@@ -111,15 +112,23 @@ export async function PUT(request,{params}){
     
     let registeredContactDetails;
     if(teamMember.member_email != receivedData.member_email){
-        registeredContactDetails = await ContactDirectory.find({email:receivedData.member_email})
-        if (registeredContactDetails) {
-            return NextResponse.json({status:false,message:`provided email:${receivedData.member_email} already registered`},{status:405})
+        try {
+            registeredContactDetails = await ContactDirectory.find({email:receivedData.member_email})
+            if (registeredContactDetails) {
+                return NextResponse.json({status:false,message:`provided email:${receivedData.member_email} already registered`},{status:405})
+            }
+        } catch (error) {
+            return NextResponse.json({ status:false,message: "Error finding contatct directory by email" }, { status: 500 });
         }
     }
     if (teamMember.contact != receivedData.contact) {
-        registeredContactDetails = await ContactDirectory.find({contact:receivedData.contact});
-        if (registeredContactDetails) {
-            return NextResponse.json({status:false,message:`provided phone:${receivedData.contact} already registered`},{status:405})
+        try {
+            registeredContactDetails = await ContactDirectory.find({contact:receivedData.contact});
+            if (registeredContactDetails) {
+                return NextResponse.json({status:false,message:`provided phone:${receivedData.contact} already registered`},{status:405})
+            }
+        } catch (error) {
+            return NextResponse.json({ status:false,message: "Error finding contatct directory by phone" }, { status: 500 });
         }
     }
     const updatedTeamMember =await TeamMemberModel.findByIdAndUpdate(_id,receivedData,{new:true});
