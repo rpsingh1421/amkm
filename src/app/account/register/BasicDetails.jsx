@@ -429,7 +429,7 @@ const BasicDetails = () => {
                 <Box className="w-1/2">
                     <TextField 
                         fullWidth
-                        type='password'
+                        // type='password'
                         
                         size='small'
                         // required

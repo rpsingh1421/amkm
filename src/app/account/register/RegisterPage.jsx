@@ -78,33 +78,33 @@ const RegisterPage = () => {
     const formData = new FormData();
     formData.append('userData', userData.member_name);
     uploadedFiles.map(item => formData.append(item.fieldName, item.file));
-    console.log('submitted Data', uploadedFiles);
+    console.log('Files to be uploaded', uploadedFiles);
     setLoading(true); // Start loading
     try {
-      const response = await axios.post('https://store.amkmofficial.com/team-members.php', formData, {
+      const fileUploadResponse = await axios.post('https://store.amkmofficial.com/team-members.php', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-      if(response.data.status){
-        const savedFiles = response.data.body;
-        savedFiles.map((item)=>{
-          setUserData((pre)=>({...pre,[item.key]:item.path}));
-        })
-        console.log("userData:",userData);
-        const response = await axios.post('/rest-api/team',userData);
-        if(response.data.status){
-          console.log(response);
-          const responseData = response.data.body;
-          setRegistrationResponse((pre)=>{
-              return {...pre,
-                email:responseData.member_email,
-                phoneNumber:responseData.contact,
-                password:userData.password,              
-              }
-          })
-          handleNext();
-        }
+      if(fileUploadResponse.data.status){
+        const savedFiles = fileUploadResponse.data.body;
+        // savedFiles.map((item)=>{
+        //   setUserData((pre)=>({...pre,[item.key]:item.path}));
+        // })
+        console.log("fileUploadResponse:",fileUploadResponse);
+        // const response = await axios.post('/rest-api/team-members',userData);
+        // if(response.data.status){
+        //   console.log(response);
+        //   const responseData = response.data.body;
+        //   setRegistrationResponse((pre)=>{
+        //       return {...pre,
+        //         email:responseData.member_email,
+        //         phoneNumber:responseData.contact,
+        //         password:userData.password,              
+        //       }
+        //   })
+        //   handleNext();
+        // }
       }
     } catch (error) {
       console.error('Error uploading files:', error);
