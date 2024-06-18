@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 import TeamMemberModel from "../../models/memberModel";
 import connect from "@/utils/dbConnect";
+import ContactDirectory from "../../models/contactModel";
 
 
 await connect();
@@ -93,6 +94,44 @@ export async function PUT(request,{params}){
 
     const _id = params.member_id;
     const receivedData =await request.json();
+    // Check if the id is a valid ObjectId
+    if (!isValidObjectId(id)) {
+        return NextResponse.json({ error: "Invalid id format" }, { status: 400 });
+    }
+    let teamMember;
+    try {
+        teamMember = await TeamMemberModel.findById(id);
+        if (!teamMember) {
+            return NextResponse.json({status:false, message: `user not found with id:${_id}` }, { status: 404 });
+        }
+    } catch (error) {
+        return NextResponse.json({ status:false,message: "Error finding user" }, { status: 500 });
+    }
 
-    return NextResponse.json({status:true,body:{id:_id,receivedData:receivedData},message:"editing team member"},{status:200})
+    //if team member exist and he wants to update phone or email ...
+    // then we have to check newly entered email or phone doesn,t registered with us already
+    
+    let registeredContactDetails;
+    if(teamMember.member_email != receivedData.member_email){
+        try {
+            registeredContactDetails = await ContactDirectory.find({email:receivedData.member_email})
+            if (registeredContactDetails) {
+                return NextResponse.json({status:false,message:`provided email:${receivedData.member_email} already registered`},{status:405})
+            }
+        } catch (error) {
+            return NextResponse.json({ status:false,message: "Error finding contatct directory by email" }, { status: 500 });
+        }
+    }
+    if (teamMember.contact != receivedData.contact) {
+        try {
+            registeredContactDetails = await ContactDirectory.find({contact:receivedData.contact});
+            if (registeredContactDetails) {
+                return NextResponse.json({status:false,message:`provided phone:${receivedData.contact} already registered`},{status:405})
+            }
+        } catch (error) {
+            return NextResponse.json({ status:false,message: "Error finding contatct directory by phone" }, { status: 500 });
+        }
+    }
+    const updatedTeamMember =await TeamMemberModel.findByIdAndUpdate(_id,receivedData,{new:true});
+    return NextResponse.json({status:true,body:updatedTeamMember,message:"team member data updated successfully"},{status:200})
 }
