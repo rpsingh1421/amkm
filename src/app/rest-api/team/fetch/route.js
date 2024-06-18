@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import TeamMemberModel from "../../models/memberModel";
+import connect from "@/utils/dbConnect";
+
+await connect();
 
 export async function GET(request){
     const searchParams = request.nextUrl.searchParams;
@@ -26,7 +29,7 @@ export async function GET(request){
             break;
         default:
             // Default case for unknown actions
-            return NextResponse.json({ error: `Unknown action type: ${type}` }, { status: 400 });
+            return NextResponse.json({status:false,message: `Unknown action type: ${type}` }, { status: 400 });
     }
     return NextResponse.json(response,{status:200});
 }
