@@ -117,13 +117,18 @@ export async function PUT(request,{params}){
         if (registeredEmail) {
             return NextResponse.json({status:false,message:`provided email:${receivedData.member_email} already registered`},{status:405})
         }
-        
+        // since newly received email is not in contact directoryy ..update this number to contactdirectory
+        const contactDetail = {email:receivedData.member_email,user:_id};
+        await ContactDirectory.create(contactDetail);
     }
     if (teamMember.contact != receivedData.contact) {
         registeredContact = await ContactDirectory.find({contact:receivedData.contact});
         if (registeredContact.length>0) {
             return NextResponse.json({status:false,message:`provided phone:${receivedData.contact} already registered`,body:registeredContact},{status:405})
         }
+        // since newly received number is not in contact directoryy ..update this number to contactdirectory
+        const contactDetail = {contact:receivedData.contact,user:_id};
+        await ContactDirectory.create(contactDetail);
     }
     const updatedTeamMember =await TeamMemberModel.findByIdAndUpdate(_id,receivedData,{new:true});
     return NextResponse.json({status:true,body:updatedTeamMember,message:"team member data updated successfully"},{status:200})

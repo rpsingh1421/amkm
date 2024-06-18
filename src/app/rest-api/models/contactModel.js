@@ -3,13 +3,13 @@ import TeamMemberModel from "./memberModel";
 const contactDirectorySchema =new mongoose.Schema({
     email: {
         type:String,
-        reqired:true
+        // reqired:true
     },
     contact:{
         type: Number,
         min: [1000000000, 'not a valid number'],
         max: [9999999999,'should not exceed 10 digit'],
-        required:true
+        // required:true
     },
     user:{
         type: mongoose.Schema.Types.ObjectId,
