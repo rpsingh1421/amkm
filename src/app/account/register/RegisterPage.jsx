@@ -88,39 +88,41 @@ const RegisterPage = () => {
       });
       if(fileUploadResponse.data.status){
         const savedFiles = fileUploadResponse.data.body;
-        console.log("savedFiles:",savedFiles);
+        // console.log("savedFiles:",savedFiles);
         // savedFiles.map((item)=>{
         //   setUserData((pre)=>({...pre,[item.key]:item.path}));
         // })
+
         // Wait for the state to be updated
         // await new Promise((resolve) => {
         //   setUserData(updatedUserData, resolve);
-        // });
-        const updatedUserData = { ...userData };
+        // });// but this not it stuck here
+        let updatedUserData = { ...userData };
 
         savedFiles.forEach(item => {
             updatedUserData[item.key] = item.path;
         });
 
-        console.log("Updated user data:", updatedUserData);
+        // console.log("Updated user data:", updatedUserData);
 
         // Use updatedUserData directly for the API call
-        console.log("fileUploadResponse:",fileUploadResponse);
+        // console.log("fileUploadResponse:",fileUploadResponse);
         const response = await axios.post('/rest-api/team',updatedUserData);
-        console.log("user data send to save:",updatedUserData);
-        console.log("user data saved response from api:",response);
-        // if(response.data.status){
-        //   console.log(response);
-        //   const responseData = response.data.body;
-        //   setRegistrationResponse((pre)=>{
-        //       return {...pre,
-        //         email:responseData.member_email,
-        //         phoneNumber:responseData.contact,
-        //         password:userData.password,              
-        //       }
-        //   })
-        //   handleNext();
-        // }
+        // console.log("user data send to save:",updatedUserData);
+        // console.log("user data saved response from api:",response);
+        if(response.data.status){
+          console.log(response);
+          const responseData = response.data.body;
+          setRegistrationResponse((pre)=>{
+              return {...pre,
+                email:responseData.member_email,
+                phoneNumber:responseData.contact,
+                password:userData.password,              
+              }
+          });
+          updatedUserData = {};
+          handleNext();
+        }
       }
     } catch (error) {
       console.error('Error uploading files:', error);
