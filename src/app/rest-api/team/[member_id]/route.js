@@ -134,11 +134,11 @@ export async function PUT(request,{params}){
     
         // Add new contact/email to the ContactDirectory if they are changed
         if (emailChanged) {
-            await new ContactDirectory({ email: member_email, user: teamMember._id }).save();
+            await ContactDirectory.create({ email: member_email, user: teamMember._id });
         }
     
         if (contactChanged) {
-            await new ContactDirectory({ contact: contact, user: teamMember._id }).save();
+            await ContactDirectory.create({ contact: contact, user: teamMember._id });
         }
     
         return NextResponse.json({status:true,body:updatedTeamMember,message:"team member data updated successfully"},{status:200})
