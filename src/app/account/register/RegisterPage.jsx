@@ -88,23 +88,26 @@ const RegisterPage = () => {
       });
       if(fileUploadResponse.data.status){
         const savedFiles = fileUploadResponse.data.body;
-        console.log("savedFiles:",savedFiles)
-
-        const updatedUserData = { ...userData };
-
-        savedFiles.map(item => {
-            updatedUserData[item.key] = item.path;
-        });
+        console.log("savedFiles:",savedFiles);
         // savedFiles.map((item)=>{
         //   setUserData((pre)=>({...pre,[item.key]:item.path}));
         // })
         // Wait for the state to be updated
-        await new Promise((resolve) => {
-          setUserData(updatedUserData, resolve);
+        // await new Promise((resolve) => {
+        //   setUserData(updatedUserData, resolve);
+        // });
+        const updatedUserData = { ...userData };
+
+        savedFiles.forEach(item => {
+            updatedUserData[item.key] = item.path;
         });
+
+        console.log("Updated user data:", updatedUserData);
+
+        // Use updatedUserData directly for the API call
         console.log("fileUploadResponse:",fileUploadResponse);
-        const response = await axios.post('/rest-api/team',userData);
-        console.log("user data send to save:",userData);
+        const response = await axios.post('/rest-api/team',updatedUserData);
+        console.log("user data send to save:",updatedUserData);
         console.log("user data saved response from api:",response);
         // if(response.data.status){
         //   console.log(response);
