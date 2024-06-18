@@ -7,8 +7,6 @@ import { NextResponse } from "next/server";
 import { createAccessToken, createRefreshToken, isTokenExpired, verifyExpiredToken, verifyRefreshToken, verifyToken } from "../../token/tokenHandler";
 import TeamMemberModel from "../../models/memberModel";
 
-
-export const dynamic = 'error'; // Add this line
 await connect();
 
 export async function GET(request){
