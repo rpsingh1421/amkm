@@ -125,7 +125,12 @@ export async function PUT(request,{params}){
                 return NextResponse.json({status:false,message:`provided contact number:${member_email} already registered`},{status:400})
             }
         }
-    
+
+        // Exclude aadhar_number and pancard_number from update
+        delete otherData.aadhar_number;
+        delete otherData.pancard_number;
+        delete otherData.aadhar_image;
+        delete otherData.pancard_image;
         // Update team member data
         teamMember.member_email = member_email;
         teamMember.contact = contact;
