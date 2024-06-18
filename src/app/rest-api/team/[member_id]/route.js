@@ -99,7 +99,7 @@ export async function PUT(request,{params}){
     }
     let teamMember;
     try {
-        teamMember = await TeamMemberModel.findById(id);
+        teamMember = await TeamMemberModel.findById(_id);
         if (!teamMember) {
             return NextResponse.json({status:false, message: `user not found with id:${_id}` }, { status: 404 });
         }
