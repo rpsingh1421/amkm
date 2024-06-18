@@ -85,3 +85,13 @@ export async function GET(request,{params}){
     }
     return NextResponse.json(response,{status:200});
 }
+
+
+/**========================Editing team member=============== */
+
+export async function PUT(request,{params}){
+
+    const _id = params.member_id;
+
+    return NextResponse.json({status:true,body:_id,message:"editing team member"},{status:200})
+}
