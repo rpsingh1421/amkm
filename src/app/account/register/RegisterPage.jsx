@@ -89,9 +89,19 @@ const RegisterPage = () => {
       if(fileUploadResponse.data.status){
         const savedFiles = fileUploadResponse.data.body;
         console.log("savedFiles:",savedFiles)
-        savedFiles.map((item)=>{
-          setUserData((pre)=>({...pre,[item.key]:item.path}));
-        })
+
+        const updatedUserData = { ...userData };
+
+        savedFiles.map(item => {
+            updatedUserData[item.key] = item.path;
+        });
+        // savedFiles.map((item)=>{
+        //   setUserData((pre)=>({...pre,[item.key]:item.path}));
+        // })
+        // Wait for the state to be updated
+        await new Promise((resolve) => {
+          setUserData(updatedUserData, resolve);
+        });
         console.log("fileUploadResponse:",fileUploadResponse);
         const response = await axios.post('/rest-api/team',userData);
         console.log("user data send to save:",userData);
