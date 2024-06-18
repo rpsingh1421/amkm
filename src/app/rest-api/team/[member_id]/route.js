@@ -98,40 +98,52 @@ export async function PUT(request,{params}){
     if (!isValidObjectId(_id)) {
         return NextResponse.json({ error: "Invalid id format" }, { status: 400 });
     }
-    let teamMember;
     try {
-        teamMember = await TeamMemberModel.findById(_id);
+        const { member_email, contact, ...otherData } = receivedData;
+    
+        let teamMember = await TeamMemberModel.findById(_id);
+    
         if (!teamMember) {
             return NextResponse.json({status:false, message: `user not found with id:${_id}` }, { status: 404 });
         }
-    } catch (error) {
-        return NextResponse.json({ status:false,message: "Error finding user" }, { status: 500 });
-    } 
-    //if team member exist and he wants to update phone or email ...
-    // then we have to check newly entered email or phone doesn,t registered with us already
     
-    let registeredEmail;
-    let registeredContact;
-    if(teamMember.member_email != receivedData.member_email){
-        registeredEmail = await ContactDirectory.find({email:receivedData.member_email})
-        if (registeredEmail) {
-            return NextResponse.json({status:false,message:`provided email:${receivedData.member_email} already registered`},{status:405})
+        // Check if email or contact is changed
+        let emailChanged = teamMember.member_email !== member_email;
+        let contactChanged = teamMember.contact !== contact;
+    
+        // Check for existing email and contact in the ContactDirectory
+        if (emailChanged) {
+            const existingEmail = await ContactDirectory.findOne({ email: member_email });
+            if (existingEmail) {
+                return NextResponse.json({status:false,message:`provided email:${member_email} already registered`},{status:400})
+            }
         }
-        // since newly received email is not in contact directoryy ..update this number to contactdirectory
-        const contactDetail = {email:receivedData.member_email,user:_id};
-        await ContactDirectory.create(contactDetail);
-    }
-    if (teamMember.contact != receivedData.contact) {
-        registeredContact = await ContactDirectory.find({contact:receivedData.contact});
-        if (registeredContact.length>0) {
-            return NextResponse.json({status:false,message:`provided phone:${receivedData.contact} already registered`,body:registeredContact},{status:405})
+    
+        if (contactChanged) {
+            const existingContact = await ContactDirectory.findOne({ contact: contact });
+            if (existingContact) {
+                return NextResponse.json({status:false,message:`provided contact number:${member_email} already registered`},{status:400})
+            }
         }
-        // since newly received number is not in contact directoryy ..update this number to contactdirectory
-        const contactDetail = {contact:receivedData.contact,user:_id};
-        await ContactDirectory.create(contactDetail);
+    
+        // Update team member data
+        teamMember.member_email = member_email;
+        teamMember.contact = contact;
+        Object.assign(teamMember, otherData);
+        const updatedTeamMember = await teamMember.save();
+    
+        // Add new contact/email to the ContactDirectory if they are changed
+        if (emailChanged) {
+            await new ContactDirectory({ email: member_email, user: teamMember._id }).save();
+        }
+    
+        if (contactChanged) {
+            await new ContactDirectory({ contact: contact, user: teamMember._id }).save();
+        }
+    
+        return NextResponse.json({status:true,body:updatedTeamMember,message:"team member data updated successfully"},{status:200})
+    } catch (error) {
+        console.error('Error updating team member:', error);
+        return NextResponse.json({status:false, message: 'Error updating team member' }, { status: 500 });
     }
-    const updatedTeamMember =await TeamMemberModel.findByIdAndUpdate(_id,receivedData,{new:true});
-    return NextResponse.json({status:true,body:updatedTeamMember,message:"team member data updated successfully"},{status:200})
-   
-    // return NextResponse.json({status:true,body:{id:_id,receivedData:receivedData},message:"editing team member"},{status:200})
 }
