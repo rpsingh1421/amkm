@@ -121,7 +121,7 @@ export async function PUT(request,{params}){
     }
     if (teamMember.contact != receivedData.contact) {
         registeredContact = await ContactDirectory.find({contact:receivedData.contact});
-        if (registeredContact) {
+        if (registeredContact.length>0) {
             return NextResponse.json({status:false,message:`provided phone:${receivedData.contact} already registered`,body:registeredContact},{status:405})
         }
     }
