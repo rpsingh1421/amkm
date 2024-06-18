@@ -122,7 +122,7 @@ export async function PUT(request,{params}){
     if (teamMember.contact != receivedData.contact) {
         registeredContact = await ContactDirectory.find({contact:receivedData.contact});
         if (registeredContact) {
-            return NextResponse.json({status:false,message:`provided phone:${receivedData.contact} already registered`},{status:405})
+            return NextResponse.json({status:false,message:`provided phone:${receivedData.contact} already registered`,body:registeredContact},{status:405})
         }
     }
     const updatedTeamMember =await TeamMemberModel.findByIdAndUpdate(_id,receivedData,{new:true});
