@@ -93,6 +93,9 @@ export async function PUT(request,{params}){
 
     const _id = params.member_id;
     const receivedData =await request.json();
-
+    // Check if the id is a valid ObjectId
+    if (!isValidObjectId(_id)) {
+        return NextResponse.json({ error: "Invalid id format" }, { status: 400 });
+    }
     return NextResponse.json({status:true,body:{id:_id,receivedData:receivedData},message:"editing team member"},{status:200})
 }
