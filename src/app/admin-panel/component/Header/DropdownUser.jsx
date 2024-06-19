@@ -67,11 +67,11 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white uppercase">
-            {authenticatedUser!='null' && authenticatedUser.member_name}
+            {authenticatedUser && authenticatedUser.member_name}
             {/* Anurag singh */}
           </span>
           <span className="block text-xs uppercase">
-            {authenticatedUser!='null' && authenticatedUser.role}
+            {authenticatedUser && authenticatedUser.role}
             {/* admin */}
             </span>
         </span>
@@ -86,14 +86,14 @@ const DropdownUser = () => {
             alt="User"
             priority={true}
           /> */}
-          <Avatar alt="User" src={`https://store.amkmofficial.com/${authenticatedUser.profile_image}`} />
+          <Avatar alt="User" src={`https://store.amkmofficial.com/${authenticatedUser && authenticatedUser.profile_image}`} />
         </span>
 
         <IconButton>{dropdownOpen?<ExpandLessOutlined/>:<ExpandMore/>}</IconButton>
       </Link>
 
       {/* <!-- Dropdown Start --> */}
-      <Paper ref={dropdown} className={`absolute mt-[10%] right-0 flex flex-col w-[15vw] flex-col rounded-sm border border-stroke bg-white shadow-default ${dropdownOpen === true ? "block" : "hidden"
+      <Paper ref={dropdown} className={`absolute mt-[10%] right-0 flex w-[15vw] flex-col rounded-sm border border-stroke bg-white shadow-default ${dropdownOpen === true ? "block" : "hidden"
         }`}
       >       
           <Link href="#" className="p-[3%] border-b hover:bg-black hover:text-white font-semibold text-base w-full" ><Person2 className='mr-[5%]'/>My Profile</Link>
