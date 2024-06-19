@@ -3,7 +3,7 @@ import MediaCategoryModel from "../../models/categoryModel";
 import mongoose from "mongoose";
 import connect from "@/utils/dbConnect";
 
-export const dynamic = 'error'; // Add this line
+
 await connect();
 // Validate ObjectId
 const isValidObjectId = (id) => {
