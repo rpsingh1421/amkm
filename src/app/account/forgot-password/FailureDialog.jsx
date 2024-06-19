@@ -1,21 +1,15 @@
 "use client"
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Box, Button, Dialog, Typography } from '@mui/material';
 import Image from 'next/image';
 import { ForgotPasswordContext } from './ForgotPassword';
 
 const FailureDialog = () => {
-    const {step,setStep,handleNext,userCredentials,setUserCredentials,userCredentialsInitial} = useContext(ForgotPasswordContext);
+    const {setStep,setUserCredentials,userCredentialsInitial} = useContext(ForgotPasswordContext);
 
     const handleGoTo = () => {
         setStep(0);
-        setUserCredentials({
-            user_id:'',
-            email:'',
-            phone:'',
-            password:'',
-            confirmPassword:''
-        })
+        setUserCredentials(userCredentialsInitial);
     };
 
   return (

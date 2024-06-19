@@ -1,20 +1,23 @@
 import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi';
 import { useAuth } from '@/context/AuthContext';
-import { Contacts, ExpandMore, Logout, Person, Person2, Settings } from '@mui/icons-material'
-import { Box, Button, List, ListItem } from '@mui/material'
+import { Contacts, ExpandLessOutlined, ExpandMore, Logout, Person, Person2, Settings } from '@mui/icons-material'
+import { Avatar, Box, Button, IconButton, List, ListItem, Paper } from '@mui/material'
+import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
 
 const api = defaultNodeApi(); // Get the Axios instance
+const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const DropdownUser = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const{authenticatedUser,setAuthenticatedUser} = useAuth();
     const navigate = useRouter();
-
+    
     const trigger = useRef(null);
     const dropdown = useRef(null);
+    console
     // close on click outside
     useEffect(() => {
         const clickHandler = ({ target }) => {
@@ -40,12 +43,18 @@ const DropdownUser = () => {
         document.addEventListener("keydown", keyHandler);
         return () => document.removeEventListener("keydown", keyHandler);
     });
-    // oon click logout button in dropdown
+    // on click logout button in dropdown
     const logoutHandler=async()=>{
-      const response = await api.get('/rest-api/auth/logout');
-      console.log(response);
-      if(response.data.status){
-        setAuthenticatedUser(null);
+      try {
+        const response = await axios.get('/rest-api/auth/sign-out');
+        console.log(response);
+        if(response.data.status){
+          navigate.push('/account/login');
+          setAuthenticatedUser(null);
+        }
+        
+      } catch (error) {
+          console.log("error when logout:",error)
       }
     }
   return (
@@ -57,64 +66,49 @@ const DropdownUser = () => {
         href="#"
       >
         <span className="hidden text-right lg:block">
-          <span className="block text-sm font-medium text-black dark:text-white">
-            Anurag Singh
+          <span className="block text-sm font-medium text-black dark:text-white uppercase">
+            {authenticatedUser!='null' && authenticatedUser.member_name}
+            {/* Anurag singh */}
           </span>
-          <span className="block text-xs">Admin</span>
+          <span className="block text-xs uppercase">
+            {authenticatedUser!='null' && authenticatedUser.role}
+            {/* admin */}
+            </span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
-          <Image
-            width={112}
-            height={112}
-            src={"/team/anurag_founder.jpeg"}
-            className='rounded-full'
+          {/* <Image
+            width={100}
+            height={100}
+            src={`https://store.amkmofficial.com/${authenticatedUser.profile_image}`}
+            // src={`${storePath}/team/anurag_founder.jpeg`}
+            className='rounded-full w-[10%]'
             alt="User"
-          />
+            priority={true}
+          /> */}
+          <Avatar alt="User" src={`https://store.amkmofficial.com/${authenticatedUser.profile_image}`} />
         </span>
 
-        <ExpandMore/>
+        <IconButton>{dropdownOpen?<ExpandLessOutlined/>:<ExpandMore/>}</IconButton>
       </Link>
 
       {/* <!-- Dropdown Start --> */}
-      <Box className={`absolute right-0 mt-4 flex w-fit flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark ${
-          dropdownOpen === true ? "block" : "hidden"
+      <Paper ref={dropdown} className={`absolute mt-[10%] right-0 flex flex-col w-[15vw] flex-col rounded-sm border border-stroke bg-white shadow-default ${dropdownOpen === true ? "block" : "hidden"
         }`}
-      >
-        <List className="flex flex-col border-b py-[1%] ">
-          <ListItem className='border-b-2 hover:bg-gray-700 hover:text-white'>
-            <Link
-              href="#"
-              className="flex items-center gap-3 text-base font-normal duration-300 ease-in-out hover:text-primary lg:text-base"
-            >
-              <Person2/>
-              My Profile
-            </Link>
-          </ListItem>
-          <ListItem className='border-b-2 hover:bg-gray-700 hover:text-white'>
-            <Link
-              href="#"
-              className="flex items-center gap-3 text-base font-normal duration-300 ease-in-out hover:text-primary lg:text-base"
-            >
-              <Contacts/>
-              My Contacts
-            </Link>
-          </ListItem>
-          <ListItem className='border-b-2 hover:bg-gray-700 hover:text-white'>
-            <Link
-              href="#"
-              className="flex items-center gap-1 text-sm font-normal duration-300 ease-in-out hover:text-primary lg:text-base"
-            >
-              <Settings/>
-              Account Settings
-            </Link>
-          </ListItem>
-        </List>
-        <Button onClick={logoutHandler} className="flex items-center gap-3 px-6 base-4 text-sm font-normal duration-300 ease-in-out hover:text-primary lg:text-base">
+      >       
+          <Link href="#" className="p-[3%] border-b hover:bg-black hover:text-white font-semibold text-base w-full" ><Person2 className='mr-[5%]'/>My Profile</Link>
+        
+        
+          <Link href="#" className="p-[3%] border-b hover:bg-black hover:text-white font-semibold text-base w-full" ><Contacts className='mr-[5%]'/>My Contacts</Link>
+      
+       
+          <Link href="#" className="p-[3%] border-b hover:bg-black hover:text-white font-semibold text-base w-full" ><Settings className='mr-[5%]'/>Account Settings</Link>
+        
+        <Button onClick={logoutHandler} variant='text' className="flex items-center gap-3 px-6 base-4 text-sm font-normal duration-300 ease-in-out hover:text-primary lg:text-base">
           <Logout/>
           Log Out
         </Button>
-      </Box>
+      </Paper>
       {/* <!-- Dropdown End --> */}
     </Box>
   )

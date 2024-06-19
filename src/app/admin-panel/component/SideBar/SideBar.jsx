@@ -26,21 +26,22 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     <Box className="bg-slate-600 w-[20%]">
     
       {/* <!-- SIDEBAR HEADER --> */}
-      <Box className="flex items-center justify-between gap-2 px-6 py-[2%] lg:py-[2%] border-b-2 h-[20%]">
-        <Link href="/admin-panel" className="flex items-center gap-[5%]">
+      {/* <Box className="flex items-center justify-between gap-2 px-6 py-[2%] lg:py-[2%] border-b-2 h-[20%]"> */}
+        <Link href="/admin-panel" className="flex items-center gap-[5%] justify-center p-[5%] border-b-2 border-white">
           <Image
-            width={80}
-            height={32}
+            width={100}
+            height={100}
             src={"/aaomilkar_logo.png"}
             alt="Logo"
-            
+            priority={true}
+            className="w-[35%]"
           />
-          <Box className="text-center leading-4">
-            <Typography className="font-bold text-2xl">Admin</Typography>
-            <Typography className="font-bold text-2xl">Panel</Typography>
+          <Box className="text-center leading-4 w-[60%]">
+            <Typography className="font-bold text-xl text-white">Admin Panel</Typography>
+            {/* <Typography className="font-bold text-2xl"></Typography> */}
           </Box>
         </Link>
-      </Box>
+      {/* </Box> */}
       {/* <!-- SIDEBAR HEADER --> */}
 
       {/* <!-- SIDEBAR Body --> */}

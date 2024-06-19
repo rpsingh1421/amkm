@@ -3,20 +3,17 @@ import Link from "next/link";
 
 const Breadcrumb = ({ pageName }) => {
   return (
-    <Box className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      <Typography className="text-title-md2 font-semibold text-black">
+    <Box className="flex justify-between py-[2%] items-center">
+      <Typography className="font-semibold text-xl text-black">
         {pageName}
       </Typography>
 
-      <Box className="w-fit">
-        <List className="flex">
-          <ListItem className="w-fit flex-none pr-0">
-            <Link className="font-normal text-sm text-[#a7a2a2]" href="/admin-panel">
-              Dashboard / 
-            </Link>
-          </ListItem>
-          <ListItem className="font-normal text-[#18ace9] text-sm w-fit flex-none px-0">{pageName}</ListItem>
-        </List>
+      
+      <Box className='flex gap-[5%]'>
+        <Link className="font-semibold text-sm text-[#a7a2a2]" href="/admin-panel"> Dashboard</Link>
+        <Typography className="font-semibold text-sm text-[#a7a2a2]"> / </Typography>
+        <Typography className="font-semibold text-[#18ace9] text-sm ">{pageName}</Typography>
+        
       </Box>
     </Box>
   );

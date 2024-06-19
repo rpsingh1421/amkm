@@ -7,13 +7,14 @@ import { Box, Button, TextField, Typography } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useContext, useLayoutEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 const LoginEntry = () => {
     const {authenticatedUser, setAuthenticatedUser} = useAuth();
     // console.log("authenticatedUser:",authenticatedUser);
     const api = defaultNodeApi(); // Get the Axios instance
+    const navigate = useRouter();
     const loginCredentialsInitial = {
         email:'',
         phone:'',
@@ -22,21 +23,33 @@ const LoginEntry = () => {
     const [loginCredentials,setLoginCredentials] = useState(loginCredentialsInitial);
     const{register,handleSubmit,control,getValues,formState:{errors},clearErrors,reset,setValue}= useForm();
     const inputChangeHandler =(e)=>{
+        setError('');
         setLoginCredentials((pre)=>{
             return {...pre,[e.target.name]:e.target.value}
         })
     }
     const submitHandler =async()=>{
         console.log("login credentials",loginCredentials);
-        const response = await api.post('/rest-api/auth/login',loginCredentials);
+        try {
+            const response = await api.post('/rest-api/auth/login',loginCredentials);
         console.log("loginresponse",response);
         if(response.data.status){
             setAuthenticatedUser(response.data.body);
+            navigate.push('/admin-panel/dashboard');
+            setLoginCredentials(loginCredentialsInitial);
+        }else{
+            setError(response.data.message);
+        }
+        } catch (error) {
+            setError("something gone wrong...server issue");
         }
     }
+    const [error,setError] = useState('');
   return (
+    <>
     <Box component='form' className='p-[5%]' onSubmit={handleSubmit(submitHandler)}>
         <Box className="mb-[3%]"><Image width={100} height={100} alt='logo' src='/aaomilkar_logo.png' className='w-[20%] m-auto'/></Box>
+        <Box className='text-center mt-[2%]'><Typography className='text-xs text-red-700'>{error && error}</Typography></Box>
         <TextField
             fullWidth
             className='my-[2%]'
@@ -142,6 +155,7 @@ const LoginEntry = () => {
             <Typography>If not already registered ?...<span><Link href="/account/register" className='text-[#0866ff]'>Sign Up</Link></span></Typography>
         </Box>
     </Box>
+    </>
   )
 }
 

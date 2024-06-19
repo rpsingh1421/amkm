@@ -33,7 +33,7 @@ export async function GET(request){
     const textContent = generateEmailText(otp);
     const ismailSent = await sendMail({
         recipient:email,
-        subject:'reset password otp',
+        subject:'Password Reset OTP',
         text: textContent,
         html: htmlContent,
     })
@@ -98,6 +98,7 @@ const generateEmailHTML = (otp) => `
     <h2>Password Reset Request</h2>
     <p>We received a request to reset your password. Use the OTP below to reset it:</p>
     <h3>${otp}</h3>
+    <p>This OTP will expire in 5 minutes.</p>
     <p>If you did not request a password reset, please ignore this email.</p>
     <p>Best regards,</p>
     <p>AMKM-"AAO MILKAR KAREIN MADAD"</p>
@@ -111,6 +112,8 @@ const generateEmailText = (otp) => `
 
   OTP: ${otp}
 
+  This OTP will expire in 5 minutes.
+  
   If you did not request a password reset, please ignore this email.
 
   Best regards,

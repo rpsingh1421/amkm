@@ -1,4 +1,4 @@
-"use client"
+
 import React from 'react'
 import AdminLayout from '../component/Layouts/AdminLayout'
 import { Typography } from '@mui/material'

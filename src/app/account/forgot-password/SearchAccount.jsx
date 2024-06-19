@@ -127,7 +127,7 @@ const SearchAccount = () => {
     </Box>
     <Box className="border-t-2 p-[2%] text-center">
         {/* <Link href='/account/forgot-password' className='text-[#0866ff]'>Cancel</Link> */}
-        <Typography>Want to try login again ?...<span><Link href="/admin-panel/login" className='text-[#0866ff] font-bold'>Go Back To Login</Link></span></Typography>
+        <Typography>Want to try login again ?...<span><Link href="/account/login" className='text-[#0866ff] font-bold'>Go Back To Login</Link></span></Typography>
     </Box>
     </>
   )

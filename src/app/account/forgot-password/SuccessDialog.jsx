@@ -14,7 +14,7 @@ const SuccessDialog = () => {
     }, 1000);
 
     const timeout = setTimeout(() => {
-      router.push('/admin-panel/login');
+      router.push('/account/login');
     }, 15000);
 
     return () => {
@@ -24,7 +24,7 @@ const SuccessDialog = () => {
   }, [router]);
 
   const handleGoToLogin = () => {
-    router.push('/admin-panel/login');
+    router.push('/account/login');
   };
 
   return (

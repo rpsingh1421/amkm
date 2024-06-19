@@ -10,6 +10,7 @@ const nextConfig = {
     //   }
     images: {
         domains: ['store.amkmofficial.com'],
+        // remotePatterns: ['store.amkmofficial.com'],//not worked ..nedds some modification
       },
 };
 
