@@ -42,7 +42,7 @@ const UploadImage = () => {
     try {
       
       const response = await api.get('/rest-api/media-category?fetch=active&type=image');
-      console.log("category list:",response.data)
+      // console.log("category list:",response.data)
       if (response.data.status) {
         setFetchedCategoryList(response.data.body);
       }
@@ -69,7 +69,7 @@ const UploadImage = () => {
     formData.append('mediaFileData',JSON.stringify(mediaFileData));
     // need to append each file individually to the FormData object:
     // previews.forEach((item) => {
-    //   formData.append(item.file.name, item.file);
+    //   formData.append('uploadedFiles[]', item.file);
     // });
     console.log("files to be upload:",filesToUpload);
     // Append each file individually to the FormData object
@@ -81,7 +81,7 @@ const UploadImage = () => {
       if (editing) {
           // await api.put(`/api/media-categories/${editingItem.id}`, formData);
           // setEditingItem(null);
-          console.log("this section will be used in editing mode")
+          // console.log("this section will be used in editing mode")
       } else {
         // const response  = await multipartApi.post('/rest-api/photo-gallery', formData);
         const fileUploadResponse = await axios.post('https://store.amkmofficial.com/image-gallery.php', formData, {
@@ -89,12 +89,12 @@ const UploadImage = () => {
             'Content-Type': 'multipart/form-data'
           }
         });
-        console.log("media upload response :",fileUploadResponse);
+        // console.log("media upload response :",fileUploadResponse);
         if (fileUploadResponse.data.status) {
           try {
             const receivedData = fileUploadResponse.data.uploadedFiles;
             const response  = await api.post('/rest-api/photo-gallery', receivedData);
-            console.log("final response:",response)
+            // console.log("final response:",response)
             setMediaFileData(initialMediaFileData);
             setPreviews([]);
             setResponseDetails({status:true,message:'image uploaded successfully'});

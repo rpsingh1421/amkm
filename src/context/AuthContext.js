@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
     const fetchUser = async () => {
       try {
         const response = await axios.get('/rest-api/auth/user');
-        console.log("user authentication response:",response)
+        // console.log("user authentication response:",response)
         if (response.data.status) {
           setAuthenticatedUser(response.data.body);
         } else {

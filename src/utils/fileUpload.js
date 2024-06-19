@@ -13,11 +13,11 @@ const uploadFile = async(destinationPath,file,fileName)=>{
         const arrayBuffer = await file.arrayBuffer();
         await writeFile(filePath, Buffer.from(arrayBuffer));
         const result = { Message: "Success", result:true ,fileName:fileName};
-        console.log (result);
+        // console.log (result);
         return result
     } catch (error) {
         const result = { Message: "Error occured ", error: error , result:false }
-        console.log (result);
+        // console.log (result);
         return result;
     }
 }
