@@ -3,11 +3,6 @@ import mongoose from "mongoose";
 import connect from "@/utils/dbConnect";
 import ImageGalleryModel from "../../models/imageGalleryModel";
 
-// Error occurred prerendering page "/rest-api/image-gallery/crud". Read more: https://nextjs.org/docs/messages/prerender-error
-
-// Error: Route /rest-api/image-gallery/crud/ with `dynamic = "error"` couldn't be rendered statically because it accessed `request.url`.
-export const dynamic = 'error'; // Add this line
-
 await connect();
 // Validate ObjectId
 const isValidObjectId = (id) => {
