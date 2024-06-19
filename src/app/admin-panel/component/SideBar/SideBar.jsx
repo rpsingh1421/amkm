@@ -27,7 +27,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     
       {/* <!-- SIDEBAR HEADER --> */}
       {/* <Box className="flex items-center justify-between gap-2 px-6 py-[2%] lg:py-[2%] border-b-2 h-[20%]"> */}
-        <Link href="/admin-panel" className="flex items-center gap-[5%] justify-center p-[5%] border-b-2 border-white">
+        <Link href="/admin-panel/dashboard" className="flex items-center gap-[5%] justify-center p-[5%] border-b-2 border-white">
           <Image
             width={100}
             height={100}
