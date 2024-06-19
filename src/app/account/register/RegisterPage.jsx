@@ -43,34 +43,6 @@ const RegisterPage = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-  // const onFinalSubmit=async()=>{
-  //   const formData = new FormData();
-  //   formData.append('userData',JSON.stringify(userData));
-  //   uploadedFiles.map(item=>formData.append(item.fieldName,item.file))
-  //   console.log('submitted Data',uploadedFiles);
-  //   try {
-  //     const response = await axios.post('/rest-api/team-members', formData, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data'
-  //       }
-  //     });
-  //     if(response.data.status){
-  //       console.log(response);
-  //       const responseData = response.data.body;
-  //       setRegistrationResponse((pre)=>{
-  //           return {...pre,
-  //             email:responseData.member_email,
-  //             phoneNumber:responseData.contact,
-  //             password:userData.password,              
-  //           }
-  //       })
-  //       handleNext();
-  //   }
-  //   } catch (error) {
-  //     console.error('Error submitting form:', error);
-  //   }
-  //   // handleNext();
-  // }
 
   const [loading, setLoading] = useState(false);
   const onFinalSubmit = async () => {

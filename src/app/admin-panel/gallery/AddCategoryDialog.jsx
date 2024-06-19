@@ -19,8 +19,9 @@ const AddCategoryDialog = (props) => {
     message:'',
   })
   const[fetchedCategoryList,setFetchedCategoryList] = useState([]);
-  const fetchCategoryList =async()=>{
-    const response= await api.get(`/rest-api/media-categories?fetch=valid&type=${mediaType}`);
+  const fetchValidCategoryList =async()=>{
+    const response= await api.get(`/rest-api/media-category?fetch=valid&type=${mediaType}`);
+    console.log("valid image category list:",response)
     if (response.data.status) {
       setFetchedCategoryList(response.data.body);
     }
@@ -29,6 +30,9 @@ const AddCategoryDialog = (props) => {
     fetchImageCategories();
     setOpenAddCategoryDialog(false);
   }
+  useEffect(()=>{
+    fetchValidCategoryList();
+  },[])
   return (
     <Dialog open={openAddCategoryDialog} > 
       <Box className="flex space-between bg-slate-600 items-center px-[3%]">
@@ -36,7 +40,7 @@ const AddCategoryDialog = (props) => {
         <IconButton size='small' onClick={handleCloseDialog}><Cancel color='error'/></IconButton>
       </Box>
         <DialogContent>
-          <CategoryContext.Provider value={{fetchedCategoryList,setFetchedCategoryList,fetchCategoryList,responseResult,setResponseResult}}>
+          <CategoryContext.Provider value={{fetchedCategoryList,setFetchedCategoryList,fetchValidCategoryList,responseResult,setResponseResult}}>
             <AddCategories/>
             <Typography className={`${responseResult.status?'text-green-600':'text-red-600'} text-center`}>{responseResult.message}</Typography>
             <CategoryTable/>

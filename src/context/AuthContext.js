@@ -55,11 +55,11 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const authenticatedUserInitialState = {
     member_id: '',
-    'member_name': '',
-    'member_email': '',
-    'contact': '',
-    'role': '',
-    'profile_image': ''
+    member_name: '',
+    member_email: '',
+    contact: '',
+    role: '',
+    profile_image: ''
 }
   const [authenticatedUser, setAuthenticatedUser] = useState(authenticatedUserInitialState);
   const [loading, setLoading] = useState(true);

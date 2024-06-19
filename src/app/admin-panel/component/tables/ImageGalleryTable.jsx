@@ -26,7 +26,9 @@ const ImageGalleryTable = () => {
       width: 150,
       renderCell: (params) => {
         return(
-          <Image width={100} height={100} src={params.row.filePath} alt={params.row.fileName} className='h-full w-full p-[2%]' />
+          <Image width={100} height={100} alt={params.row.fileName} className='h-full w-full p-[2%]' 
+            src={`https://store.amkmofficial.com/${params.row.filePath}`} 
+          />
         )
       }
     },
@@ -39,7 +41,7 @@ const ImageGalleryTable = () => {
           };
           const onClickDelete = async(e) => {
             const currentRow = params.row;
-            const response = await api.get(`/rest-api/image-gallery/crud?action=delete&id=${currentRow._id}`);
+            const response = await api.get(`/rest-api/photo-gallery/crud?action=delete&id=${currentRow._id}`);
             console.log(response);  
             if(response.data.status){
                 fetchImageGalleryList();
@@ -59,7 +61,7 @@ const ImageGalleryTable = () => {
             const onClick = async(e) => {
             const currentRow = params.row;
             console.log("currentRowId:",currentRow._id);
-            const response = await api.get(`/rest-api/image-gallery/crud?action=modify-status&id=${currentRow._id}`);
+            const response = await api.get(`/rest-api/photo-gallery/crud?action=modify-status&id=${currentRow._id}`);
             console.log(response);  
             if(response.data.status){
                 fetchImageGalleryList();
@@ -81,7 +83,7 @@ const ImageGalleryTable = () => {
  
     /**===============view image related */
   const fetchImageGalleryList = async()=>{
-    const response = await api.get('/rest-api/image-gallery');
+    const response = await api.get('/rest-api/photo-gallery');
     if (response.data.status) {
       setImageGalleryList(response.data.body);
     }

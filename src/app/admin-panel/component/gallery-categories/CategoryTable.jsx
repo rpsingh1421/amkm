@@ -10,7 +10,7 @@ import axios from 'axios';
 
 const api = defaultNodeApi();
 const CategoryTable = () => {
-    const{fetchedCategoryList,setFetchedCategoryList,fetchCategoryList}= useContext(CategoryContext);
+    const{fetchedCategoryList,setFetchedCategoryList,fetchValidCategoryList}= useContext(CategoryContext);
     const columns = [
         { field: 'id', headerName: 'S.NO', width: 60,
             renderCell: (params) => {
@@ -37,10 +37,10 @@ const CategoryTable = () => {
                 const onClick = async(e) => {
                 const currentRow = params.row;
                 console.log("currentRowId:",currentRow._id);
-                const response = await axios.get(`/rest-api/media-categories/crud?action=modify-status&id=${currentRow._id}`);
+                const response = await axios.get(`/rest-api/media-category/crud?action=modify-status&id=${currentRow._id}`);
                 console.log(response);  
                 if(response.data.status){
-                    fetchCategoryList();
+                    fetchValidCategoryList();
                   }
               };
                 return (
@@ -56,10 +56,10 @@ const CategoryTable = () => {
                 };
                 const onClickDelete = async(e) => {
                   const currentRow = params.row;
-                  const response = await axios.get(`/rest-api/media-categories/crud?action=delete&id=${currentRow._id}`);
+                  const response = await axios.get(`/rest-api/media-category/crud?action=delete&id=${currentRow._id}`);
                   console.log(response);  
                   if(response.data.status){
-                      fetchCategoryList();
+                      fetchValidCategoryList();
                     }
                 };
                 return (

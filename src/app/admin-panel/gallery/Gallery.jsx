@@ -30,8 +30,8 @@ const Gallery = () => {
       </Paper>
       <Paper className='w-[90%] m-auto mt-[1%] py-[5%] rounded-xl'>
         {value=='one' && <UploadImage/>}
-        {value=='two' && <UploadVideo/>}
-        {value=='three' && <UploadPdf/>}
+        {/* {value=='two' && <UploadVideo/>} */}
+        {/* {value=='three' && <UploadPdf/>} */}
       </Paper>
       <Paper className='w-[90%] m-auto mt-[1%] rounded-xl'>
         {value=='one' && <ImageGalleryTable/>}

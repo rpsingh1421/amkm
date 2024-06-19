@@ -20,12 +20,12 @@ const ViewImage = (props) => {
     <Dialog open={openImageDialog} onClose={handleClose} className=" w-80% m-auto">
         <Box className='flex gap-[1%] justify-end p-[2%]'>
             <IconButton onClick={()=>setZoom(true)} disabled={!zoom ? false:true}><ZoomIn/></IconButton>
-            <IconButton IconButton onClick={()=>setZoom(false)} disabled={zoom ? false:true}><ZoomOut/></IconButton>
+            <IconButton onClick={()=>setZoom(false)} disabled={zoom ? false:true}><ZoomOut/></IconButton>
             <IconButton onClick={()=>handleClose()} className='rounded-md bg-red-600 text-white' size='small'><Close color='inherit' fontSize='small'/></IconButton>
         </Box>
       <DialogContent>
         <Box>
-          <Image width={"100"} height={"100"} src={storePath+imagePath} alt='gallery_image'  className={zoom&&zoomImage}/>
+          <Image width={"100"} height={"100"} src={'https://store.amkmofficial.com/'+imagePath} alt='gallery_image'  className={zoom&&zoomImage}/>
         </Box>
       </DialogContent>
     </Dialog>

@@ -12,7 +12,7 @@ const api = defaultNodeApi();
 
 const AddCategories = () => {
   const {authenticatedUser} = useAuth();
-  const {responseResult,setResponseResult,fetchCategoryList} = useContext(CategoryContext);
+  const {responseResult,setResponseResult,fetchValidCategoryList} = useContext(CategoryContext);
   const{register,handleSubmit,control,formState:{errors},clearErrors,reset}= useForm();
   const initialCategoryData = {
     category_name:'',
@@ -26,12 +26,12 @@ const AddCategories = () => {
     setCategoryData(pre=>({...pre,[e.target.name]:e.target.value}));
   }
   const submitHandler =async()=>{
-    const response = await api.post('/rest-api/media-categories',categoryData);
+    const response = await api.post('/rest-api/media-category',categoryData);
     console.log('category addition response:',response);
     if (response.data.status) {
       setCategoryData(initialCategoryData);
       setResponseResult(pre=>({...pre,status:response.data.status,message:response.data.message}))
-      fetchCategoryList();
+      fetchValidCategoryList();
     }
   }
   return (

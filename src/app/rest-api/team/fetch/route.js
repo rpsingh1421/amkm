@@ -13,7 +13,7 @@ console.log("search prarams",type)
     switch (type) {
         case 'all':
             memberList= await TeamMemberModel.find();
-            return NextResponse.json({status:true,message:'all team member list fetched successfully'});
+            return NextResponse.json({status:true,body:memberList,message:'all team member list fetched successfully'});
             break;
         case 'active':// status active
         memberList= await TeamMemberModel.find({status:true});

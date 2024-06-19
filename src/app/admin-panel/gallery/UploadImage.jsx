@@ -24,11 +24,13 @@ const UploadImage = () => {
     fileName:'',
     filePath:'',
     categoryName:'',//team,member,work/project/activity
-    uploadedBy: authenticatedUser!=null && authenticatedUser.member_id
+    uploadedBy: authenticatedUser && authenticatedUser.member_id
   }
   const [mediaFileData, setMediaFileData] = useState(initialMediaFileData);
   /**=========previews will contain uploaded files information [{file:'',previewUrl:''}] */
   const [previews, setPreviews] = useState([]);
+
+  const [filesToUpload,setFilesToUpload] = useState([]);
 
   /**============this dialog will be used for add new category */
   const [openAddCategoryDialog,setOpenAddCategoryDialog] = useState(false);
@@ -39,7 +41,7 @@ const UploadImage = () => {
   const fetchImageCategories = async()=>{
     try {
       
-      const response = await api.get('/rest-api/media-categories?fetch=active&type=image');
+      const response = await api.get('/rest-api/media-category?fetch=active&type=image');
       console.log("category list:",response.data)
       if (response.data.status) {
         setFetchedCategoryList(response.data.body);
@@ -66,25 +68,40 @@ const UploadImage = () => {
 
     formData.append('mediaFileData',JSON.stringify(mediaFileData));
     // need to append each file individually to the FormData object:
-    previews.forEach(item => {
-      formData.append('uploadedFiles', item.file);
+    // previews.forEach((item) => {
+    //   formData.append(item.file.name, item.file);
+    // });
+    console.log("files to be upload:",filesToUpload);
+    // Append each file individually to the FormData object
+    filesToUpload.forEach((file) => {
+      formData.append('uploadedFiles[]', file); // Use 'uploadedFiles[]' to handle multiple files
     });
-    
+  
     try {
       if (editing) {
           // await api.put(`/api/media-categories/${editingItem.id}`, formData);
           // setEditingItem(null);
           console.log("this section will be used in editing mode")
       } else {
-        const response  = await multipartApi.post('/rest-api/image-gallery', formData);
-        console.log("media upload response :",response);
-        if (response.data.status) {
-
-          setMediaFileData(initialMediaFileData);
-          setPreviews([]);
-          setResponseDetails({status:true,message:'image uploaded successfully'})
-        }else{
-          setResponseDetails({status:false,message:'image upload failed....try again'})
+        // const response  = await multipartApi.post('/rest-api/photo-gallery', formData);
+        const fileUploadResponse = await axios.post('https://store.amkmofficial.com/image-gallery.php', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        console.log("media upload response :",fileUploadResponse);
+        if (fileUploadResponse.data.status) {
+          try {
+            const receivedData = fileUploadResponse.data.uploadedFiles;
+            const response  = await api.post('/rest-api/photo-gallery', receivedData);
+            console.log("final response:",response)
+            setMediaFileData(initialMediaFileData);
+            setPreviews([]);
+            setResponseDetails({status:true,message:'image uploaded successfully'});
+          } catch (error) {
+            setResponseDetails({status:false,message:'image upload failed'});
+          }
+          
         }
       }
       
@@ -129,7 +146,7 @@ const UploadImage = () => {
         </FormControl>
         <IconButton onClick={()=>setOpenAddCategoryDialog(true)}><Add color='success' fontSize='medium'/></IconButton>
       </Box>
-      <SelectAndPreview previews={previews} setPreviews={setPreviews}/>
+      <SelectAndPreview previews={previews} setPreviews={setPreviews} setFilesToUpload={setFilesToUpload}/>
       <Box className="flex justify-end">
           <Button type='submit' variant='contained' size='small' className='' disabled={previews.length<1}>upload</Button>
       </Box>

@@ -4,14 +4,15 @@ import Image from 'next/image';
 import React, { useState } from 'react'
 
 const SelectAndPreview = (props) => {
-  const {previews, setPreviews} = props;
+  const {previews, setPreviews,setFilesToUpload} = props;
 
   const handleFileChange = (event) => {
-    const files = Array.from(event.target.files);;
+    const files = Array.from(event.target.files);
     const newPreviews = files.map(file => ({
       file,
       preview: URL.createObjectURL(file) // Create an object URL for each file
     }));
+    setFilesToUpload(pre=>[...pre, ...files]);
       /**The map method returns a new array (newPreviews), where each element is an object containing:
     The original file object.
     A preview URL created by URL.createObjectURL. */

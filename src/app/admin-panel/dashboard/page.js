@@ -7,7 +7,7 @@ import Breadcrumb from '../component/Breadcumbs/Breadcumb'
 const DashBoard = () => {
   return (
     <AdminLayout>
-      <Breadcrumb pageName={'Dashboard'} />
+      <Breadcrumb pageName={'dashboard'} />
     </AdminLayout>
   )
 }
