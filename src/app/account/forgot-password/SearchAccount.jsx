@@ -23,10 +23,10 @@ const SearchAccount = () => {
         })
     }
     const submitHandler =async()=>{
-        console.log("userCredentials",userCredentials);
+        // console.log("userCredentials",userCredentials);
         try {
             const response = await api.get(`/rest-api/auth/password-change?email=${userCredentials.email}&contact=${userCredentials.phone}`);
-            console.log("account search response:",response);
+            // console.log("account search response:",response);
             if(response.data.status){
                 setUserCredentials(pre=>({...pre,user_id:response.data.user_id}));
                 handleNext();

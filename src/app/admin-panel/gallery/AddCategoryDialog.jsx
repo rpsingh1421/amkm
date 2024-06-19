@@ -21,7 +21,7 @@ const AddCategoryDialog = (props) => {
   const[fetchedCategoryList,setFetchedCategoryList] = useState([]);
   const fetchValidCategoryList =async()=>{
     const response= await api.get(`/rest-api/media-category?fetch=valid&type=${mediaType}`);
-    console.log("valid image category list:",response)
+    // console.log("valid image category list:",response)
     if (response.data.status) {
       setFetchedCategoryList(response.data.body);
     }

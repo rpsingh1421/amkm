@@ -29,10 +29,10 @@ const LoginEntry = () => {
         })
     }
     const submitHandler =async()=>{
-        console.log("login credentials",loginCredentials);
+        // console.log("login credentials",loginCredentials);
         try {
             const response = await api.post('/rest-api/auth/login',loginCredentials);
-        console.log("loginresponse",response);
+        // console.log("loginresponse",response);
         if(response.data.status){
             setAuthenticatedUser(response.data.body);
             navigate.push('/admin-panel/dashboard');

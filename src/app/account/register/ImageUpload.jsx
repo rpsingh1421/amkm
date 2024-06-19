@@ -43,7 +43,7 @@ const ImageUpload = () => {
     }
        
     const fileSizeValidation=(value)=>{
-      console.log(value);
+      // console.log(value);
       return value[0].size>100000&&value[0].size<300000 || 'file size should be of min 100kB and Maximize 300KB';
     }
   return (

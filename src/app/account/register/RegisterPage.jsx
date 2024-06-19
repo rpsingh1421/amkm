@@ -50,7 +50,7 @@ const RegisterPage = () => {
     const formData = new FormData();
     formData.append('userData', userData.member_name);
     uploadedFiles.map(item => formData.append(item.fieldName, item.file));
-    console.log('Files to be uploaded', uploadedFiles);
+    // console.log('Files to be uploaded', uploadedFiles);
     setLoading(true); // Start loading
     try {
       const fileUploadResponse = await axios.post('https://store.amkmofficial.com/team-members.php', formData, {
@@ -83,7 +83,7 @@ const RegisterPage = () => {
         // console.log("user data send to save:",updatedUserData);
         // console.log("user data saved response from api:",response);
         if(response.data.status){
-          console.log(response);
+          // console.log(response);
           const responseData = response.data.body;
           setRegistrationResponse((pre)=>{
               return {...pre,

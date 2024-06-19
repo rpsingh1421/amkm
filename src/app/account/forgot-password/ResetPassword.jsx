@@ -16,15 +16,15 @@ const ResetPassword = () => {
         setUserCredentials(pre=>({...pre,[e.target.name]:e.target.value}));
     }
     const submitHandler =async()=>{
-        console.log("credentials",userCredentials);
+        // console.log("credentials",userCredentials);
         const data = {
             user_id:userCredentials.user_id,
             password:userCredentials.password
         }
-        console.log(" data to be send:",data)
+        // console.log(" data to be send:",data)
         try {
             const response = await api.put('/rest-api/auth/password-change',data);
-        console.log("loginresponse",response);
+        // console.log("loginresponse",response);
         if(response.data.status){
             handleNext();
         }
