@@ -10,8 +10,7 @@ const isValidObjectId = (id) => {
   };
 
 export async function GET(request, { params }){
-    const url = new URL(request.url);
-    const searchParams = url.searchParams; // Get the URL search parameters
+    const searchParams = request.nextUrl.searchParams;
     const action = searchParams.get('action'); // Replace with your query parameter key
     const id = searchParams.get('id'); // Replace with your query parameter key
     // const idInt = parseInt(id, 10); // Convert id to an integer
