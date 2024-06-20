@@ -7,7 +7,8 @@ import { Edit } from '@mui/icons-material';
 
 const api = defaultNodeApi();
 
-const VideoGalleryTable = () => {
+const VideoGalleryTable = (props) => {
+  const {videoGalleryList,fetchVideoGalleryList,onClickEdit} = props;
   const columns = [
     { field: 'id', headerName: 'S.NO', width: 60,
         renderCell: (params) => {
@@ -37,7 +38,7 @@ const VideoGalleryTable = () => {
         
           const onClickDelete = async(e) => {
             const currentRow = params.row;
-            const response = await api.get(`/rest-api/video-gallery/crud?action=delete&id=${currentRow._id}`);
+            const response = await api.delete(`/rest-api/video-gallery/${currentRow._id}`);
             console.log(response);  
             if(response.data.status){
                 fetchVideoGalleryList();
@@ -45,7 +46,7 @@ const VideoGalleryTable = () => {
           };
           return ( 
             <Box className='flex items-center justify-center h-full'>
-                <IconButton color='info'><Edit/></IconButton>
+                <IconButton color='info' onClick={()=>onClickEdit(params.row._id)}><Edit/></IconButton>
                 <IconButton color='error' onClick={onClickDelete}><DeleteForeverIcon/></IconButton>
             </Box>
           );
@@ -57,7 +58,7 @@ const VideoGalleryTable = () => {
             const onClick = async(e) => {
             const currentRow = params.row;
             console.log("currentRowId:",currentRow._id);
-            const response = await api.get(`/rest-api/video-gallery/crud?action=modify-status&id=${currentRow._id}`);
+            const response = await api.get(`/rest-api/video-gallery/${currentRow._id}?action=modify-status`);
             console.log(response);  
             if(response.data.status){
                 fetchVideoGalleryList();
@@ -69,19 +70,10 @@ const VideoGalleryTable = () => {
         },
     },
     { field: 'categoryName', headerName: 'category', },
-    { field: 'fileName', headerName: 'name', },
-    { field: 'uploadedBy', headerName: 'Uploaded By', },
+    { field: 'fileName', headerName: 'name', width:150},
+    { field: 'uploadedBy', headerName: 'Uploaded By',width:200 },
   ];
-  const [videoGalleryList,setVideoGalleryList] = useState([]);
-  /**===============view image related */
- 
-    /**===============view image related */
-  const fetchVideoGalleryList = async()=>{
-    const response = await api.get('/rest-api/video-gallery');
-    if (response.data.status) {
-      setVideoGalleryList(response.data.body);
-    }
-  }
+  
   useEffect(()=>{
     fetchVideoGalleryList();
   },[]);
@@ -89,7 +81,7 @@ const VideoGalleryTable = () => {
     <>
     <Box>
       <Box className="bg-[#009688] text-center">
-        <Typography variant='p' className="font-bold text-xl text-white ">Image Gallery List</Typography>
+        <Typography variant='p' className="font-bold text-xl text-white ">Video Gallery List</Typography>
       </Box>
       <Box>
         <DataGrid

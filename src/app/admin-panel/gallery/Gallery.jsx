@@ -26,18 +26,13 @@ const Gallery = () => {
         >
           <Tab value="one" label="upload image" />
           <Tab value="two" label="upload video" />
-          <Tab value="three" label="upload pdf" />
+          <Tab value="three" label="upload pdf" disabled/>
         </Tabs>
       </Paper>
-      <Paper className='w-[90%] m-auto mt-[1%] py-[5%] rounded-xl'>
-        {value=='one' && <UploadImage/>}
-        {value=='two' && <UploadVideo/>}
-        {/* {value=='three' && <UploadPdf/>} */}
-      </Paper>
-      <Paper className='w-[90%] m-auto mt-[1%] rounded-xl'>
-        {value=='one' && <ImageGalleryTable/>}
-        {value=='two' && <VideoGalleryTable/>}
-      </Paper>
+      
+      {value=='one' && <UploadImage/>}
+      {value=='two' && <UploadVideo/>}
+      {/* {value=='three' && <UploadPdf/>} */}
     </Box>
   )
 }

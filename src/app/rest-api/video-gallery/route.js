@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import VideoGalleryModel from "../models/videoGalleryModel";
+import connect from "@/utils/dbConnect";
 
+await connect();
 export async function POST(request){
     try {
         const receivedData = await request.json();

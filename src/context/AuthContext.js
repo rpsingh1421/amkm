@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
   }, [router]);
 
   return (
-    <AuthContext.Provider value={{ authenticatedUser, setAuthenticatedUser, loading }}>
+    <AuthContext.Provider value={{authenticatedUserInitialState, authenticatedUser, setAuthenticatedUser, loading }}>
       {children}
     </AuthContext.Provider>
   );

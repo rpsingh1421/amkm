@@ -1,7 +1,7 @@
 "use client"
 
 import { Add, Category } from '@mui/icons-material'
-import { Box, Button, FormControl, FormHelperText, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Box, Button, FormControl, FormHelperText, IconButton, InputLabel, MenuItem, Paper, Select, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import AddCategoryDialog from './AddCategoryDialog'
 import axios from 'axios'
@@ -10,6 +10,7 @@ import SelectAndPreview from '../component/SelectAndPreview'
 import { useAuth } from '@/context/AuthContext'
 import { useForm } from 'react-hook-form'
 import multipartNodeApi from '@/app/rest-api/api/node-api/multiPartApi'
+import ImageGalleryTable from '../component/tables/ImageGalleryTable'
 
 const multipartApi = multipartNodeApi();//this api is used to send file using axios
 const api = defaultNodeApi(); // Get the Axios instance used for normal json data
@@ -116,6 +117,7 @@ const UploadImage = () => {
   
   return (
     <>
+    <Paper className='w-[90%] m-auto mt-[1%] py-[5%] rounded-xl'>
     <Box component={'form'} onSubmit={handleSubmit(submitHandler)} className='w-3/4 m-auto'>
       <Typography className={`${responseDetails.status?'text-green-500':'text-red-500'}`}>{responseDetails.message}</Typography>
       <Box className="flex gap-[3%] mb-[2%]">
@@ -153,6 +155,10 @@ const UploadImage = () => {
     </Box>
     
     <AddCategoryDialog openAddCategoryDialog={openAddCategoryDialog} setOpenAddCategoryDialog={setOpenAddCategoryDialog} fetchImageCategories={fetchImageCategories} mediaType ={'image'} />
+    </Paper>
+    <Paper className='w-[90%] m-auto mt-[1%] rounded-xl'>
+       <ImageGalleryTable/>
+    </Paper>
     </>
   )
 }

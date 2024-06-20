@@ -13,7 +13,7 @@ const api = defaultNodeApi();
 const CategoryContext = createContext()
 
 const AddCategoryDialog = (props) => { 
-  const {openAddCategoryDialog,setOpenAddCategoryDialog,fetchImageCategories,mediaType} = props; 
+  const {openAddCategoryDialog,setOpenAddCategoryDialog,fetchMediaCategories,mediaType} = props; 
   const [responseResult,setResponseResult] = useState({
     status:"",
     message:'',
@@ -27,7 +27,7 @@ const AddCategoryDialog = (props) => {
     }
   }
   const handleCloseDialog = ()=>{
-    fetchImageCategories();
+    fetchMediaCategories();
     setOpenAddCategoryDialog(false);
   }
   useEffect(()=>{

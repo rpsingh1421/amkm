@@ -97,7 +97,11 @@ const generateEmailHTML = (otp) => `
   <div style="font-family: Arial, sans-serif; line-height: 1.6;">
     <h2>Password Reset Request</h2>
     <p>We received a request to reset your password. Use the OTP below to reset it:</p>
-    <h3>${otp}</h3>
+    <div style="text-align: center;">
+        <div style="font-weight: bold; border: 1px solid black; padding: 2%; background-color: #ccc;">
+        ${otp}
+        </div>
+    </div>
     <p>This OTP will expire in 5 minutes.</p>
     <p>If you did not request a password reset, please ignore this email.</p>
     <p>Best regards,</p>
