@@ -78,8 +78,8 @@ const UploadVideo = () => {
     <Box component={'form'} onSubmit={handleSubmit(submitHandler)} className='w-3/4 m-auto'>
       <Box className='mb-[3%] border'>
         <Box className='border-b'><Typography  className='px-[2%] font-bold border-r w-fit bg-gray-400'>Important Instruction:</Typography></Box>
-        <Typography className='text-sm'><span className='font-bold text-green-500'>valid</span> : "https://www.youtube.com/<span className='font-bold text-green-500'>embed</span>/zF8Z7R1DLF4?si=RY_bf4ZncvQrpZjS"</Typography>
-        <Typography className='text-sm'><span className='font-bold text-red-500'>inValid</span>: "https://www.youtube.com/,<span className='font-bold text-red-500'>watch</span>?v=zF8Z7R1DLF4&t=1s&ab_channel=AaoMilkarKarenMadad"</Typography>
+        <Typography className='text-sm'><span className='font-bold text-green-500'>valid</span> : `&quot;`https://www.youtube.com/<span className='font-bold text-green-500'>embed</span>/zF8Z7R1DLF4?si=RY_bf4ZncvQrpZjS`&quot;`</Typography>
+        <Typography className='text-sm'><span className='font-bold text-red-500'>inValid</span>: `&quot;`https://www.youtube.com/,<span className='font-bold text-red-500'>watch</span>?v=zF8Z7R1DLF4&t=1s&ab_channel=AaoMilkarKarenMadad`&quot;`</Typography>
       </Box>
       
       <Typography className={`${responseDetails.status?'text-green-500':'text-red-500'}`}>{responseDetails.message}</Typography>
