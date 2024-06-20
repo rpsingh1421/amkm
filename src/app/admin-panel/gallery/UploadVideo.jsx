@@ -4,14 +4,10 @@ import { Add, Category } from '@mui/icons-material'
 import { Box, Button, FormControl, FormHelperText, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import AddCategoryDialog from './AddCategoryDialog'
-import axios from 'axios'
 import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi'
-import SelectAndPreview from '../component/SelectAndPreview'
 import { useAuth } from '@/context/AuthContext'
 import { useForm } from 'react-hook-form'
-import multipartNodeApi from '@/app/rest-api/api/node-api/multiPartApi'
 
-const multipartApi = multipartNodeApi();//this api is used to send file using axios
 const api = defaultNodeApi(); // Get the Axios instance used for normal json data
 const UploadVideo = () => {
   const {authenticatedUser} = useAuth();
@@ -26,12 +22,7 @@ const UploadVideo = () => {
     categoryName:'',//team,member,work/project/activity
     uploadedBy: authenticatedUser && authenticatedUser.member_id
   }
-  const [mediaFileData, setMediaFileData] = useState(initialMediaFileData);
-  /**=========previews will contain uploaded files information [{file:'',previewUrl:''}] */
-  const [previews, setPreviews] = useState([]);
-
-  const [filesToUpload,setFilesToUpload] = useState([]);
-
+  const [mediaFileData,setMediaFileData] = useState(initialMediaFileData);
   /**============this dialog will be used for add new category */
   const [openAddCategoryDialog,setOpenAddCategoryDialog] = useState(false);
   
@@ -64,50 +55,18 @@ const UploadVideo = () => {
 
     /**=======event handler when upload button is clicked */
   const submitHandler = async () => {
-    const formData = new FormData();
-
-    formData.append('mediaFileData',JSON.stringify(mediaFileData));
-    // need to append each file individually to the FormData object:
-    // previews.forEach((item) => {
-    //   formData.append('uploadedFiles[]', item.file);
-    // });
-    console.log("files to be upload:",filesToUpload);
-    // Append each file individually to the FormData object
-    filesToUpload.forEach((file) => {
-      formData.append('uploadedFiles[]', file); // Use 'uploadedFiles[]' to handle multiple files
-    });
-  
     try {
       if (editing) {
           // await api.put(`/api/media-categories/${editingItem.id}`, formData);
           // setEditingItem(null);
           // console.log("this section will be used in editing mode")
-      } else {
-        // const response  = await multipartApi.post('/rest-api/photo-gallery', formData);
-        const fileUploadResponse = await axios.post('https://store.amkmofficial.com/image-gallery.php', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-        // console.log("media upload response :",fileUploadResponse);
-        if (fileUploadResponse.data.status) {
-          try {
-            const receivedData = fileUploadResponse.data.uploadedFiles;
-            const response  = await api.post('/rest-api/photo-gallery', receivedData);
-            // console.log("final response:",response)
-            setMediaFileData(initialMediaFileData);
-            setPreviews([]);
-            setResponseDetails({status:true,message:'image uploaded successfully'});
-          } catch (error) {
-            setResponseDetails({status:false,message:'image upload failed'});
-          }
-          
-        }
       }
-      
-      // fetchItems();
+      const response  = await api.post('/rest-api/video-gallery', mediaFileData);
+      setMediaFileData(initialMediaFileData);
+      setResponseDetails({status:true,message:'video data uploaded successfully'});
     } catch (error) {
-        console.error('Error submitting form:', error);
+      console.error('Error submitting form:', error);
+      setResponseDetails({status:false,message:'video data upload failed'});
     }
   };
   useEffect(()=>{
@@ -117,9 +76,16 @@ const UploadVideo = () => {
   return (
     <>
     <Box component={'form'} onSubmit={handleSubmit(submitHandler)} className='w-3/4 m-auto'>
+      <Box className='mb-[3%] border'>
+        <Box className='border-b'><Typography  className='px-[2%] font-bold border-r w-fit bg-gray-400'>Important Instruction:</Typography></Box>
+        <Typography className='text-sm'><span className='font-bold text-green-500'>valid</span> : "https://www.youtube.com/<span className='font-bold text-green-500'>embed</span>/zF8Z7R1DLF4?si=RY_bf4ZncvQrpZjS"</Typography>
+        <Typography className='text-sm'><span className='font-bold text-red-500'>inValid</span>: "https://www.youtube.com/,<span className='font-bold text-red-500'>watch</span>?v=zF8Z7R1DLF4&t=1s&ab_channel=AaoMilkarKarenMadad"</Typography>
+      </Box>
+      
       <Typography className={`${responseDetails.status?'text-green-500':'text-red-500'}`}>{responseDetails.message}</Typography>
+      
       <Box className="flex gap-[3%] mb-[2%]">
-        <Typography className='w-[25%] font-bold'>Category</Typography>
+        <Typography className='w-[30%] font-bold'>Category</Typography>
         <FormControl fullWidth>
           <InputLabel id="categoryLabel">Select Category</InputLabel>
           <Select
@@ -147,26 +113,48 @@ const UploadVideo = () => {
         <IconButton onClick={()=>setOpenAddCategoryDialog(true)}><Add color='success' fontSize='medium'/></IconButton>
       </Box>
       <Box className="flex gap-[3%] mb-[2%]">
-        <Typography className='w-[25%] font-bold'>Video Link</Typography>
+        <Typography className='w-[30%] font-bold'>Video Link</Typography>
         <TextField
           fullWidth
           size='small'
           label="paste youtube video link"
-          name="videoLink"
+          name="filePath"
+          value={mediaFileData.filePath}
           onChange={inputChangeHandler}
           inputProps={
             register(
-              'videoLink',{
+              'filePath',{
                 required:"empty field not allowed"
               }
             )
           }
-          error={errors.videoLink && errors.videoLink}
-          helperText={errors.videoLink && errors.videoLink?.message}
+          error={errors.filePath && errors.filePath}
+          helperText={errors.filePath && errors.filePath?.message}
+        />
+      </Box>
+      <Box className="flex gap-[3%] mb-[2%]">
+        <Typography className='w-[30%] font-bold'>Video Description</Typography>
+        <TextField
+          fullWidth
+          size='small'
+          label="video description"
+          placeholder='two or three words'
+          name="fileName"
+          value={mediaFileData.fileName}
+          onChange={inputChangeHandler}
+          inputProps={
+            register(
+              'fileName',{
+                required:"empty field not allowed"
+              }
+            )
+          }
+          error={errors.fileName && errors.fileName}
+          helperText={errors.fileName && errors.fileName?.message}
         />
       </Box>
       <Box className="flex justify-end">
-          <Button type='submit' variant='contained' size='small' className='' disabled={previews.length<1}>upload</Button>
+          <Button type='submit' variant='contained' size='small'>upload</Button>
       </Box>
     </Box>
     

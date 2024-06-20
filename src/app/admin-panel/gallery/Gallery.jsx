@@ -5,6 +5,7 @@ import UploadImage from './UploadImage';
 import UploadVideo from './UploadVideo';
 import UploadPdf from './UploadPdf';
 import ImageGalleryTable from '../component/tables/ImageGalleryTable';
+import VideoGalleryTable from '../component/tables/VideoGalleryTable';
 
 
 const GalleryContext = createContext();
@@ -35,6 +36,7 @@ const Gallery = () => {
       </Paper>
       <Paper className='w-[90%] m-auto mt-[1%] rounded-xl'>
         {value=='one' && <ImageGalleryTable/>}
+        {value=='two' && <VideoGalleryTable/>}
       </Paper>
     </Box>
   )
