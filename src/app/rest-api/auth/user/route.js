@@ -38,44 +38,10 @@ export async function GET(request){
           console.log("isTokenExpired:", isAccessTokenExpired);
           //if access token expired,check for refresh token expiry
           if(isAccessTokenExpired){
-            console.log("accesstoken expired");
-            //check for refreshtoken
-            const refreshTokenVerificationResult = await verifyRefreshToken ({ access_token:accessToken.value, refresh_token: refreshToken.value});
-            
-            console.log("refreshTokenVerificationResult:",refreshTokenVerificationResult)
-            if(!refreshTokenVerificationResult.isValid){
-              console.log("refresh token invalid or expired")
-              return NextResponse.json({status:false, message: refreshTokenVerificationResult.message },{status:200});
-            }
-            console.log("refresh token valid")
-            // if refresh token is valid and not expired then create a new refresh token and access token and send to cookie 
-            const user_id = refreshTokenVerificationResult.user_id;
-              //==================validate user===========
-            const user = await validateUser(user_id);
-            console.log(" user validation if access token expired and refresh token is valid:",user);
-            if(user.isvalid){
-              const response = NextResponse.json({ status: true,message:'valid user',body:user.authorizeduserData },{status:200});
-              /*=========generate json webtoken and refresh token========== */
-              const newAccessToken = createAccessToken({id:user.authorizeduserData.member_id});
-              const newRefreshToken = await createRefreshToken({ user_id: user.authorizeduserData.member_id });
-              // Set cookies
-              response.cookies.set('accessToken', newAccessToken, {
-                  httpOnly: true,
-                  secure: process.env.NODE_ENV === 'production',
-                  maxAge: 3600, // 1 hour
-                  path: '/',
-              });
-  
-              response.cookies.set('refreshToken', newRefreshToken, {
-                  httpOnly: true,
-                  secure: process.env.NODE_ENV === 'production',
-                  maxAge: 86400, // 24 hours
-                  path: '/',
-              });
-              return response;
-            } 
+            return NextResponse.json({status:false,message:"token expired already"},{status:500})
           }
-          //if access token not expired
+       
+          
           const payload = jwt.verify(accessToken.value, jwtConfig.secret, { ignoreExpiration: true });
           console.log("payload:",payload);
                   
@@ -88,16 +54,37 @@ export async function GET(request){
                   // }
           /**==================================================== */  
 
+          //check for refreshtoken
+          const refreshTokenVerificationResult = await verifyRefreshToken ({ access_token:accessToken.value, refresh_token: refreshToken.value});
+                
+          console.log("refreshTokenVerificationResult:",refreshTokenVerificationResult)
+
+          if(!refreshTokenVerificationResult.isValid){
+            console.log("refresh token invalid or expired")
+            return NextResponse.json({status:false, message: refreshTokenVerificationResult.message },{status:200});
+          }
+          console.log("refresh token valid")
+
+          // if refresh token is valid and not expired then create a new refresh token and access token and send to cookie 
+          const user_id = refreshTokenVerificationResult.user_id;
+
+          console.log("user id from refresh token:",user_id)
+          console.log("user id on basis of payload:",payload.id);
+
+          if(payload.id !== user_id){
+            return NextResponse.json({status:false, message: "invalid token id" },{status:200});
+          }
+
           // Find the user based on the decoded token's user ID
           const user = await validateUser(payload.id);
           console.log("user on basis of payload:",user);
-          console.log("id of user on basis of payload:",user.authorizeduserData.member_id)
           if(user.isvalid){
+                
             return NextResponse.json({ status: true,message:'valid user',body:user.authorizeduserData },{status:200});
           }   
         } catch (error) {
           console.error("Invalid or expired token:", error.message);
-          return NextResponse.json({status:false, message: 'Failed to authenticate token.Either Invalid or expired token' },{status:200});
+          // return NextResponse.json({status:false, message: 'Failed to authenticate token.Either Invalid or expired token' },{status:200});
         }       
 
 }

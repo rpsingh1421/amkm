@@ -9,12 +9,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import LoginProcessingDialog from '../LoginProcessingDialog'
 
 const LoginEntry = () => {
     const {authenticatedUser, setAuthenticatedUser} = useAuth();
     // console.log("authenticatedUser:",authenticatedUser);
     const api = defaultNodeApi(); // Get the Axios instance
     const navigate = useRouter();
+    const [loading,setLoading] = useState(false);
     const loginCredentialsInitial = {
         email:'',
         phone:'',
@@ -30,18 +32,22 @@ const LoginEntry = () => {
     }
     const submitHandler =async()=>{
         // console.log("login credentials",loginCredentials);
+        setLoading(true);
         try {
             const response = await api.post('/rest-api/auth/login',loginCredentials);
-        // console.log("loginresponse",response);
+        console.log("loginresponse",response);
         if(response.data.status){
             setAuthenticatedUser(response.data.body);
             navigate.push('/admin-panel/dashboard');
             setLoginCredentials(loginCredentialsInitial);
+            setLoading(false);
         }else{
             setError(response.data.message);
+            setLoading(false)
         }
         } catch (error) {
             setError("something gone wrong...server issue");
+            setLoading(false)
         }
     }
     const [error,setError] = useState('');
@@ -155,6 +161,7 @@ const LoginEntry = () => {
             <Typography>If not already registered ?...<span><Link href="/account/register" className='text-[#0866ff]'>Sign Up</Link></span></Typography>
         </Box>
     </Box>
+    {loading && <LoginProcessingDialog/>}
     </>
   )
 }

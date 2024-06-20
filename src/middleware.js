@@ -2,6 +2,7 @@
 
 import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
+import jwtConfig from './utils/jwtConfig';
 
 const secret = process.env.JWT_SECRET;
 
@@ -26,7 +27,7 @@ export async function middleware(req) {
         try {
             // Verify access token
             // Decode the token without verifying it
-            const decoded = jwt.decode(accessToken.value);
+            const decoded = jwt.decode(accessToken.value,jwtConfig.secret);
             // If the token couldn't be decoded, it's invalid
             if (!decoded) {
                 console.log("access token is not present but not valid....redirected to account/login")
@@ -37,15 +38,13 @@ export async function middleware(req) {
             // If token is about to expire in the next minute, refresh it
             if (exp - Date.now() < 60 * 1000) {
                 // Add your token refresh logic here
-                console.log("access token is near to expiry..need a new token")
-                // //     const response = await axios.post('/api/refresh-token', { token: refreshToken });
-//             // //     const { newAccessToken, newRefreshToken } = response.data;
-
-//             // //     // Set new tokens in cookies
-//             // //     const res = NextResponse.next();
-//             // //     res.cookies.set('accessToken', newAccessToken, { httpOnly: true, secure: true });
-//             // //     res.cookies.set('refreshToken', newRefreshToken, { httpOnly: true, secure: true });
-//             // //     return res;
+                // console.log("access token is near to expiry..need a new token");
+                // try{
+                //     await axios.post('/api/refresh-token', { token: refreshToken });
+                // }catch(error){
+                //     return NextResponse.redirect(new URL('/account/login', req.url));
+                // }
+                
             }
 
             return NextResponse.next();

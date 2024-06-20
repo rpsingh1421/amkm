@@ -7,13 +7,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
+import LogoutProcessingDialog from '../LogoutProcessingDialog';
 
 const api = defaultNodeApi(); // Get the Axios instance
 const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const DropdownUser = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
+
     const{authenticatedUser,setAuthenticatedUser} = useAuth();
     const navigate = useRouter();
+    const [loading,setLoading] = useState(false);
     
     const trigger = useRef(null);
     const dropdown = useRef(null);
@@ -45,19 +48,23 @@ const DropdownUser = () => {
     });
     // on click logout button in dropdown
     const logoutHandler=async()=>{
+      setLoading(true)
       try {
         const response = await axios.get('/rest-api/auth/sign-out');
         console.log(response);
         if(response.data.status){
           navigate.push('/account/login');
           setAuthenticatedUser(null);
+          setLoading(false)
         }
         
       } catch (error) {
           console.log("error when logout:",error)
+          setLoading(false)
       }
     }
   return (
+    <>
     <Box className="relative">
       <Link
         ref={trigger}
@@ -111,6 +118,8 @@ const DropdownUser = () => {
       </Paper>
       {/* <!-- Dropdown End --> */}
     </Box>
+    {loading && <LogoutProcessingDialog/>}
+    </>
   )
 }
 

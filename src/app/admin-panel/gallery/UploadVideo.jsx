@@ -2,16 +2,122 @@
 
 import { Add, Category } from '@mui/icons-material'
 import { Box, Button, FormControl, FormHelperText, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
-import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import AddCategoryDialog from './AddCategoryDialog'
+import axios from 'axios'
+import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi'
+import SelectAndPreview from '../component/SelectAndPreview'
+import { useAuth } from '@/context/AuthContext'
+import { useForm } from 'react-hook-form'
+import multipartNodeApi from '@/app/rest-api/api/node-api/multiPartApi'
 
+const multipartApi = multipartNodeApi();//this api is used to send file using axios
+const api = defaultNodeApi(); // Get the Axios instance used for normal json data
 const UploadVideo = () => {
-  const initialData = {
-    Category:'',
-    images:[],
+  const {authenticatedUser} = useAuth();
+  const{register,handleSubmit,control,formState:{errors},clearErrors,reset}= useForm();
+  /** if same component is used for edit */
+  /**===================================== */
+  const [editing, setEditing] = useState(false);
+  /**===================================== */
+  const initialMediaFileData = {
+    fileName:'',
+    filePath:'',
+    categoryName:'',//team,member,work/project/activity
+    uploadedBy: authenticatedUser && authenticatedUser.member_id
   }
+  const [mediaFileData, setMediaFileData] = useState(initialMediaFileData);
+  /**=========previews will contain uploaded files information [{file:'',previewUrl:''}] */
+  const [previews, setPreviews] = useState([]);
+
+  const [filesToUpload,setFilesToUpload] = useState([]);
+
+  /**============this dialog will be used for add new category */
+  const [openAddCategoryDialog,setOpenAddCategoryDialog] = useState(false);
+  
+  /**======== contains image category list which are active */
+  const[fetchedCategoryList,setFetchedCategoryList] = useState([]);
+  /**============function for fetching category list */
+  const fetchImageCategories = async()=>{
+    try {
+      
+      const response = await api.get('/rest-api/media-category?fetch=active&type=video');
+      // console.log("category list:",response.data)
+      if (response.data.status) {
+        setFetchedCategoryList(response.data.body);
+      }
+    } catch (error) {
+      console.error('Error fetching media categories:', error);
+    }
+  }
+
+  const inputChangeHandler =(e)=>{
+    setResponseDetails({status:'',message:''})
+    setMediaFileData(pre=>({...pre,[e.target.name]:e.target.value}));
+  }
+
+  const [responseDetails,setResponseDetails] = useState({
+    status:'',
+    message:''
+  })
+
+
+    /**=======event handler when upload button is clicked */
+  const submitHandler = async () => {
+    const formData = new FormData();
+
+    formData.append('mediaFileData',JSON.stringify(mediaFileData));
+    // need to append each file individually to the FormData object:
+    // previews.forEach((item) => {
+    //   formData.append('uploadedFiles[]', item.file);
+    // });
+    console.log("files to be upload:",filesToUpload);
+    // Append each file individually to the FormData object
+    filesToUpload.forEach((file) => {
+      formData.append('uploadedFiles[]', file); // Use 'uploadedFiles[]' to handle multiple files
+    });
+  
+    try {
+      if (editing) {
+          // await api.put(`/api/media-categories/${editingItem.id}`, formData);
+          // setEditingItem(null);
+          // console.log("this section will be used in editing mode")
+      } else {
+        // const response  = await multipartApi.post('/rest-api/photo-gallery', formData);
+        const fileUploadResponse = await axios.post('https://store.amkmofficial.com/image-gallery.php', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        // console.log("media upload response :",fileUploadResponse);
+        if (fileUploadResponse.data.status) {
+          try {
+            const receivedData = fileUploadResponse.data.uploadedFiles;
+            const response  = await api.post('/rest-api/photo-gallery', receivedData);
+            // console.log("final response:",response)
+            setMediaFileData(initialMediaFileData);
+            setPreviews([]);
+            setResponseDetails({status:true,message:'image uploaded successfully'});
+          } catch (error) {
+            setResponseDetails({status:false,message:'image upload failed'});
+          }
+          
+        }
+      }
+      
+      // fetchItems();
+    } catch (error) {
+        console.error('Error submitting form:', error);
+    }
+  };
+  useEffect(()=>{
+    fetchImageCategories();
+  },[]);
+  
   return (
-    <Box component={'form'} className='w-3/4 m-auto'>
+    <>
+    <Box component={'form'} onSubmit={handleSubmit(submitHandler)} className='w-3/4 m-auto'>
+      <Typography className={`${responseDetails.status?'text-green-500':'text-red-500'}`}>{responseDetails.message}</Typography>
       <Box className="flex gap-[3%] mb-[2%]">
         <Typography className='w-[25%] font-bold'>Category</Typography>
         <FormControl fullWidth>
@@ -21,53 +127,51 @@ const UploadVideo = () => {
               labelId="categoryLabel"
               id="category"
               size='small'
-              name='category'
-              // value={userData.state}
-              label="Select State"
-              // onChange={inputChangeHandler}
-              // displayEmpty
+              name='categoryName'
+              value={mediaFileData.categoryName}
+              onChange={inputChangeHandler}
               type='search' 
-              // inputProps={register('state', {
-              //     required: 'Please select state',
-              //   })}
-              // error={errors.state && true}
+              inputProps={register('categoryName', {
+                  required: 'Please select category',
+                })}
+              error={errors.categoryName}
               // helperText={errors.state?.message}
           >
-              <MenuItem value="activity">activity</MenuItem>
-              <MenuItem value="media">media</MenuItem>
+            {fetchedCategoryList.map((category,index)=>{
+              return (
+                <MenuItem value={category.category_name} key={index}>{category.category_name}</MenuItem>
+              )
+            })}
           </Select>
         </FormControl>
-        <IconButton><Add color='success' fontSize='medium'/></IconButton>
+        <IconButton onClick={()=>setOpenAddCategoryDialog(true)}><Add color='success' fontSize='medium'/></IconButton>
       </Box>
-        <Box className="flex gap-[3%] mb-[2%]">
-            <Typography className='w-[25%] font-bold'>Select Videos </Typography>
-            <TextField
-                fullWidth
-                size='small'
-                // name='video'
-                placeholder='selected images'
-                // value={''}
-                disabled
-            />
-            
-            <Box>
-                <TextField
-                    // fullWidth
-                    type="file"
-                    name="cover"
-                    id="cover"
-                    className="sr-only"
-                />
-                <span>
-                    {/* <FolderOpen color='inherit' className='text-black bg-yellow-500'/> */}
-                    <Image src='/open-folder-icon.jpg' alt='folder_icon' width={30} height={30} className='cursor-pointer'/>
-                </span>
-            </Box>
-        </Box>
-        <Box className="flex justify-end">
-            <Button variant='contained' size='small' className=''>upload</Button>
-        </Box>
+      <Box className="flex gap-[3%] mb-[2%]">
+        <Typography className='w-[25%] font-bold'>Video Link</Typography>
+        <TextField
+          fullWidth
+          size='small'
+          label="paste youtube video link"
+          name="videoLink"
+          onChange={inputChangeHandler}
+          inputProps={
+            register(
+              'videoLink',{
+                required:"empty field not allowed"
+              }
+            )
+          }
+          error={errors.videoLink && errors.videoLink}
+          helperText={errors.videoLink && errors.videoLink?.message}
+        />
+      </Box>
+      <Box className="flex justify-end">
+          <Button type='submit' variant='contained' size='small' className='' disabled={previews.length<1}>upload</Button>
+      </Box>
     </Box>
+    
+    <AddCategoryDialog openAddCategoryDialog={openAddCategoryDialog} setOpenAddCategoryDialog={setOpenAddCategoryDialog} fetchImageCategories={fetchImageCategories} mediaType ={'video'} />
+    </>
   )
 }
 
