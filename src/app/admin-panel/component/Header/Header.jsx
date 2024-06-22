@@ -3,12 +3,13 @@ import { Box, IconButton, List, Paper, TextField } from '@mui/material'
 import React from 'react'
 import DropdownUser from './DropdownUser'
 import { useAuth } from '@/context/AuthContext'
+import DarkModeSwitcher from './DarkModeSwitcher'
 
 const Header = () => {
   
   return (
-    <Paper className="sticky top-0 z-999 w-full bg-white drop-shadow-1 ">
-      <Box className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
+    <Paper className="sticky top-0 z-999 w-full bg-white drop-shadow-1 dark:bg-boxdark py-[1.35%]">
+      <Box className="flex flex-grow items-center justify-between px-4 py-2 md:px-6 2xl:px-11">
         
         {/* search tool */}
         <Box component={'form'} >
@@ -28,7 +29,7 @@ const Header = () => {
         <Box className="flex items-center gap-3 2xsm:gap-7">
           <List className="flex items-center gap-2 2xsm:gap-4">
             {/* <!-- Dark Mode Toggler --> */}
-            {/* <DarkModeSwitcher /> */}
+            <DarkModeSwitcher />
             {/* <!-- Dark Mode Toggler --> */}
 
             {/* <!-- Notification Menu Area --> */}

@@ -1,18 +1,21 @@
 import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi';
 import { Box, IconButton, Stack, Switch, Typography } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ViewImage from '@/app/components/ViewImage';
 import Image from 'next/image';
+import TableLoadingSkeleton from '@/app/components/Layout/TableLoadingSkeleton';
+import NoRowsLayout from '@/app/components/Layout/NowRowsLayout';
 
 const api = defaultNodeApi();
 
 const ImageGalleryTable = () => {
+  const [isLoading,setIsLoading] = useState(true);
   const columns = [
-    { field: 'id', headerName: 'S.NO', width: 60,
+    { field: 'id',headerAlign: 'center', headerName: 'S.NO', width: 60,
         renderCell: (params) => {
            const rowIndex = params.api.getAllRowIds().indexOf(params.id)+1;
             return (
@@ -22,7 +25,7 @@ const ImageGalleryTable = () => {
     },
     {
       field: 'image',
-      headerName: 'Image',
+    headerAlign: 'center', headerName: 'Image',
       width: 150,
       renderCell: (params) => {
         return(
@@ -32,7 +35,7 @@ const ImageGalleryTable = () => {
         )
       }
     },
-    {field: 'action', headerName: 'Action', width: 120, sortable: false, 
+    {field: 'action',headerAlign: 'center', headerName: 'Action', width: 120, sortable: false, 
       renderCell: (params) => {
           const viewImage = (e) => {
             const currentRow = params.row;
@@ -55,7 +58,7 @@ const ImageGalleryTable = () => {
           );
       },
     },
-    { field: 'status',headerName: 'status', width: 90,sortable: false,
+    { field: 'status',headerAlign: 'center',headerName: 'status', width: 90,sortable: false,
         // disableClickEventBubbling: true,  
         renderCell: (params) => {
             const onClick = async(e) => {
@@ -72,9 +75,9 @@ const ImageGalleryTable = () => {
             );
         },
     },
-    { field: 'categoryName', headerName: 'category', },
-    { field: 'fileName', headerName: 'name', },
-    { field: 'uploadedBy', headerName: 'Uploaded By', },
+    { field: 'categoryName',headerAlign: 'center', headerName: 'category', flex: 0.5},
+    { field: 'fileName',headerAlign: 'center', headerName: 'name', flex: 1,},
+    { field: 'uploadedBy',headerAlign: 'center', headerName: 'Uploaded By',flex: 1, },
   ];
   const [imageGalleryList,setImageGalleryList] = useState([]);
   /**===============view image related */
@@ -86,7 +89,9 @@ const ImageGalleryTable = () => {
     const response = await api.get('/rest-api/photo-gallery');
     if (response.data.status) {
       setImageGalleryList(response.data.body);
+      // return response.data.body;
     }
+    setIsLoading(false);
   }
   useEffect(()=>{
     fetchImageGalleryList();
@@ -94,21 +99,45 @@ const ImageGalleryTable = () => {
   return (
     <>
     <Box>
-      <Box className="bg-[#009688] text-center">
+      <Box className="bg-[#009688] text-center dark:bg-boxdark">
         <Typography variant='p' className="font-bold text-xl text-white ">Image Gallery List</Typography>
       </Box>
-      <Box>
-        <DataGrid
-          rows={imageGalleryList}
-          getRowId={(row) => row._id}
-          columns={columns}
-          initialState={{
-            
-            pagination: { paginationModel: { pageSize: 5 } },
+      <Box className={`${isLoading && 'h-[400px]'} w-full dark:bg-bodydark2`}>
+      <DataGrid
+        rows={imageGalleryList}
+        getRowId={(row) => row._id}
+        columns={columns}
+        initialState={{
+          
+          pagination: { paginationModel: { pageSize: 5 } },
+        }}
+        pageSizeOptions={[5, 10, 25]}  
+        disableRowSelectionOnClick
+        autoHeight
+          sx={{
+            '--DataGrid-overlayHeight': '300px',
+            "& .MuiDataGrid-cell": {
+                border: 1,
+                borderRight: 0,
+                borderTop: 0,
+                borderColor:'lightgrey',
+                // add more css for customization
+                p:0,
+                textAlign:'center'
+                },
+            // '& .super-app-theme--header': {
+            //   backgroundColor: 'rgba(255, 7, 0, 0.55)',
+            // },
+            '& .MuiDataGrid-columnHeader': {border:1,borderColor:'lightgrey'},
+            '& .MuiDataGrid-columnHeaderTitle': {fontWeight: 'bold' },
           }}
-          pageSizeOptions={[5, 10, 25]}  
-          disableRowSelectionOnClick
-        />
+          slots={{
+            noRowsOverlay: NoRowsLayout,
+            loadingOverlay: TableLoadingSkeleton,
+          }}
+          loading={isLoading}
+        
+      />
       </Box>
     </Box>
     <ViewImage imagePath={imagePath} openImageDialog={openImageDialog} setOpenImageDialog={setOpenImageDialog}/>
@@ -117,3 +146,9 @@ const ImageGalleryTable = () => {
 }
 
 export default ImageGalleryTable
+
+function loadingOverlay(){
+  return(
+    <TableLoadingSkeleton/>
+  )
+}

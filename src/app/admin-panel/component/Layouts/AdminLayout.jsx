@@ -19,7 +19,7 @@ export default function AdminLayout({children}) {
         {/* <!-- ===== Sidebar End ===== --> */}
 
         {/* <!-- ===== Content Area Start ===== --> */}
-        <Box className="bg-cyan-50  relative flex flex-1 flex-col overflow-y-hidden overflow-x-hidden">
+        <Box className="bg-whiten dark:bg-boxdark-2  relative flex flex-1 flex-col overflow-y-hidden overflow-x-hidden">
           {/* <!-- ===== Header Start ===== --> */}
           <Header
             // sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} 

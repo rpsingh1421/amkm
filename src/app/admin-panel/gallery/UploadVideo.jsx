@@ -150,7 +150,7 @@ const UploadVideo = () => {
       </Box>
       <Box className="flex gap-[3%] mb-[2%]">
         <Typography className='w-[30%] font-bold'>Video Link</Typography>
-        {/* <TextField
+        <TextField
           fullWidth
           size='small'
           label="paste youtube video link"
@@ -166,8 +166,8 @@ const UploadVideo = () => {
           }
           error={errors.filePath && errors.filePath}
           helperText={errors.filePath && errors.filePath?.message}
-        /> */}
-        <Controller
+        />
+        {/* <Controller
           name="filePath"
           control={control}
           // defaultValue={mediaFileData.filePath}
@@ -184,11 +184,11 @@ const UploadVideo = () => {
               helperText={errors.filePath?.message}
             />
           )}
-        />
+        /> */}
       </Box>
       <Box className="flex gap-[3%] mb-[2%]">
         <Typography className='w-[30%] font-bold'>Video Description</Typography>
-        <Controller
+        {/* <Controller
           name="fileName"
           control={control}
           // defaultValue={mediaFileData.fileName}
@@ -206,8 +206,8 @@ const UploadVideo = () => {
               helperText={errors.fileName && errors.fileName?.message}
             />
           )}
-        />
-        {/* <TextField
+        /> */}
+        <TextField
           fullWidth
           size='small'
           label="video description"
@@ -224,7 +224,7 @@ const UploadVideo = () => {
           }
           error={errors.fileName && errors.fileName}
           helperText={errors.fileName && errors.fileName?.message}
-        /> */}
+        />
       </Box>
       <Box className="flex justify-end">
           {editing ?<Button type='submit' variant='contained' size='small'>Edit</Button>

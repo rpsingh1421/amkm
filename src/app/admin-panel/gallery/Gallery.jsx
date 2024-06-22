@@ -17,22 +17,23 @@ const Gallery = () => {
     };
   return (
     <Box>
-      <Paper className="w-[90%] m-auto">
+      <Paper className="w-[90%] m-auto dark:bg-boxdark">
         <Tabs
           value={value}
           onChange={handleChange}
-          textColor="secondary"
+          textColor="inherit"
           indicatorColor="secondary"
+          className='dark:text-white '
         >
           <Tab value="one" label="upload image" />
           <Tab value="two" label="upload video" />
-          <Tab value="three" label="upload pdf" disabled/>
+          <Tab value="three" label="upload pdf" />
         </Tabs>
       </Paper>
       
       {value=='one' && <UploadImage/>}
       {value=='two' && <UploadVideo/>}
-      {/* {value=='three' && <UploadPdf/>} */}
+      {value=='three' && <UploadPdf/>}
     </Box>
   )
 }

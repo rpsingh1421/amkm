@@ -236,7 +236,7 @@ function NavBar() {
   /* ===========mobile view navbar related======== */
   return (
     <>
-    <Box className={pathname=='/'?'bg-transparent':'bg-black'}>
+    <Box className={pathname=='/'?'bg-transparent':'bg-[#000000]'}>
       <Box className="hidden lg:flex justify-around">
         <Box className="flex">
           {navItems.map((item,index) => (

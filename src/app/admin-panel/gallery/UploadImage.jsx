@@ -117,7 +117,7 @@ const UploadImage = () => {
   
   return (
     <>
-    <Paper className='w-[90%] m-auto mt-[1%] py-[5%] rounded-xl'>
+    <Paper className='w-[90%] m-auto mt-[1%] py-[5%] rounded-xl dark:bg-bodydark2'>
     <Box component={'form'} onSubmit={handleSubmit(submitHandler)} className='w-3/4 m-auto'>
       <Typography className={`${responseDetails.status?'text-green-500':'text-red-500'}`}>{responseDetails.message}</Typography>
       <Box className="flex gap-[3%] mb-[2%]">
@@ -154,7 +154,7 @@ const UploadImage = () => {
       </Box>
     </Box>
     
-    <AddCategoryDialog openAddCategoryDialog={openAddCategoryDialog} setOpenAddCategoryDialog={setOpenAddCategoryDialog} fetchImageCategories={fetchImageCategories} mediaType ={'image'} />
+    <AddCategoryDialog openAddCategoryDialog={openAddCategoryDialog} setOpenAddCategoryDialog={setOpenAddCategoryDialog} fetchMediaCategories={fetchImageCategories} mediaType ={'image'} />
     </Paper>
     <Paper className='w-[90%] m-auto mt-[1%] rounded-xl'>
        <ImageGalleryTable/>

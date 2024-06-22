@@ -20,7 +20,6 @@ const DropdownUser = () => {
     
     const trigger = useRef(null);
     const dropdown = useRef(null);
-    console
     // close on click outside
     useEffect(() => {
         const clickHandler = ({ target }) => {
@@ -77,7 +76,7 @@ const DropdownUser = () => {
             {authenticatedUser && authenticatedUser.member_name}
             {/* Anurag singh */}
           </span>
-          <span className="block text-xs uppercase">
+          <span className="block text-xs dark:text-white uppercase">
             {authenticatedUser && authenticatedUser.role}
             {/* admin */}
             </span>
@@ -96,14 +95,14 @@ const DropdownUser = () => {
           <Avatar alt="User" src={`https://store.amkmofficial.com/${authenticatedUser && authenticatedUser.profile_image}`} />
         </span>
 
-        <IconButton>{dropdownOpen?<ExpandLessOutlined/>:<ExpandMore/>}</IconButton>
+        <IconButton className='dark:bg-white'>{dropdownOpen?<ExpandLessOutlined/>:<ExpandMore/>}</IconButton>
       </Link>
 
       {/* <!-- Dropdown Start --> */}
       <Paper ref={dropdown} className={`absolute mt-[10%] right-0 flex w-[15vw] flex-col rounded-sm border border-stroke bg-white shadow-default ${dropdownOpen === true ? "block" : "hidden"
         }`}
       >       
-          <Link href="#" className="p-[3%] border-b hover:bg-black hover:text-white font-semibold text-base w-full" ><Person2 className='mr-[5%]'/>My Profile</Link>
+          <Link href="/admin-panel/profile" className="p-[3%] border-b hover:bg-black hover:text-white font-semibold text-base w-full" ><Person2 className='mr-[5%]'/>My Profile</Link>
         
         
           <Link href="#" className="p-[3%] border-b hover:bg-black hover:text-white font-semibold text-base w-full" ><Contacts className='mr-[5%]'/>My Contacts</Link>

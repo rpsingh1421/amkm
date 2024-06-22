@@ -21,7 +21,7 @@ const ViewImage = (props) => {
         <Box className='flex gap-[1%] justify-end p-[2%]'>
             <IconButton onClick={()=>setZoom(true)} disabled={!zoom ? false:true}><ZoomIn/></IconButton>
             <IconButton onClick={()=>setZoom(false)} disabled={zoom ? false:true}><ZoomOut/></IconButton>
-            <IconButton onClick={()=>handleClose()} className='rounded-md bg-red-600 text-white' size='small'><Close color='inherit' fontSize='small'/></IconButton>
+            <IconButton onClick={()=>handleClose()} className='rounded-md bg-red text-white  hover:bg-red' size='small' ><Close color='inherit' fontSize='small'/></IconButton>
         </Box>
       <DialogContent>
         <Box>

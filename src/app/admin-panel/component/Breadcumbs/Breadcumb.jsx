@@ -4,7 +4,7 @@ import Link from "next/link";
 const Breadcrumb = ({ pageName }) => {
   return (
     <Box className="flex justify-between py-[2%] items-center">
-      <Typography className="font-semibold text-xl text-black capitalize">
+      <Typography className="font-semibold text-xl text-black capitalize dark:text-white">
         {pageName}
       </Typography>
 
