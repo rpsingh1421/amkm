@@ -10,7 +10,7 @@ const TopBar = () => {
             <Box className="w-[100px]">
               <Link href='/'><Image width={100} height={100} src="/aaomilkar.jpeg" alt="amkm_logo" className="w-20 h-auto rounded-full" priority/></Link>
             </Box>
-            <Link href='/'><Typography component={'h1'} className="font-serif font-bold ml-2 text-red-600 text-3xl" >AAO MILKAR KAREN MADAD</Typography></Link>
+            <Link href='/'><Typography component={'h1'} className="font-serif font-bold ml-2 text-red text-3xl" >AAO MILKAR KAREN MADAD</Typography></Link>
         </Box>
         <Box className="sm:w-1/2 py-[2%] sm:py-0 h-1/2 bg-stone-700 sm:h-24 bordericon flex items-center sm:rounded-bl-full">
           <Box className="flex items-center justify-between px-[5%]">

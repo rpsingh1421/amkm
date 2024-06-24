@@ -1,7 +1,8 @@
 "use client"
 import { Box, Card, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ViewImage from '../components/Dialogs/ViewImageDialog'
+import axios from 'axios';
 
 const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const NewsImage = () => {
@@ -13,6 +14,12 @@ const NewsImage = () => {
         setImagePath(path);
         setOpenImageDialog(true);
     }
+    // const fetchAllImage = async()=>{
+    //     const response = await axios.get()
+    // }
+    // useEffect(()=>{
+
+    // },[])
   return (
     <>
     <Box className="text-center">

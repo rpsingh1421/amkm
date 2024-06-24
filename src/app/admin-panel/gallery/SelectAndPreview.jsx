@@ -58,10 +58,10 @@ const SelectAndPreview = (props) => {
             </label>
           </Box>
       </Box>
-      <Box className="flex flex-wrap gap-[1%]">
+      <Box className="flex flex-wrap gap-[1%] overflow-y-scroll h-[20vh]">
           {previews.map(({ preview }, index) => (
-              <Box key={index} className="relative inline-block">
-                  <Image width={100} height={100} className="block" src={preview} alt={`preview ${index}`}/>
+              <Box key={index} className="relative inline-block w-[10%]">
+                  <Image width={100} height={100} className="block h-full" src={preview} alt={`preview ${index}`}/>
                   <IconButton sx={{position:'absolute',top:'0',right:'0',color:'#ffffff', p:'0',background:'red'}} onClick={() => handleRemoveImage(preview)}><DeleteForever color=''/></IconButton>
                   {/* <Button className='absolute top-0 right-0' onClick={() => handleRemoveImage(preview)}><Delete/></Button> */}
               </Box>

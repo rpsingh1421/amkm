@@ -12,8 +12,8 @@ import NoRowsLayout from '@/app/components/Layout/NowRowsLayout';
 
 const api = defaultNodeApi();
 
-const ImageGalleryTable = () => {
-  const [isLoading,setIsLoading] = useState(true);
+const ImageGalleryTable = (props) => {
+  const{isLoading,imageGalleryList,fetchImageGalleryList} = props;
   const columns = [
     { field: 'id',headerAlign: 'center', headerName: 'S.NO', width: 60,
         renderCell: (params) => {
@@ -79,20 +79,13 @@ const ImageGalleryTable = () => {
     { field: 'fileName',headerAlign: 'center', headerName: 'name', flex: 1,},
     { field: 'uploadedBy',headerAlign: 'center', headerName: 'Uploaded By',flex: 1, },
   ];
-  const [imageGalleryList,setImageGalleryList] = useState([]);
+  
   /**===============view image related */
   const [openImageDialog,setOpenImageDialog] = useState(false);
   const [imagePath,setImagePath] =useState('');
  
     /**===============view image related */
-  const fetchImageGalleryList = async()=>{
-    const response = await api.get('/rest-api/photo-gallery');
-    if (response.data.status) {
-      setImageGalleryList(response.data.body);
-      // return response.data.body;
-    }
-    setIsLoading(false);
-  }
+  
   useEffect(()=>{
     fetchImageGalleryList();
   },[]);

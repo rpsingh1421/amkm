@@ -90,14 +90,15 @@ const UploadImage = () => {
             'Content-Type': 'multipart/form-data'
           }
         });
-        // console.log("media upload response :",fileUploadResponse);
+        console.log("media upload response :",fileUploadResponse);
         if (fileUploadResponse.data.status) {
           try {
             const receivedData = fileUploadResponse.data.uploadedFiles;
             const response  = await api.post('/rest-api/photo-gallery', receivedData);
-            // console.log("final response:",response)
+            console.log("final response:",response)
             setMediaFileData(initialMediaFileData);
             setPreviews([]);
+            fetchImageGalleryList();
             setResponseDetails({status:true,message:'image uploaded successfully'});
           } catch (error) {
             setResponseDetails({status:false,message:'image upload failed'});
@@ -111,15 +112,29 @@ const UploadImage = () => {
         console.error('Error submitting form:', error);
     }
   };
+  /**=============image gallery fetching related */
+  const [isLoading,setIsLoading] = useState(true);
+  const [imageGalleryList,setImageGalleryList] = useState([]);
+  const fetchImageGalleryList = async()=>{
+    const response = await api.get('/rest-api/photo-gallery');
+    if (response.data.status) {
+      setImageGalleryList(response.data.body);
+      // return response.data.body;
+    }
+    setIsLoading(false);
+  }
   useEffect(()=>{
     fetchImageCategories();
   },[]);
-  
+  useEffect(()=>{
+    setMediaFileData(pre=>({...pre,uploadedBy:authenticatedUser.member_id}))
+  },[authenticatedUser])
+
   return (
     <>
     <Paper className='w-[90%] m-auto mt-[1%] py-[5%] rounded-xl dark:bg-bodydark2'>
     <Box component={'form'} onSubmit={handleSubmit(submitHandler)} className='w-3/4 m-auto'>
-      <Typography className={`${responseDetails.status?'text-green-500':'text-red-500'}`}>{responseDetails.message}</Typography>
+      <Typography className={`${responseDetails.status?'text-green-500':'text-red'}`}>{responseDetails.message}</Typography>
       <Box className="flex gap-[3%] mb-[2%]">
         <Typography className='w-[25%] font-bold'>Category</Typography>
         <FormControl fullWidth>
@@ -148,6 +163,7 @@ const UploadImage = () => {
         </FormControl>
         <IconButton onClick={()=>setOpenAddCategoryDialog(true)}><Add color='success' fontSize='medium'/></IconButton>
       </Box>
+     
       <SelectAndPreview previews={previews} setPreviews={setPreviews} setFilesToUpload={setFilesToUpload}/>
       <Box className="flex justify-end">
           <Button type='submit' variant='contained' size='small' className='' disabled={previews.length<1}>upload</Button>
@@ -157,7 +173,7 @@ const UploadImage = () => {
     <AddCategoryDialog openAddCategoryDialog={openAddCategoryDialog} setOpenAddCategoryDialog={setOpenAddCategoryDialog} fetchMediaCategories={fetchImageCategories} mediaType ={'image'} />
     </Paper>
     <Paper className='w-[90%] m-auto mt-[1%] rounded-xl'>
-       <ImageGalleryTable/>
+       <ImageGalleryTable imageGalleryList={imageGalleryList} isLoading={isLoading} fetchImageGalleryList={fetchImageGalleryList}/>
     </Paper>
     </>
   )
