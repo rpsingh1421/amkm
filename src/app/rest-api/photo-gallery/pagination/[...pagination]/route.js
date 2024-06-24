@@ -9,19 +9,24 @@ export async function GET(request,{params}){
     const search = searchParams.get('search');
     const sortField = searchParams.get('sortField') || 'createdAt';
     const sortOrder = searchParams.get('sortOrder') || 'desc';
+    const category = searchParams.get('category');
     
     const pagination = params.pagination;
     const pageNo = pagination[0]; // Current page number
     const pageSize = pagination[1]; // Current page size
   
-    const query = { trash: false ,status:status };
-    if (search) {
-      query.$or = [
-        { categoryName: new RegExp(search, 'i') },
-        { fileName: new RegExp(search, 'i') },
-        { uploadedBy: new RegExp(search, 'i') },
-      ];
+    const query = { trash: false ,status:status  };
+    if(category){
+      query.categoryName=category
     }
+    console.log("query:",query)
+    // if (search) {
+    //   query.$or = [
+    //     { categoryName: new RegExp(search, 'i') },
+    //     { fileName: new RegExp(search, 'i') },
+    //     { uploadedBy: new RegExp(search, 'i') },
+    //   ];
+    // }
 
     const sortOptions = { [sortField]: sortOrder };
     const skip = parseInt(pageNo) * parseInt(pageSize); //number of documents to be skipped
