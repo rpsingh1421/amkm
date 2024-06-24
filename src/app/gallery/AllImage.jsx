@@ -6,7 +6,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import LoadingImageSkeleton from "./LoadingImageSkeleton";
 
-const storePath = process.env.NEXT_PUBLIC_STORE;
+// const storePath = process.env.NEXT_PUBLIC_STORE;
+const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const AllImage = () => {
   const [isLoading,setIsLoading] = useState(true);
   // State to store the total image count from the server
