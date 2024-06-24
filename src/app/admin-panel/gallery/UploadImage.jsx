@@ -5,11 +5,11 @@ import { Box, Button, FormControl, FormHelperText, IconButton, InputLabel, MenuI
 import React, { useEffect, useState } from 'react'
 import AddCategoryDialog from './AddCategoryDialog'
 import axios from 'axios'
-import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi'
+import defaultNodeApi from '@/lib/api/defaultNodeApi'
 import SelectAndPreview from '../component/SelectAndPreview'
 import { useAuth } from '@/context/AuthContext'
 import { useForm } from 'react-hook-form'
-import multipartNodeApi from '@/app/rest-api/api/node-api/multiPartApi'
+import multipartNodeApi from '@/lib/api/multiPartApi'
 import ImageGalleryTable from '../component/tables/ImageGalleryTable'
 
 const multipartApi = multipartNodeApi();//this api is used to send file using axios

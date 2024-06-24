@@ -8,7 +8,7 @@ const TopBar = () => {
     <Box className="sm:h-24 sm:flex bg-white rad">
         <Box className ="sm:w-1/2 flex items-center ml-5 ">
             <Box className="w-[100px]">
-              <Link href='/'><Image width={"100"} height={"100"} src="/aaomilkar.jpeg" alt="" className="w-20 h-auto rounded-full"/></Link>
+              <Link href='/'><Image width={100} height={100} src="/aaomilkar.jpeg" alt="amkm_logo" className="w-20 h-auto rounded-full" priority/></Link>
             </Box>
             <Link href='/'><Typography component={'h1'} className="font-serif font-bold ml-2 text-red-600 text-3xl" >AAO MILKAR KAREN MADAD</Typography></Link>
         </Box>

@@ -1,7 +1,7 @@
 // src/app/admin-panel/login/LoginEntry.js
 "use client"
 
-import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi'
+import defaultNodeApi from '@/lib/api/defaultNodeApi'
 import { useAuth } from '@/context/AuthContext'
 import { Box, Button, TextField, Typography } from '@mui/material'
 import Image from 'next/image'

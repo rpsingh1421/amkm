@@ -1,7 +1,7 @@
 // src/app/admin-panel/login/LoginEntry.js
 "use client"
 
-import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi'
+import defaultNodeApi from '@/lib/api/defaultNodeApi'
 import { useAuth } from '@/context/AuthContext'
 import { Box, Button, TextField, Typography } from '@mui/material'
 import Image from 'next/image'
@@ -12,7 +12,7 @@ import { useForm } from 'react-hook-form'
 import LoginProcessingDialog from '../LoginProcessingDialog'
 
 const LoginEntry = () => {
-    const {authenticatedUser, setAuthenticatedUser} = useAuth();
+    const {authenticatedUser, setAuthenticatedUser,login} = useAuth();
     // console.log("authenticatedUser:",authenticatedUser);
     const api = defaultNodeApi(); // Get the Axios instance
     const navigate = useRouter();
@@ -38,6 +38,7 @@ const LoginEntry = () => {
         console.log("loginresponse",response);
         if(response.data.status){
             setAuthenticatedUser(response.data.body);
+            login(response.data.body);//authcontext
             navigate.push('/admin-panel/dashboard');
             setLoginCredentials(loginCredentialsInitial);
             setLoading(false);

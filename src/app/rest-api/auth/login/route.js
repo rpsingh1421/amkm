@@ -28,6 +28,8 @@ export async function POST (request){
     /*=========generate json webtoken and refresh token========== */
     const accessToken = createAccessToken({id:user._id});
     const refreshToken = await createRefreshToken({ user_id: user._id });
+    console.log("generated access token:",accessToken);
+    console.log("generated refresh token:",refreshToken)
     /*======user data to be send in response for further use */
     const authorizeduserData ={
         member_id : user._id,

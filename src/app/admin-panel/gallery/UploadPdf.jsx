@@ -2,7 +2,7 @@
 
 import {  Paper } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi'
+import defaultNodeApi from '@/lib/api/defaultNodeApi'
 import DynamicImageGalleryTable from '../component/tables/DynamicImageGalleryTable'
 
 

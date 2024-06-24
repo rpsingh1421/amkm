@@ -7,7 +7,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ViewImage from '@/app/components/ViewImage';
 import Image from 'next/image';
 import axios from 'axios';
-import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi';
+import defaultNodeApi from '@/lib/api/defaultNodeApi';
 import TableLoadingSkeleton from '@/app/components/Layout/TableLoadingSkeleton';
 import NoRowsLayout from '@/app/components/Layout/NowRowsLayout';
 

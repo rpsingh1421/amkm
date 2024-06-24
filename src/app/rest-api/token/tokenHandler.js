@@ -8,11 +8,14 @@ export const createAccessToken =(data)=>{
         data,
         jwtConfig.secret,
         {
-          algorithm: 'HS256',
-          allowInsecureKeySizes: true,
-          expiresIn: jwtConfig.jwtExpiration,
+          expiresIn: jwtConfig.jwtExpiration,//{ expiresIn: '1h' }or{ expiresIn: 3600 } both is ok and acceptable
         }
     );
+    // const token = jwt.sign(
+    //                 { userId: user.id, username: user.username },
+    //                 jwtConfig.secret,
+    //                 { expiresIn: '1h' }
+    //               );
     return token;
 }
 
@@ -23,8 +26,15 @@ export const createRefreshToken = async (data) => {
       expiredAt.getSeconds() + jwtConfig.jwtRefreshExpiration
     );
   
-    const _token = uuidv4();
-  
+    // const _token = uuidv4();
+
+  const _token = jwt.sign(
+        data,
+        jwtConfig.refresh_secret,
+        {
+          expiresIn: jwtConfig.jwtExpiration,//{ expiresIn: '1h' }or{ expiresIn: 3600 } both is ok and acceptable
+        }
+    );
     const refresh_token_data = {
       token: _token,
       user_id: user_id,
@@ -80,7 +90,7 @@ export const verifyRefreshToken = async (data) => {
  /**==================================================== */  
     const existingRefreshToken = await RefreshTokenModel.findOne({ token: refresh_token, user_id: payload.id });
   
-    if (existingRefreshToken != null) {
+    if (existingRefreshToken) {
       const currentTime = new Date();
       const expiryTime = new Date(existingRefreshToken.expiredAt);
   

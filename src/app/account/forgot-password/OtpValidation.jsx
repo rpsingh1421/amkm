@@ -1,5 +1,5 @@
 "use client"
-import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi';
+import defaultNodeApi from '@/lib/api/defaultNodeApi';
 import { Box, Button, TextField, Typography } from '@mui/material'
 import Image from 'next/image'
 import React, { useContext, useState } from 'react'

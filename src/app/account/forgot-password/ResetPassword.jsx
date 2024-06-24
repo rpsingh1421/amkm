@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
 import { ForgotPasswordContext } from './ForgotPassword';
 import Image from 'next/image';
-import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi';
+import defaultNodeApi from '@/lib/api/defaultNodeApi';
 
 const api = defaultNodeApi();
 const ResetPassword = () => {

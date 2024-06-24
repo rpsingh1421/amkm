@@ -5,7 +5,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { DataGrid } from '@mui/x-data-grid';
-import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi';
+import defaultNodeApi from '@/lib/api/defaultNodeApi';
 import axios from 'axios';
 
 const api = defaultNodeApi();

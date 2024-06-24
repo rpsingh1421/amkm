@@ -1,4 +1,4 @@
-import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi';
+import defaultNodeApi from '@/lib/api/defaultNodeApi';
 import { useAuth } from '@/context/AuthContext';
 import { Contacts, ExpandLessOutlined, ExpandMore, Logout, Person, Person2, Settings } from '@mui/icons-material'
 import { Avatar, Box, Button, IconButton, List, ListItem, Paper } from '@mui/material'
@@ -14,7 +14,7 @@ const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const DropdownUser = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const{authenticatedUser,setAuthenticatedUser} = useAuth();
+    const{authenticatedUser,setAuthenticatedUser,logout} = useAuth();
     const navigate = useRouter();
     const [loading,setLoading] = useState(false);
     
@@ -53,7 +53,7 @@ const DropdownUser = () => {
         console.log(response);
         if(response.data.status){
           navigate.push('/account/login');
-          setAuthenticatedUser(null);
+          logout();
           setLoading(false)
         }
         

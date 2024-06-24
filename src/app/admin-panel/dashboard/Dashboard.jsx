@@ -7,6 +7,9 @@ import LineChart1 from '../component/charts/LineChart1';
 import LineChart2 from '../component/charts/LineChart2';
 import FetchingData from './FetchingData';
 import Loading from './Loading';
+import RequestedMembers from '../component/member-request/RequestedMembers';
+import Visitor from '../component/visitor/Visitor';
+import Donation from '../component/Donation/Donation';
 
 const Dashboard = () => {
   
@@ -19,6 +22,13 @@ const Dashboard = () => {
             <FetchingData/>
           </Suspense>
         </Paper> */}
+        <Box className='flex gap-[2%]'>
+          <Donation/>
+        </Box>
+        <Box className='flex gap-[2%] justify-between my-[3%]'>
+          <RequestedMembers/>
+          <Visitor/>
+        </Box>
         <Box className='flex gap-[2%] justify-between'>
           <CardDataStats title="Total views" total="$3.456K" rate="0.43%" levelUp >
             <RemoveRedEye color='inherit'/>

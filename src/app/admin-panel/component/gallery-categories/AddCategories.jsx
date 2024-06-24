@@ -1,5 +1,5 @@
 "use client"
-import defaultNodeApi from '@/app/rest-api/api/node-api/defaultNodeApi'
+import defaultNodeApi from '@/lib/api/defaultNodeApi'
 import { useAuth } from '@/context/AuthContext'
 import { Box, Button, Dialog, DialogContent, FormControl, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { green } from '@mui/material/colors'
