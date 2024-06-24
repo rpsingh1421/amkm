@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
-import LogoutProcessingDialog from '../LogoutProcessingDialog';
+import LogoutProcessingDialog from '../Dialogs/LogoutProcessingDialog';
 
 const api = defaultNodeApi(); // Get the Axios instance
 const storePath = process.env.NEXT_PUBLIC_STORE_URL;

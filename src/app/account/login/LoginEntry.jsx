@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import LoginProcessingDialog from '../LoginProcessingDialog'
+import LoginProcessingDialog from '../../admin-panel/component/Dialogs/LoginProcessingDialog'
 
 const LoginEntry = () => {
     const {authenticatedUser, setAuthenticatedUser,login} = useAuth();
