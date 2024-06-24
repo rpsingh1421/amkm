@@ -4,7 +4,7 @@ import { DataGrid } from '@mui/x-data-grid'
 import React, { useEffect, useState } from 'react'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import ViewImage from '@/app/components/ViewImage';
+import ViewImage from '@/app/components/Dialogs/ViewImageDialog';
 import Image from 'next/image';
 import axios from 'axios';
 import defaultNodeApi from '@/lib/api/defaultNodeApi';

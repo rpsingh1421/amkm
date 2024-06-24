@@ -1,14 +1,14 @@
 import { Box, Button, Card, List, ListItem, Paper, TextField, Typography } from "@mui/material"
 import React from "react"
-import NavBar from "../components/NavBar"
+import NavBar from "../components/navbar/NavBar"
 import MailForm from "./MailForm"
 import SocialLinks from "./SocialLinks"
-import TopBar from "../components/TopBar"
-import CopyRight from "../components/CopyRight"
-import Footer from "../components/Footer"
+import TopBar from "../components/topbar/TopBar"
+import CopyRight from "../components/copyright/CopyRight"
+import Footer from "../components/footer/Footer"
 import MainLayout from "../components/Layout/MainLayout"
 import Image from "next/image"
-import GIveUsHand from "../components/GiveUsHand"
+import GIveUsHand from "../components/banner/GiveUsHand"
 
 const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const ContactPage = () => {

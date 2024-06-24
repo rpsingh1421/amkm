@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material"
 import React from "react"
-import TopBar from "../components/TopBar"
-import NavBar from "../components/NavBar"
-import Footer from "../components/Footer"
-import CopyRight from "../components/CopyRight"
+import TopBar from "../components/topbar/TopBar"
+import NavBar from "../components/navbar/NavBar"
+import Footer from "../components/footer/Footer"
+import CopyRight from "../components/copyright/CopyRight"
 import MainLayout from "../components/Layout/MainLayout"
 import Image from "next/image"
 

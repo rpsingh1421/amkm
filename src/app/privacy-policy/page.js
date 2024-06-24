@@ -1,7 +1,7 @@
 
 import PrivacyPolicy from "./PrivacyPolicy"
 import MainLayout from "../components/Layout/MainLayout"
-import GIveUsHand from "../components/GiveUsHand";
+import GIveUsHand from "../components/banner/GiveUsHand";
 
 const privacyPage =()=>{
     return(

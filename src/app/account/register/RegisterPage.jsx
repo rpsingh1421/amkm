@@ -7,7 +7,7 @@ import ImageUpload from './ImageUpload';
 import PreviewUserData from './PreviewUserData';
 import RegistrationResult from './RegistrationResult';
 import axios from 'axios';
-import ProcessingDialog from '@/app/components/ProcessingDialog';
+import ProcessingDialog from '@/app/components/Dialogs/ProcessingDialog';
 
 const steps = ['Basic Details', 'Upload Documents', 'Preview & final Submit','Result'];
 const StepperContext = createContext();

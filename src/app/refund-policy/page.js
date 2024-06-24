@@ -1,6 +1,6 @@
 import { Paper, Typography } from "@mui/material"
 import MainLayout  from "../components/Layout/MainLayout"
-import GIveUsHand from "../components/GiveUsHand"
+import GIveUsHand from "../components/banner/GiveUsHand"
 
 const refundPolicyPage =()=>{
     return(

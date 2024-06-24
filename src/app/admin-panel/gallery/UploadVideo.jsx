@@ -3,7 +3,7 @@
 import { Add, Category } from '@mui/icons-material'
 import { Box, Button, FormControl, FormHelperText, IconButton, InputLabel, MenuItem, Paper, Select, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import AddCategoryDialog from './AddCategoryDialog'
+import AddCategoryDialog from '../component/Dialogs/AddCategoryDialog'
 import defaultNodeApi from '@/lib/api/defaultNodeApi'
 import { useAuth } from '@/context/AuthContext'
 import { Controller, useForm } from 'react-hook-form'

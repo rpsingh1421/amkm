@@ -1,14 +1,14 @@
 import { Box, Paper, ListItem, Typography, Button } from "@mui/material"
 import React from "react"
-import NavBar from "../components/NavBar"
-import TopBar from "../components/TopBar"
-import CopyRight from "../components/CopyRight"
-import Footer from "../components/Footer"
+import NavBar from "../components/navbar/NavBar"
+import TopBar from "../components/topbar/TopBar"
+import CopyRight from "../components/copyright/CopyRight"
+import Footer from "../components/footer/Footer"
 import ShortContent from "../story/ShortContent"
 import ShortStory from "../founder/ShortStory"
 import MainLayout from "../components/Layout/MainLayout"
 import Image from "next/image"
-import GIveUsHand from "../components/GiveUsHand"
+import GIveUsHand from "../components/banner/GiveUsHand"
 
 const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const About = () => {

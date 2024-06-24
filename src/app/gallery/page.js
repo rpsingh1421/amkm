@@ -2,7 +2,7 @@ import { Box, Card, Typography } from '@mui/material'
 import React from 'react'
 import GalleryBody from './GalleryBody'
 import MainLayout from '../components/Layout/MainLayout'
-import GIveUsHand from '../components/GiveUsHand'
+import GIveUsHand from '../components/banner/GiveUsHand'
 
 const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const GalleryPage = () => {

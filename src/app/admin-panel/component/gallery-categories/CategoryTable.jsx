@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { CategoryContext } from '../../gallery/AddCategoryDialog'
+import { CategoryContext } from '../Dialogs/AddCategoryDialog'
 import { Box, Icon, IconButton, Stack, Switch, Typography } from '@mui/material';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import BorderColorIcon from '@mui/icons-material/BorderColor';

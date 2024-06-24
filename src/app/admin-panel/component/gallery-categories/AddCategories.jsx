@@ -5,7 +5,7 @@ import { Box, Button, Dialog, DialogContent, FormControl, IconButton, InputLabel
 import { green } from '@mui/material/colors'
 import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { CategoryContext } from '../../gallery/AddCategoryDialog'
+import { CategoryContext } from '../Dialogs/AddCategoryDialog'
 
 
 const api = defaultNodeApi();

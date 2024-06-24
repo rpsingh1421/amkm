@@ -1,4 +1,4 @@
-import GIveUsHand from "../components/GiveUsHand"
+import GIveUsHand from "../components/banner/GiveUsHand"
 import MainLayout from "../components/Layout/MainLayout"
 import TermsConditions from "./TermsConditions"
 

@@ -1,14 +1,14 @@
 import { Box, Button, Typography } from "@mui/material";
 import Image from "next/image";
-import NavBar from "./components/NavBar";
-import TopBar from "./components/TopBar";
-import Banner from "./components/Banner";
-import ImageGallery from "./components/ImageGallery";
-import NgoProfile from "./components/NgoProfile";
-import JoinUsSection from "./components/joinUs";
-import Footer from "./components/Footer";
-import CopyRight from "./components/CopyRight";
-import Team from "./components/Team";
+import NavBar from "./components/navbar/NavBar";
+import TopBar from "./components/topbar/TopBar";
+import ImageGallery from "./components/home/ImageGallery";
+import NgoProfile from "./components/home/NgoProfile";
+import JoinUsSection from "./components/home/joinUs";
+import Footer from "./components/footer/Footer";
+import CopyRight from "./components/copyright/CopyRight";
+import Team from "./components/home/Team";
+import Banner from "./components/banner/Banner";
 
 export default function Home() {
   return (

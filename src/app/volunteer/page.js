@@ -3,7 +3,7 @@ import React from 'react'
 import MailForm from '../contact/MailForm'
 import MainLayout from '../components/Layout/MainLayout'
 import Image from 'next/image'
-import GIveUsHand from '../components/GiveUsHand'
+import GIveUsHand from '../components/banner/GiveUsHand'
 
 const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const volunteerPage = () => {

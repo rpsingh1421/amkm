@@ -5,7 +5,7 @@ import React, { Suspense, useEffect, useState } from 'react'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import ViewImage from '@/app/components/ViewImage';
+import ViewImage from '@/app/components/Dialogs/ViewImageDialog';
 import Image from 'next/image';
 import TableLoadingSkeleton from '@/app/components/Layout/TableLoadingSkeleton';
 import NoRowsLayout from '@/app/components/Layout/NowRowsLayout';

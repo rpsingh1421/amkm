@@ -1,9 +1,9 @@
 
 import { Box } from "@mui/material";
-import TopBar from "../TopBar";
-import NavBar from "../NavBar";
-import CopyRight from "../CopyRight";
-import Footer from "../Footer";
+import TopBar from "../topbar/TopBar";
+import NavBar from "../navbar/NavBar";
+import CopyRight from "../copyright/CopyRight";
+import Footer from "../footer/Footer";
 
 export default function MainLayout({children}) {
   return (
