@@ -18,7 +18,7 @@ export async function GET(request,{params}){
     const action = searchParams.get('action');
     const _id = params.member_id;
     // Check if the id is a valid ObjectId
-    if (!isValidObjectId(id)) {
+    if (!isValidObjectId(_id)) {
         return NextResponse.json({ error: "Invalid id format" }, { status: 400 });
     }
 
@@ -26,9 +26,10 @@ export async function GET(request,{params}){
     let teamMember;
     let updatedTeamMember;
     try {
-        teamMember = await TeamMemberModel.findById(id);
+        teamMember = await TeamMemberModel.findById(_id);
+        
         if (!teamMember) {
-        return NextResponse.json({status:false, message: `user not found with id:${_id}` }, { status: 404 });
+            return NextResponse.json({status:false, message: `user not found with id:${_id}` }, { status: 404 });
         }
     } catch (error) {
         return NextResponse.json({ status:false,message: "Error finding user" }, { status: 500 });
@@ -36,6 +37,7 @@ export async function GET(request,{params}){
 
     switch (action) {
         case 'fetch':
+            delete teamMember.password;
             response = { message: 'user data fetched successfully', body:teamMember, status:true };
             break;
         case 'modify-status':
@@ -43,18 +45,19 @@ export async function GET(request,{params}){
         teamMember.status = !teamMember.status;
         try {
             updatedTeamMember= await teamMember.save();
-            response = { message: 'status changed successfully', body:teamMember, status:true };
+            delete updatedTeamMember.password
+            response = {body:updatedTeamMember, message: 'status changed successfully',status:true };
         } catch (error) {
             return NextResponse.json({ message: "Error in changing status", status: false }, { status: 500 });
         }
-        response = { action: 'modify-status',  message: 'Status modified successfully', body:teamMember };
+        // response = { action: 'modify-status',  message: 'Status modified successfully', body:teamMember };
         break;
         case 'trash':
         // Logic for 'trash' action
         teamMember.trash = true;
         try {
             updatedTeamMember= await teamMember.save();
-            response = { message: 'Moved to trash successfully', body:teamMember, status:true };
+            response = { message: 'Moved to trash successfully', status:true };
         } catch (error) {
             return NextResponse.json({ message: "Error in deleting user", status: false }, { status: 500 });
         }
@@ -65,7 +68,7 @@ export async function GET(request,{params}){
         teamMember.trash = false;
         try {
             updatedTeamMember= await teamMember.save();
-            response = { message: 'restored successfully', body:teamMember,status:true };
+            response = { message: 'restored successfully', status:true };
         } catch (error) {
             return NextResponse.json({ message: "Error in restoring", status: false }, { status: 500 });
         }
@@ -74,7 +77,7 @@ export async function GET(request,{params}){
         case 'delete':
         // Logic for 'delete' action
         try {
-            await TeamMemberModel.findByIdAndDelete(id);
+            await TeamMemberModel.findByIdAndDelete(_id);
             response = { action: 'delete', message: 'Deleted successfully' };
         } catch (error) {
             return NextResponse.json({ message: "Error deleting media category", status: false }, { status: 500 });
@@ -136,7 +139,7 @@ export async function PUT(request,{params}){
         teamMember.contact = contact;
         Object.assign(teamMember, otherData);
         const updatedTeamMember = await teamMember.save();
-    
+        delete updatedTeamMember.password;
         // Add new contact/email to the ContactDirectory if they are changed
         if (emailChanged) {
             await ContactDirectory.create({ email: member_email, user: teamMember._id });

@@ -43,7 +43,10 @@ const teamMemberSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    role:String,
+    role:{
+        type:String,
+        default: 'member'
+    },
     status: {
         type: Boolean,
         default: false
