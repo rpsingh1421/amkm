@@ -7,7 +7,7 @@ import TopBar from '@/app/components/topbar/TopBar'
 import { Box, Button, Paper, Typography } from '@mui/material'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const PaymentSuccessContent =  () => {
