@@ -22,10 +22,9 @@ const PaymentForm = () => {
         city:'',
         pincode:'',
         panNumber:'',
-        aadhaarNumber:'',
-        paymentDetails:{
-            paymentMode:'',
-        }
+        // paymentDetails:{
+        //     paymentMode:'',
+        // }
     }
     const [donorDetails,setDonorDetails] = useState(donorDetailsInitialState);
     const [step,setStep] = useState(0);

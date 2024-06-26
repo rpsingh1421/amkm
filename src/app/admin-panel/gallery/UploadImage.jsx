@@ -127,7 +127,7 @@ const UploadImage = () => {
     fetchImageCategories();
   },[]);
   useEffect(()=>{
-    setMediaFileData(pre=>({...pre,uploadedBy:authenticatedUser.member_id}))
+    setMediaFileData(pre=>({...pre,uploadedBy:authenticatedUser&&authenticatedUser.member_id}))
   },[authenticatedUser])
 
   return (

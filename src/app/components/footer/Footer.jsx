@@ -5,7 +5,7 @@ import Link from 'next/link';
 const Footer = () => {
     const storePath = process.env.NEXT_PUBLIC_STORE_URL;
   return (
-    <Box className="bg-cover bg-[url('/footer/footerbackground.jpg')]" style={{backgroundImage: `url(${storePath}/footer/footerbackground.jpg)`,width: '100%'}}
+    <Box className="bg-cover" style={{backgroundImage: `url(${storePath}/footer/footerbackground.jpg)`,width: '100%'}}
     >
       <Box className="w-full bg-[#000000eb] sm:flex gap-5 justify-around p-5">
         <Box className='hidden sm:block sm:w-2/5'>

@@ -2,6 +2,7 @@ import { Box, Paper, Typography } from '@mui/material'
 import React from 'react'
 import PaymentForm from './PaymentForm'
 import MainLayout from '../components/Layout/MainLayout'
+
 const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const Donate = () => {
   return (

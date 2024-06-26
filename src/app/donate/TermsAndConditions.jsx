@@ -5,7 +5,7 @@ import { Button, Checkbox, Dialog, DialogActions, DialogContent, FormControlLabe
 import { useState } from "react"
 
 const TermsAndConditions = (props) => {
-  const {openDialog,setOpenDialog} =props;
+  const {openDialog,setOpenDialog,initiatePayment} =props;
   // checkBox related
   const [checked, setChecked] = useState(false);
 
@@ -34,7 +34,7 @@ const TermsAndConditions = (props) => {
       </DialogContent>
       <DialogActions>
         <Button variant="contained" startIcon={<ArrowBack/>} color="warning" size="small" onClick={()=>setOpenDialog(false)}>Go Back</Button>
-        <Button variant="contained" endIcon={<ArrowForward/>} color="success" size="small" onClick={()=>setOpenDialog(false)}>Proceed</Button>
+        <Button variant="contained" endIcon={<ArrowForward/>} color="success" size="small" onClick={()=>initiatePayment()} disabled={!checked}>Proceed</Button>
       </DialogActions>
     </Dialog>
   )

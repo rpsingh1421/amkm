@@ -1,10 +1,10 @@
 // models/transactionModel.js
 import mongoose from 'mongoose';
+import DonorModel from './donorModel';
 
 const TransactionSchema = new mongoose.Schema({
     transactionId: { 
         type: String, 
-        required: true 
     },
     status: { 
         type: String, 
@@ -13,14 +13,13 @@ const TransactionSchema = new mongoose.Schema({
     amount: { 
         type: Number, 
         required: true 
-
     },
-    createdAt: { 
-        type: Date, 
-        default: Date.now 
-
+    donor:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'donors',
+        required:true
     }
-});
+},{timestamps:true});
 
 const OnlineTransactionModel = mongoose.models.online_transactions || mongoose.model('online_transactions', TransactionSchema);
 export default OnlineTransactionModel;

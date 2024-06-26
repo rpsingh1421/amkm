@@ -47,10 +47,6 @@ const donorSchema = new mongoose.Schema({
     panNumber:{
         type:String,
         required:true
-    },
-    aadhaarNumber:{
-        type:Number,
-        required:true
     }
 },{timestamps:true});
 

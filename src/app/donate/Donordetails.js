@@ -10,7 +10,9 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import TermsAndConditions from "./TermsAndConditions";
 import { ArrowBack } from "@mui/icons-material";
 import Image from "next/image";
+import axios from "axios";
 
+const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const Donordetails = () => {
     const {donorDetailsInitialState,donorDetails,setDonorDetails,step,setStep} = useContext(DonorDetailContext);
     const{register,handleSubmit,control,formState:{errors},clearErrors,reset,setValue}= useForm();
@@ -30,18 +32,21 @@ const Donordetails = () => {
         console.log('hello')
         setOpenDialog(true);
     }
-    // const selectAmountHandler =(amount)=>{
-    //     // clearErrors("paidAmount");
-    //     setDonorDetails((pre)=>{
-    //         return {...pre,paidAmount:amount}
-    //     });
-    //     setValue("paidAmount", amount);
-    //     clearErrors("paidAmount");
-           
-    // }
-    // const amountSubmitHandler =()=>{
-    //     setStep(step+1);
-    // }
+    const initiatePayment = async () => {
+        setOpenDialog(false);
+        try {
+            const response = await axios.post('/rest-api/payment/phonepay/initiate-payment', donorDetails);
+            console.log("payment initiation response:",response);
+          // const result = await response.json();
+            // if (response.data.success) {
+            //     window.location.href = response.data.paymentUrl;
+            // } else {
+            //     console.error('Payment initiation failed:', response.data.message);
+            // }
+        } catch (error) {
+            console.error('Error initiating payment:', error);
+        }
+    };
   return (
     <>
     <Paper component='form' onSubmit={handleSubmit(openAcceptTermsAndConditionDialog)} className="bg-white text-center flex flex-col gap-2 h-[100%] p-2 rounded-b-2xl">
@@ -67,6 +72,8 @@ const Donordetails = () => {
                 name="donorName"
                 label="name"
                 className="w-1/2"
+                value={donorDetails.donorName}
+                onChange={inputChangeHandler}
                 inputProps={{
                     ...register(
                         'donorName',{
@@ -93,6 +100,8 @@ const Donordetails = () => {
                 name="contactNumber"
                 label="Mobile Number"
                 className="w-1/2"
+                value={donorDetails.contactNumber}
+                onChange={inputChangeHandler}
                 inputProps={{
                     ...register(
                         'contactNumber',{
@@ -145,6 +154,8 @@ const Donordetails = () => {
                 name="email"
                 label="Email"
                 className="w-[60%]"
+                value={donorDetails.email}
+                onChange={inputChangeHandler}
                 inputProps={{
                     ...register(
                         'email',{
@@ -165,6 +176,8 @@ const Donordetails = () => {
                 name="addressLine1"
                 label="Address Line1"
                 className="w-1/2"
+                value={donorDetails.addressLine1}
+                onChange={inputChangeHandler}
                 inputProps={{
                     ...register(
                         'addressLine1',{
@@ -181,6 +194,8 @@ const Donordetails = () => {
                 name="addressLine2"
                 label="Address Line2"
                 className="w-1/2"
+                value={donorDetails.addressLine2}
+                onChange={inputChangeHandler}
             />
         </Box>
         <Box className="flex gap-[1%]">
@@ -189,6 +204,8 @@ const Donordetails = () => {
                 name="state"
                 label="state"
                 className="w-1/2"
+                value={donorDetails.state}
+                onChange={inputChangeHandler}
                 inputProps={{
                     ...register(
                         'state',{
@@ -215,6 +232,8 @@ const Donordetails = () => {
                 name="district"
                 label="district"
                 className="w-1/2"
+                value={donorDetails.district}
+                onChange={inputChangeHandler}
                 inputProps={{
                     ...register(
                         'district',{
@@ -243,6 +262,8 @@ const Donordetails = () => {
                 name="city"
                 label="city"
                 className="w-1/2"
+                value={donorDetails.city}
+                onChange={inputChangeHandler}
                 inputProps={{
                     ...register(
                         'city',{
@@ -269,6 +290,8 @@ const Donordetails = () => {
                 name="pincode"
                 label="pincode"
                 className="w-1/2"
+                value={donorDetails.pincode}
+                onChange={inputChangeHandler}
                 inputProps={{
                     ...register(
                         'pincode',{
@@ -296,6 +319,8 @@ const Donordetails = () => {
             size="small"
             name='panNumber'
             label='Pan Number'
+            value={donorDetails.panNumber}
+            onChange={inputChangeHandler}
             helperText='Please note that if you do not provide your PAN Number, you will not be able to claim 50% tax exemption u/s 80G in India'
             inputProps={{
                 ...register(
@@ -321,14 +346,14 @@ const Donordetails = () => {
         />
         
         <Box className="my-[3%] text-center">
-            <Image width={100} height={100} src="/payment-mode-strip.png" alt="payment-strip" className="m-auto w-fit"/>
+            <Image width={100} height={100} src={`${storePath}/payment-mode-strip.png`} alt="payment-strip" className="m-auto w-fit"/>
             <Typography className="text-xs">We accept all major payment methods</Typography>
         </Box>
         <Box className="flex">
             <Button type="submit" color="warning" variant="contained" size="small" className="w-fit m-auto" startIcon={<ArrowBack/>} onClick={()=>setStep(0)}>Go Back</Button>
             <Button type="submit" color="info" variant="contained" size="small" className="w-fit m-auto">continue to payment</Button>
         </Box>    
-        <TermsAndConditions openDialog={openDialog} setOpenDialog={setOpenDialog}/>
+        <TermsAndConditions openDialog={openDialog} setOpenDialog={setOpenDialog} initiatePayment={initiatePayment}/>
     </Paper>
     
     </>
