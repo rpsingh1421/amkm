@@ -41,11 +41,11 @@ const ImageUpload = () => {
         setUploadedFiles(uploadedFiles.filter(item=>item.fieldName!=fieldName));
       }
     }
-       
-    const fileSizeValidation=(value)=>{
-      // console.log(value);
-      return value[0].size>100000&&value[0].size<300000 || 'file size should be of min 100kB and Maximize 300KB';
-    }
+    /**=======custom validation using form hook for a file */
+    // const fileSizeValidation=(value)=>{
+    //   // console.log(value);
+    //   return value[0].size>100000&&value[0].size<300000 || 'file size should be of min 100kB and Maximize 300KB';
+    // }
   return (
     <Box component={'form'} onSubmit={handleSubmit(handleNext)}>
         <Box className="flex gap-[2%] items-center my-[2%]">
@@ -61,8 +61,7 @@ const ImageUpload = () => {
               inputProps={{
                 ...register('profile_image',{
                   required:'profile photo not selected',
-                  validate:fileSizeValidation,
-                  validate:fileSizeValidation
+                  // validate:fileSizeValidation,
                 })
               }}
             />
@@ -89,7 +88,7 @@ const ImageUpload = () => {
               inputProps={{
                 ...register('aadhar_image',{
                   required:'aadhar not selected',
-                  validate:fileSizeValidation
+                  // validate:fileSizeValidation
                 })
               }}
             />
@@ -117,7 +116,7 @@ const ImageUpload = () => {
               inputProps={{
                 ...register('pancard_image',{
                   required:'pancard_image not selected',
-                  validate:fileSizeValidation
+                  // validate:fileSizeValidation
                 })
               }}
             />

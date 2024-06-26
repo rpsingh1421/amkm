@@ -140,7 +140,6 @@ const DynamicDataGrid = () => {
           setIsLoading(false);
           console.log(response.data.body);
       })
-    console.log(paginationModel.pageSize);
   }
   // Effect to fetch row count and rows when paginationModel changes
   useEffect(()=>{

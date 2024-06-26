@@ -7,7 +7,10 @@ export async function GET(request){
   const searchParams = request.nextUrl.searchParams;
   const status = searchParams.get('status');
   const category = searchParams.get('category');
-  const filter= { trash: false ,status:status};
+  let filter={trash: false};
+  if(status){
+    filter={ trash: false ,status:status};
+  }
   if(category){
     filter.categoryName=category
   }

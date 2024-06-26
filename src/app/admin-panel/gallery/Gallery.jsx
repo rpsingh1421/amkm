@@ -27,7 +27,7 @@ const Gallery = () => {
         >
           <Tab value="one" label="upload image" />
           <Tab value="two" label="upload video" />
-          <Tab value="three" label="upload pdf" />
+          <Tab value="three" label="upload pdf" disabled/>
         </Tabs>
       </Paper>
       

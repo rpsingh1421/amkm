@@ -6,7 +6,7 @@ await connect();
 export async function GET(request,{params}){
     const searchParams = request.nextUrl.searchParams;
     const status = searchParams.get('status');
-    const search = searchParams.get('search');
+    // const search = searchParams.get('search');
     const sortField = searchParams.get('sortField') || 'createdAt';
     const sortOrder = searchParams.get('sortOrder') || 'desc';
     const category = searchParams.get('category');
@@ -14,8 +14,10 @@ export async function GET(request,{params}){
     const pagination = params.pagination;
     const pageNo = pagination[0]; // Current page number
     const pageSize = pagination[1]; // Current page size
-  
-    const query = { trash: false ,status:status  };
+    let query={trash: false};
+    if(status){
+      query={ trash: false ,status:status};
+    }
     if(category){
       query.categoryName=category
     }
