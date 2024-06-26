@@ -10,12 +10,11 @@ import { useSearchParams } from 'next/navigation'
 import React from 'react'
 
 const storePath = process.env.NEXT_PUBLIC_STORE_URL;
-const paymentSuccessfulPage =  () => {
+const PaymentSuccessContent =  () => {
   const searchParams = useSearchParams();
   return (
-    <Box>
-      <TopBar/>
-      {/* <NavBar/> */}
+    <>
+      
       <Box className="m-auto w-[75%] text-center my-[5%]">
         <Typography className="font-bold text-5xl my-[5%] border-b-4 border-[#fc6539]">Your Donation Was Successful</Typography>
         <Typography className='mb-[5%]'>Thank you so much for your generous contribution! In the last 4 decades, it&apos;s people like you who have helped us ensure happier childhoods for over 3 million underprivileged children in India; and for that, we are truly grateful.</Typography>
@@ -58,6 +57,20 @@ const paymentSuccessfulPage =  () => {
         <Typography className='font-bold text-base text-[#fc6539]'>Founder, AAO MILKE KAREIN MADAD</Typography>
       </Box>
       <Box className="bg-cover h-[100vh]" style={{backgroundImage: `url(${storePath}/project-work/p57_image.jpg)`,width: '100%'}}> </Box>
+     
+    </>
+  )
+}
+
+
+
+const paymentSuccessfulPage = () => {
+  return (
+    <Box>
+      <TopBar/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <PaymentSuccessContent />
+      </Suspense>
       <Footer/>
       <CopyRight/>
     </Box>
