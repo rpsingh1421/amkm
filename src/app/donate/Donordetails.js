@@ -37,9 +37,15 @@ const Donordetails = () => {
         try {
             const response = await axios.post('/rest-api/payment/phonepay/initiate-payment', donorDetails);
             console.log("payment initiation response:",response);
-            const result = await response.json();
             if (response.data.success) {
+                /** if want to open payment page in same tab */
                 window.location.href = response.data.paymentUrl;
+
+                /** if want to open payment page in new tab */
+                // window.open(
+                //     response.data.paymentUrl,
+                //     "_blank"
+                // );
             } else {
                 console.error('Payment initiation failed:', response.data.message);
             }

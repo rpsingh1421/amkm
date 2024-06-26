@@ -1,4 +1,4 @@
-
+"use client"
 import CopyRight from '@/app/components/copyright/CopyRight'
 import Footer from '@/app/components/footer/Footer'
 import NavBar from '@/app/components/navbar/NavBar'
@@ -6,11 +6,12 @@ import TopBar from '@/app/components/topbar/TopBar'
 import { Box, Button, Paper, Typography } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import React from 'react'
 
 const storePath = process.env.NEXT_PUBLIC_STORE_URL;
-const paymentFailPage = ({params}) => {
-  const transactionId = params.transactionId;
+const paymentFailPage = () => {
+  const searchParams = useSearchParams();
   return (
     <Box>
       <TopBar/>
@@ -21,19 +22,19 @@ const paymentFailPage = ({params}) => {
         <Paper className="rounded-2xl p-[5%] w-3/4 m-auto ">
             <Box className="text-left flex border-2">
               <Typography className='border-r-2 w-1/4 p-[1%]'>Donor Name </Typography>
-              <Typography></Typography>
+              <Typography>{searchParams.get("donor")}</Typography>
             </Box>
             <Box className="text-left flex border-l-2 border-b-2 border-r-2">
               <Typography className='border-r-2 w-1/4 p-[1%]'>Transaction ID </Typography>
-              <Typography>{transactionId}</Typography>
+              <Typography>{searchParams.get("transactionId")}</Typography>
             </Box>
             <Box className="text-left flex border-l-2 border-b-2 border-r-2">
-              <Typography className='border-r-2 w-1/4 p-[1%]'>Transaction Code </Typography>
-              <Typography></Typography>
+              <Typography className='border-r-2 w-1/4 p-[1%]'>Refrence ID </Typography>
+              <Typography>{searchParams.get("providerReferenceId")}</Typography>
             </Box>
             <Box className="text-left flex border-l-2 border-b-2 border-r-2">
               <Typography  className='border-r-2 w-1/4 p-[1%]'>Donation Amount</Typography>
-              <Typography></Typography>
+              <Typography>{Number(searchParams.get("amount"))/100}</Typography>
             </Box>
         </Paper>
         <Box className="my-[5%]">

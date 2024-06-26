@@ -6,6 +6,9 @@ const TransactionSchema = new mongoose.Schema({
     transactionId: { 
         type: String, 
     },
+    refrenceId: { 
+        type: String, 
+    },
     status: { 
         type: String, 
         required: true 
