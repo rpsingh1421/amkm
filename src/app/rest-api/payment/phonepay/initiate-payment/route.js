@@ -82,22 +82,22 @@ export async function POST(req) {
         const base64Encoded = Buffer.from(jsonString).toString('base64');
 
         console.log("payload in baseEncoded:",base64Encoded);
-        const API_Endpoint="/pg/v1/pay";
-        const Salt_Key= "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
+        API_Endpoint="/pg/v1/pay";
+        const Salt_Key= process.env.Salt_Key;
         const Salt_Index=1;
         const SHA256 = (data) => crypto.createHash('sha256').update(data).digest('hex');
         const Checksum_Value = SHA256(base64Encoded + API_Endpoint + Salt_Key) + "###" + Salt_Index;
         console.log("checksumValue:",Checksum_Value);
-    //     // Make a request to PhonePe API to initiate payment with PhonePe and get the payment URL
-    //     const response = await axios.post('https://api.phonepe.com/apis/hermes/pg/v1/pay',payload , 
-    //         {
-    //             headers: {
-    //             'Content-Type': 'application/json',
-    //             'X-VERIFY': Checksum_Value  //'YOUR_CHECKSUM_HERE' // Generate checksum as per PhonePe docs
-    //             }
-    //         });
-    //         // Redirect user to PhonePe payment page
-    //         paymentUrl = response.data.data.instrumentResponse.redirectInfo.url;
+        // Make a request to PhonePe API to initiate payment with PhonePe and get the payment URL
+        const response = await axios.post('https://api.phonepe.com/apis/hermes/pg/v1/pay',payload , 
+            {
+                headers: {
+                'Content-Type': 'application/json',
+                'X-VERIFY': Checksum_Value  //'YOUR_CHECKSUM_HERE' // Generate checksum as per PhonePe docs
+                }
+            });
+            // Redirect user to PhonePe payment page
+            paymentUrl = response.data.data.instrumentResponse.redirectInfo.url;
     //         // const paymentUrl = `https://phonepe.com/pay?txnId=${merchantTransactionId}&amount=${amount}`;
             
     } catch (error) {
