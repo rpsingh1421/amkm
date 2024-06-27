@@ -11,12 +11,14 @@ import TermsAndConditions from "./TermsAndConditions";
 import { ArrowBack } from "@mui/icons-material";
 import Image from "next/image";
 import axios from "axios";
+import ProcessingPage from "../components/PhonePePayment/ProcessingPage";
 
 const storePath = process.env.NEXT_PUBLIC_STORE_URL;
 const Donordetails = () => {
     const {donorDetailsInitialState,donorDetails,setDonorDetails,step,setStep} = useContext(DonorDetailContext);
     const{register,handleSubmit,control,formState:{errors},clearErrors,reset,setValue}= useForm();
-
+    const [processingDialog,setProcessingDialog] = useState(false);
+    const [paymentInitiation,setPaymentInitiation]=useState(true);
     const inputChangeHandler =(e)=>{
         setDonorDetails((pre)=>{
             return {...pre,[e.target.name]:e.target.value}
@@ -34,10 +36,12 @@ const Donordetails = () => {
     }
     const initiatePayment = async () => {
         setOpenDialog(false);
+        setProcessingDialog(true);
         try {
             const response = await axios.post('/rest-api/payment/phonepay/initiate-payment', donorDetails);
             console.log("payment initiation response:",response);
             if (response.data.success) {
+                setProcessingDialog(false);
                 /** if want to open payment page in same tab */
                 window.location.href = response.data.paymentUrl;
 
@@ -47,9 +51,11 @@ const Donordetails = () => {
                 //     "_blank"
                 // );
             } else {
+                setPaymentInitiation(false);
                 console.error('Payment initiation failed:', response.data.message);
             }
         } catch (error) {
+            setPaymentInitiation(false);
             console.error('Error initiating payment:', error);
         }
     };
@@ -361,7 +367,11 @@ const Donordetails = () => {
         </Box>    
         <TermsAndConditions openDialog={openDialog} setOpenDialog={setOpenDialog} initiatePayment={initiatePayment}/>
     </Paper>
-    
+    {processingDialog && <ProcessingPage processingDialog={processingDialog} 
+                                        setProcessingDialog={setProcessingDialog}
+                                        paymentInitiation={paymentInitiation}
+                                        setPaymentInitiation={setPaymentInitiation}
+                                        setStep={setStep}/>}
     </>
   )
 }
