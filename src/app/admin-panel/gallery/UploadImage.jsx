@@ -142,7 +142,8 @@ const UploadImage = () => {
           <Select
               // sx={{minHeight:'0px',height:'1.6rem',fontSize:'small'}}
               labelId="categoryLabel"
-              id="category"
+              id="categoryLabel"
+              label='Select Category'
               size='small'
               name='categoryName'
               value={mediaFileData.categoryName}

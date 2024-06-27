@@ -128,6 +128,7 @@ const UploadVideo = () => {
               // sx={{minHeight:'0px',height:'1.6rem',fontSize:'small'}}
               labelId="categoryLabel"
               id="category"
+              label="Select Category"
               size='small'
               name='categoryName'
               value={mediaFileData.categoryName}
