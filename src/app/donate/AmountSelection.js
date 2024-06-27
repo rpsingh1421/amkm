@@ -69,7 +69,7 @@ const AmountSelection = () => {
                                 //     value:4,
                                 //     message:"amount should not be less than 1000"
                                 // }
-                                validate: value => value >=500 || "amount should not be less than 500"
+                                validate: value => value >=100 || "amount should not be less than 500"
                             }
                         )
                     }}
