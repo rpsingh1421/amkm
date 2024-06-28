@@ -66,6 +66,7 @@ const LoginEntry = () => {
             label='Enter email'
             value={loginCredentials.email}
             onChange={inputChangeHandler}
+            disabled={loginCredentials.phone}
             inputProps={{
                 ...register(
                     'email',{
@@ -100,6 +101,7 @@ const LoginEntry = () => {
                 className="mb-[2%]"
                 value={loginCredentials.phone}
                 onChange={inputChangeHandler}
+                disabled={loginCredentials.email}
                 inputProps={{
                     ...register(
                         'phone',{

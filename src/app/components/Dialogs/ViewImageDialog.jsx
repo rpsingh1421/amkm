@@ -25,7 +25,7 @@ const ViewImage = (props) => {
         </Box>
       <DialogContent>
         <Box>
-          <Image width={"100"} height={"100"} src={'https://store.amkmofficial.com/'+imagePath} alt='gallery_image'  className={zoom&&zoomImage}/>
+          <Image width={"1000"} height={"100"} src={'https://store.amkmofficial.com/'+imagePath} alt='gallery_image'  className={zoom&&zoomImage}/>
         </Box>
       </DialogContent>
     </Dialog>

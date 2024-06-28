@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Fab, Typography } from "@mui/material";
 import Image from "next/image";
 import NavBar from "./components/navbar/NavBar";
 import TopBar from "./components/topbar/TopBar";
@@ -9,6 +9,8 @@ import Footer from "./components/footer/Footer";
 import CopyRight from "./components/copyright/CopyRight";
 import Team from "./components/home/Team";
 import Banner from "./components/banner/Banner";
+import Favorite from "@mui/icons-material/Favorite";
+import FabButton from "./components/FabButton/FabButton";
 
 export default function Home() {
   return (
@@ -26,8 +28,10 @@ export default function Home() {
       <ImageGallery/>
       <Team/>
       <JoinUsSection/>
+      
       <Footer/>
       <CopyRight/>
+      <FabButton/>
     </Box>
   );
 }

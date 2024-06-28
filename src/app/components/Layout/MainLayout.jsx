@@ -1,9 +1,11 @@
 
-import { Box } from "@mui/material";
+import { Box, Fab } from "@mui/material";
 import TopBar from "../topbar/TopBar";
 import NavBar from "../navbar/NavBar";
 import CopyRight from "../copyright/CopyRight";
 import Footer from "../footer/Footer";
+import { Favorite } from "@mui/icons-material";
+import FabButton from "../FabButton/FabButton";
 
 export default function MainLayout({children}) {
   return (
@@ -39,6 +41,7 @@ export default function MainLayout({children}) {
         {/* <!-- ===== CopyRight End ===== --> */}
         <CopyRight/>
         {/* <!-- ===== CopyRight End ===== --> */}
+        <FabButton/>
       </Box>
       {/* <!-- ===== Page Wrapper End ===== --> */}
     </>

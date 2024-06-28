@@ -19,7 +19,7 @@ const ProcessingPage = (props) => {
       <DialogContent className='text-center'>
         {paymentInitiation ? <Box>
           <Typography className='font-bold text-xl'>Your request is still being processed, please wait.</Typography>
-          <Box className='flex justify-center'><Image src='/loading_circle.gif'  width={100} height={100} sx={{width:'auto',height:'auto'}} alt='loading'/></Box>
+          <Box className='flex justify-center'><Image priority src='/loading_circle.gif'  width={100} height={100} sx={{width:'auto',height:'auto'}} alt='loading'/></Box>
           <Typography className='font-semibold'>Thanks for helping us.</Typography>
         </Box>
         :

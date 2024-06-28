@@ -6,6 +6,7 @@ await connect();
 export async function GET(request,{params}){
     const searchParams = request.nextUrl.searchParams;
     const status = searchParams.get('status');
+    const fetch = searchParams.get('fetch');
     // const search = searchParams.get('search');
     const sortField = searchParams.get('sortField') || 'createdAt';
     const sortOrder = searchParams.get('sortOrder') || 'desc';
@@ -15,6 +16,9 @@ export async function GET(request,{params}){
     const pageNo = pagination[0]; // Current page number
     const pageSize = pagination[1]; // Current page size
     let query={trash: false};
+    if(fetch=='all'){
+      query={};
+    }
     if(status){
       query={ trash: false ,status:status};
     }

@@ -76,7 +76,7 @@ const AllImage = () => {
               <Image 
                 src={`${storePath}/${image.filePath}`} 
                 alt={image.fileName} 
-                width={100} 
+                width={1000} 
                 height={100} 
                 className="w-full h-full rounded-xl " 
                 
