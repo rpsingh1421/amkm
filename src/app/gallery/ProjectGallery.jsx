@@ -78,7 +78,7 @@ const AllImage = () => {
             </Box>
           }
           {imageList.map((image, index) => (
-            <Box className='relative rounded-xl bg-red w-[32%] h-[40vh] mb-[3%]' key={index}>
+            <Box className='relative rounded-xl bg-borderGray w-[32%] h-[40vh] mb-[3%]' key={index}>
               <Image 
                 src={`${storePath}/${image.filePath}`} 
                 alt={image.fileName} 

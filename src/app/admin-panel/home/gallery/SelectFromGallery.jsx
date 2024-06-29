@@ -2,12 +2,17 @@
 
 import LoadingImageSkeleton from "@/app/gallery/LoadingImageSkeleton";
 import { Box, Button } from "@mui/material";
+import { GridCheckCircleIcon } from "@mui/x-data-grid";
 import axios from "axios";
 import Image from "next/image";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { GalleryContext } from "../GallerySection";
 const storePath = process.env.NEXT_PUBLIC_STORE;
 const SelectFromGallery = () => {
+    const {fetchGalleryImage,selectedImage,setSelectedImage,newSelectedImage,setNewSelectedImage} = useContext(GalleryContext);
     const [isLoading, setIsLoading] = useState(true);
+    
+    /*========pagination related=========*/
     const [totalImages, setTotalImages] = useState(8);
     const [imageRowModel, setImageRowModel] = useState({
       page: 0,
@@ -39,6 +44,7 @@ const SelectFromGallery = () => {
         fetchImageCount();
         fetchImages();
     },[])
+
     useEffect(() => {
       if (imageRowModel.page !== 0 || imageRowModel.items !== 8) {
         fetchImages();
@@ -51,12 +57,37 @@ const SelectFromGallery = () => {
         page: prev.page + 1,
       }));
     };
+  
+    const selectImageForChange=(image)=>{
+      if(newSelectedImage == image){
+        setNewSelectedImage();
+      }else{
+        setNewSelectedImage(image);
+      }
+    }
+
+    const changeImageHandler =async()=>{
+      // console.log("hello")
+      console.log("selected image is :",selectedImage);
+      console.log("new selected image is :",newSelectedImage);
+      try {
+        const response= await axios.put(`/rest-api/home-page/${selectedImage._id}`,{image1:newSelectedImage});
+        console.log("change image response:",response);
+        fetchGalleryImage();
+        setNewSelectedImage();
+        setSelectedImage(undefined);
+      } catch (error) {
+        console.error('failed to change image:',error)
+      }
+    }
   return (
     <Box>
       <Box className='flex gap-[1%] flex-wrap my-[1%] h-[52vh] pl-2 overflow-auto'>
           {isLoading && <LoadingImageSkeleton />}
           {imageList.map((image, index) => (
-            <Box className='relative rounded-xl w-[24%] h-[25vh] bg-green-400' key={index}>
+            <Box className='relative rounded-xl w-[24%] h-[25vh] bg-borderGray cursor-pointer'  key={index}
+                onClick={()=>selectImageForChange(image.filePath)}
+            >
               <Image 
                 src={`${storePath}/${image.filePath}`} 
                 alt={image.fileName} 
@@ -65,6 +96,11 @@ const SelectFromGallery = () => {
                 className="w-full h-full rounded-xl " 
                 
               />
+              {newSelectedImage === image.filePath && (
+                <Box className='absolute top-2 right-2'>
+                  <GridCheckCircleIcon className='text-blue-500' fontSize="large" />
+                </Box>
+              )}
               <Box className='absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 bg-black bg-opacity-50 rounded-xl '
                
                >
@@ -74,13 +110,24 @@ const SelectFromGallery = () => {
             
           ))}
         </Box>
-        <Box className='my-[1%] flex justify-end mr-[5%]'>
+        <Box className='my-[1%] flex justify-end mr-[5%] gap-[5%]'>
+        <Button 
+            // onClick={showMore} 
+            disabled={!newSelectedImage} 
+            variant='contained' 
+            size="medium" 
+            color="success"
+            onClick={()=>changeImageHandler()}
+          >
+            change
+          </Button>
+
           <Button 
             onClick={showMore} 
             disabled={Math.ceil(totalImages / imageRowModel.items) === (imageRowModel.page + 1)} 
             variant='contained' 
             size="medium" 
-            color="success"
+            color="primary"
           >
             Show More
           </Button>
