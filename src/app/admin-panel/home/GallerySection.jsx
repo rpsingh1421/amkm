@@ -8,11 +8,14 @@ import axios from "axios";
 import Image from "next/image";
 import { Close } from "@mui/icons-material";
 import ChangeImage from "./gallery/ChangeImage";
+import LoadingImageSkeleton from "@/app/gallery/LoadingImageSkeleton";
+import NoRowsLayout from "@/app/components/Layout/NowRowsLayout";
 
 
 const storePath = process.env.NEXT_PUBLIC_STORE;
 const GalleryContext = createContext();
 const GallerySection = () => {
+    const [isLoading,setIsLoading] = useState(true);
     const[changeImageDialog,setChangeImageDialog] = useState(false);
     const [selectedImage,setSelectedImage] = useState(undefined);
     const[galleryList,setGalleryList] = useState([]);
@@ -22,9 +25,11 @@ const GallerySection = () => {
             console.log("gallery data:",response)
             if(response.data.body){
                 setGalleryList(response.data.body);
+                setIsLoading(false);
             }
         } catch (error) {
             console.log("fetching error:",error)
+            setIsLoading(false);
         }
     }
     useEffect(()=>{
@@ -39,6 +44,7 @@ const GallerySection = () => {
   return (
     <Paper className='w-[90%] m-auto mt-[1%] rounded-xl'>
         <Box className='flex gap-[1%] p-[1%] my-[1%]'>
+            {isLoading && <LoadingImageSkeleton />}
             { galleryList.map((item,index)=>{
                 return (
                     <Box className='text-center w-[19.5%]' key={index}>
@@ -49,6 +55,7 @@ const GallerySection = () => {
                     </Box>
                 )
             })}
+            {galleryList.length==0 && <NoRowsLayout/>}
         </Box>
         {selectedImage && 
             <Dialog open sx={{

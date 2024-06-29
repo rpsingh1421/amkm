@@ -17,7 +17,7 @@ console.log("search prarams",type)
             break;
         case 'active':// status active
             memberList= await TeamMemberModel.find({status:true}).select("-password");
-        response =NextResponse.json({status:true,message:'all active team member list fetched successfully'});
+        response =NextResponse.json({body:memberList,status:true,message:'all active team member list fetched successfully'});
             break;
         case 'valid': // trash false ..status doesn't matter
             memberList= await TeamMemberModel.find({trash:false}).select("-password");

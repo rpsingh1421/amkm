@@ -5,6 +5,7 @@ import Banner from './Banner';
 import AboutSection from './About';
 import JoinUs from './JoinUs';
 import GallerySection from './GallerySection';
+import CoreTeam from './core-team/CoreTeam';
 
 const PageDataContext = createContext();
 const Home = () => {
@@ -44,7 +45,7 @@ const Home = () => {
           {value=='one' && <Banner/>}
           {value=='two' && <AboutSection/>}
           {value=='three' && <GallerySection/>}
-          {/* {value=='four' && <VideoGallery/>} */}
+          {value=='four' && <CoreTeam/>}
           {value=='five' && <JoinUs/>} 
       </PageDataContext.Provider>
       
