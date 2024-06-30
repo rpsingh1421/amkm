@@ -77,7 +77,8 @@ export async function POST(req) {
         // Redirect user to PhonePe payment page
         paymentUrl = response.data.data.instrumentResponse.redirectInfo.url;            
     } catch (error) {
-        return NextResponse.json({ error: 'Something went wrong' },{status:500});
+        console.error('error in payment-initiation:',error);
+        return NextResponse.json({ error: 'Something went wrong' ,error},{status:500});
     }
     return NextResponse.json({ success: true, paymentUrl }, { status: 200 });
 }

@@ -11,12 +11,13 @@ const isValidObjectId = (id) => {
 export async function PUT(request,{params}){
     const _id = params.id;
     const receivedData = await request.json();
+    console.log('received data to update:',receivedData)
     if (isValidObjectId(_id)) {
         try {
-            await HomePageModel.findByIdAndUpdate(_id,receivedData);
-            return NextResponse.json({message:'image changed successfully'},{status:200})
+            const updatedData= await HomePageModel.findByIdAndUpdate(_id,receivedData);
+            return NextResponse.json({message:`${updatedData.section} data updated successfully`},{status:200})
         } catch (error) {
-            return NextResponse.json({message:'failed to change image'},{status:400})
+            return NextResponse.json({message:`failed to update ${updatedData.section} data`},{status:400})
         }
     } else {
         return NextResponse.json({message:'invalid id'},{status:500})

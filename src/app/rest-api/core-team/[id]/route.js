@@ -1,6 +1,7 @@
 import connect from "@/utils/dbConnect";
 import { NextResponse, userAgent } from "next/server";
 import CoreTeamModel from "../../models/coreTeamModel";
+import mongoose from "mongoose";
 
 await connect();
 // Validate ObjectId
@@ -51,13 +52,15 @@ export async function GET(request,{params}){
 export async function PUT(request,{params}){
     const _id =params.id;
     const receivedData = await request.json();
+    console.log("received data for modify:",receivedData)
     if (!isValidObjectId(_id)) {
         return NextResponse.json({message:'invalid id'},{status:500})
     }
     try {
         await CoreTeamModel.findByIdAndUpdate(_id,receivedData);
-        return NextResponse.json({message:'core team member data updated',error:error},{status:200})
+        return NextResponse.json({message:'core team member data updated'},{status:200})
     } catch (error) {
+
         return NextResponse.json({message:'updation failed',error:error},{status:400})
     }
 }

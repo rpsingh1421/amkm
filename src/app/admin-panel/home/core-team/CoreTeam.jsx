@@ -1,13 +1,23 @@
 "use client"
 import { Paper, Tab, Tabs } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import MemberList from './MemberList';
 import AddModifyMember from './AddModifyMember';
 import axios from 'axios';
 
+const CoreTeamContext = createContext();
 const CoreTeam = () => {
     const[tabValue,setTabValue] = useState('one');
     const [registeredMembers,setRegisteredMembers] = useState([]);
+    const [isEditing,setIsEditing] = useState(false);
+    const memberInitialData={
+        position:'',
+        facebook:'',
+        instagram:'',
+        twitter:'',
+        user:''
+    };
+    const [memberData,setMemberData] = useState(memberInitialData); 
     const fetchRegisteredMemberList=async()=>{
         try {
             const response = await axios.get('/rest-api/team/fetch?type=active');
@@ -40,11 +50,14 @@ const CoreTeam = () => {
 
             
         </Tabs>
-
-        {tabValue=='one' && <MemberList/>}
-        {tabValue=='two' && <AddModifyMember registeredMembers={registeredMembers}/>}
+        <CoreTeamContext.Provider value={{setTabValue,isEditing,setIsEditing,registeredMembers,memberInitialData,memberData,setMemberData}}>
+            {tabValue=='one' && <MemberList/>}
+            {tabValue=='two' && <AddModifyMember registeredMembers={registeredMembers}/>}
+        </CoreTeamContext.Provider>
     </Paper>
   )
 }
 
 export default CoreTeam
+
+export {CoreTeamContext}

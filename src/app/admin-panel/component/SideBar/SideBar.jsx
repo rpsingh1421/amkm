@@ -42,7 +42,7 @@ const Sidebar = () => {
             <ListItem>
               <Link
                 href="/admin-panel/dashboard"
-                className={` w-full group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-300 ease-in-out hover:text-white text-[#000000c7] hover:bg-slate-800 ${pathname=='/admin-panel/dashboard' && 'bg-slate-800'}`}
+                className={` w-full group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-300 ease-in-out hover:text-white text-whiten hover:bg-slate-800 ${pathname=='/admin-panel/dashboard' && 'bg-slate-800'}`}
               >
                 <Dashboard/>
                 Dashboard
@@ -58,7 +58,7 @@ const Sidebar = () => {
               <ListItem>
                 <Link
                   href="/admin-panel/home"
-                  className={`w-full group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-300 ease-in-out hover:text-white text-[#000000c7] hover:bg-slate-800 ${pathname=='/admin-panel/home' && 'bg-slate-800'}`}
+                  className={`w-full group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-300 ease-in-out hover:text-white text-whiten hover:bg-slate-800 ${pathname=='/admin-panel/home' && 'bg-slate-800'}`}
                 >
                   <Home/>
                   Home
@@ -78,7 +78,7 @@ const Sidebar = () => {
                   <ListItem>
                     <Link
                       href="#"
-                      className={"w-full group relative flex items-center justify-center gap-2.5 rounded-md p-2 font-medium duration-300 ease-in-out hover:text-white text-gray-400 hover:bg-meta-4"}
+                      className={"w-full group relative flex items-center justify-center gap-2.5 rounded-md p-2 font-medium duration-300 ease-in-out hover:text-white text-whiten hover:bg-meta-4"}
                     >
                       Banner
                     </Link>
@@ -86,7 +86,7 @@ const Sidebar = () => {
                   <ListItem>
                     <Link
                       href="#"
-                      className={"w-full group relative flex items-center justify-center gap-2.5 rounded-md p-2 font-medium duration-300 ease-in-out hover:text-white text-gray-400 hover:bg-meta-4"}
+                      className={"w-full group relative flex items-center justify-center gap-2.5 rounded-md p-2 font-medium duration-300 ease-in-out hover:text-white text-whiten hover:bg-meta-4"}
                     >
                       About Us
                     </Link>
@@ -94,7 +94,7 @@ const Sidebar = () => {
                   <ListItem>
                     <Link
                       href="#"
-                      className={"w-full group relative flex items-center justify-center gap-2.5 rounded-md p-2 font-medium duration-300 ease-in-out hover:text-white text-gray-400 hover:bg-meta-4"}
+                      className={"w-full group relative flex items-center justify-center gap-2.5 rounded-md p-2 font-medium duration-300 ease-in-out hover:text-white text-whiten hover:bg-meta-4"}
                     >
                       Image Gallery
                     </Link>
@@ -102,7 +102,7 @@ const Sidebar = () => {
                   <ListItem>
                     <Link
                       href="#"
-                      className={"w-full group relative flex items-center justify-center gap-2.5 rounded-md p-2 font-medium duration-300 ease-in-out hover:text-white text-gray-400 hover:bg-meta-4"}
+                      className={"w-full group relative flex items-center justify-center gap-2.5 rounded-md p-2 font-medium duration-300 ease-in-out hover:text-white text-whiten hover:bg-meta-4"}
                     >
                       Team
                     </Link>
@@ -110,7 +110,7 @@ const Sidebar = () => {
                   <ListItem>
                     <Link
                       href="#"
-                      className={"w-full group relative flex items-center justify-center gap-2.5 rounded-md p-2 font-medium duration-300 ease-in-out hover:text-white text-gray-400 hover:bg-meta-4"}
+                      className={"w-full group relative flex items-center justify-center gap-2.5 rounded-md p-2 font-medium duration-300 ease-in-out hover:text-white text-whiten hover:bg-meta-4"}
                     >
                       Join Us
                     </Link>
@@ -120,7 +120,7 @@ const Sidebar = () => {
              <ListItem>
                 <Link
                   href="/admin-panel/gallery"
-                  className={`w-full group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-300 ease-in-out hover:text-white text-[#000000c7] hover:bg-slate-800 ${pathname=='/admin-panel/gallery' && 'bg-slate-800'}`}
+                  className={`w-full group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-300 ease-in-out hover:text-white text-whiten hover:bg-slate-800 ${pathname=='/admin-panel/gallery' && 'bg-slate-800'}`}
                 >
                   <Collections/>
                   Gallery

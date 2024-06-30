@@ -41,7 +41,7 @@ const LoginEntry = () => {
             login(response.data.body);//authcontext
             navigate.push('/admin-panel/dashboard');
             setLoginCredentials(loginCredentialsInitial);
-            setLoading(false);
+           
         }else{
             setError(response.data.message);
             setLoading(false)
@@ -49,6 +49,8 @@ const LoginEntry = () => {
         } catch (error) {
             setError("something gone wrong...server issue");
             setLoading(false)
+        }finally{
+            setLoading(false);
         }
     }
     const [error,setError] = useState('');
@@ -56,7 +58,7 @@ const LoginEntry = () => {
     <>
     <Box component='form' className='p-[5%]' onSubmit={handleSubmit(submitHandler)}>
         <Box className="mb-[3%]"><Image width={100} height={100} alt='logo' src='/aaomilkar_logo.png' className='w-[20%] m-auto'/></Box>
-        <Box className='text-center mt-[2%]'><Typography className='text-xs text-red-700'>{error && error}</Typography></Box>
+        <Box className='text-center mt-[2%]'><Typography className='text-xs text-red'>{error && error}</Typography></Box>
         <TextField
             fullWidth
             className='my-[2%]'

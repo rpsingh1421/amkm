@@ -1,22 +1,50 @@
 "use client"
 
 import { Box, Button, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
+import axios from "axios";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { CoreTeamContext } from "./CoreTeam";
 
 const storePath = process.env.NEXT_PUBLIC_STORE;
-const AddModifyMember = ({registeredMembers}) => {
-  const memberInitialData={
-
-  };
-  const [memberData,setMemberData] = useState(memberInitialData);
+const AddModifyMember = ({}) => {
+  const {setTabValue,isEditing,setIsEditing,registeredMembers,memberInitialData,memberData,setMemberData} = useContext(CoreTeamContext);
+  const [responseDetails,setResponseDetails] = useState({
+    status:'',
+    message:''
+  })
+ 
   const { register, handleSubmit, formState: { errors, dirtyFields,isDirty }, clearErrors, reset,watch } = useForm({
     defaultValues: memberData // Set the initial values
   });
 
-  const onFormSubmit =async()=>{
-
+  const onFormSubmit =async(data)=>{
+    console.log("all submitted data:",data);
+    if (isEditing) {
+      const changedValues = Object.keys(dirtyFields).reduce((accumulator, current) => {
+        accumulator[current] = data[current];
+        return accumulator;
+      }, {});
+      console.log("Changed values:", changedValues);
+      try {
+        await axios.put(`/rest-api/core-team/${memberData._id}`,changedValues);
+        setResponseDetails({status:true,message:'member data is updated'})
+        setMemberData(memberInitialData);
+      } catch (error) {
+        console.error('member is not updated:',error);
+        setResponseDetails({status:false,message:'member data is not updated...try again later'})
+      }
+    } else {
+      try {
+        await axios.post('/rest-api/core-team',data);
+        setResponseDetails({status:true,message:'member is added to core team'})
+        reset();
+      } catch (error) {
+        console.error('member is not registered as core team:',error);
+        setResponseDetails({status:false,message:'member is not added to core team...try again later'})
+      }
+    }
   }
   useEffect(()=>{
     reset(memberData);
@@ -29,9 +57,18 @@ const AddModifyMember = ({registeredMembers}) => {
       setSelectedMember(user);
     }
   },[watch('user')])
-
+  const clearForm =()=>{
+    if (isEditing) {
+      setMemberData(memberInitialData);
+      setIsEditing(false);
+      setTabValue('one');
+    } else {
+      reset();
+    }
+  }
   return (
     <Box className='my-[3%]'>
+      {responseDetails.message && <Typography className={`mb-[2%] text-center ${responseDetails.status? 'text-green-500':'text-bgRed'}`}>{responseDetails.message}</Typography>}
       <Box component={'form'} onSubmit={handleSubmit(onFormSubmit)}>
         <Box className='flex gap-[3%]'>
           
@@ -57,6 +94,7 @@ const AddModifyMember = ({registeredMembers}) => {
                       size="small"
                       labelId="user-select-label"
                       label="Select Member"
+                      value={watch('user') || ''}
                       {...register("user", { required: "member is required" })}
                       error={!!errors.user}
                       helperText={errors.user?.message}
@@ -81,6 +119,7 @@ const AddModifyMember = ({registeredMembers}) => {
                       size="small"
                       labelId="position-select-label"
                       label="Assign Position"
+                      value={watch('position') || ''}
                       {...register("position", { required: "member is required" })}
                       error={!!errors.position}
                       helperText={errors.position?.message}
@@ -104,14 +143,14 @@ const AddModifyMember = ({registeredMembers}) => {
                   value={watch('facebook')}
                   {...register('facebook', {
                       // required: 'Title field should not be empty',
-                      // pattern: {
-                      //     value: /^[a-zA-Z]+(\s[a-zA-Z]+)?$/,
-                      //     message: "Please enter one or two words using only alphabets."
-                      // }
+                      pattern: {
+                        value: /^(https?:\/\/)?(www\.)?facebook.com\/[a-zA-Z0-9(\.\?)?]/,
+                        message: "Enter a valid Facebook URL"
+                      }
                   })}
                   error={!!errors.facebook}
                   helperText={errors.facebook?.message}
-                  disabled
+                  
               />
 
             </Box>
@@ -123,39 +162,39 @@ const AddModifyMember = ({registeredMembers}) => {
                   value={watch('instagram')}
                   {...register('instagram', {
                       // required: 'Title field should not be empty',
-                      // pattern: {
-                      //     value: /^[a-zA-Z]+(\s[a-zA-Z]+)?$/,
-                      //     message: "Please enter one or two words using only alphabets."
-                      // }
+                      pattern: {
+                        value: /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9_]+\/?$/,
+                        message: "Enter a valid Instagram URL"
+                      }
                   })}
                   error={!!errors.instagram}
                   helperText={errors.instagram?.message}
-                  disabled
+                  
               />
 
             </Box>
             <Box className="flex gap-[3%] mb-[2%]">
-              <Typography className='w-[25%] font-bold'>Youtube Link</Typography>
+              <Typography className='w-[25%] font-bold'>Twitter Link</Typography>
               <TextField
                   fullWidth
                   size='small'
-                  value={watch('youtube')}
-                  {...register('youtube', {
+                  value={watch('twitter')}
+                  {...register('twitter', {
                       // required: 'Title field should not be empty',
-                      // pattern: {
-                      //     value: /^[a-zA-Z]+(\s[a-zA-Z]+)?$/,
-                      //     message: "Please enter one or two words using only alphabets."
-                      // }
+                      pattern: {
+                        value: /^(https?:\/\/)?(www\.)?(twitter\.com|x\.com)\/[a-zA-Z0-9_]+\/?$/,
+                        message: "Enter a valid Twitter URL"
+                      }
                   })}
-                  error={!!errors.youtube}
-                  helperText={errors.youtube?.message}
-                  disabled
+                  error={!!errors.twitter}
+                  helperText={errors.twitter?.message}
               />
 
             </Box>
             <Box className='flex gap-[3%] justify-end'>
-              <Button type="submit" variant='contained'>modify</Button>
-              <Button type="submit" variant='contained'>add</Button>
+              <Button variant="contained" size="medium" onClick={()=>clearForm()}>cancel</Button>
+             {isEditing ? <Button type="submit" variant='contained' disabled={!isDirty}>modify</Button>
+              : <Button type="submit" variant='contained' disabled={!isDirty}>add</Button>}
             </Box>
           </Box>
         </Box>

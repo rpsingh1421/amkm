@@ -18,6 +18,9 @@ export async function GET(request){
         if(section=='About Us'){
             fetchedData = await HomePageModel.findOne({section:section});
         }
+        if(section=='banner'){
+            fetchedData = await HomePageModel.findOne({section:section});
+        }
         return NextResponse.json({body:fetchedData,message:'sucessfully fetched desired output'},{status:200})
     } catch (error) {
         return NextResponse.json({error:error,message:'Something went wrong'},{status:500})

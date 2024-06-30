@@ -14,7 +14,8 @@ export async function GET(request){
         const teamList= await CoreTeamModel.find(query)
         .populate({
             path: 'user',
-            select: 'member_name profile_image -_id' // Include only name,and image, exclude _id
+            select: 'member_name profile_image _id'
+            // select: 'member_name profile_image -_id' // Include only name,and image, exclude _id
           });
         return NextResponse.json({body:teamList ,message:'core team list fetched successfully'},{status:200})
     } catch (error) {
