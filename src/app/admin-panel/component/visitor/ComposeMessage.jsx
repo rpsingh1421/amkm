@@ -25,18 +25,19 @@ const ComposeMessage = () => {
     });
     const sendMailHandler =async(data)=>{
         console.log("all mail data:",data);
-        const mailData={
+        const emailData={
             recipient:data.to,
             subject:data.subject,
             message:data.message,
         }
-        console.log("mail data to be send:",mailData);
+        console.log("mail data to be send:",emailData);
         // sendMail();
         try {
-           const mailResponse =  await axios.put('/rest-api/visitor',mailData);
+           const mailResponse =  await axios.put('/rest-api/visitor',emailData);
             console.log("email send response:",mailResponse);
             setSentMailResponse({ status:true, message:'Email sent successfully'})
             setMailData(mailDataInitial);
+            reset(mailData)
         } catch (error) {
             console.log("error in sending email:",error);
             setSentMailResponse({ status:true, message:'Failed to send email'})
