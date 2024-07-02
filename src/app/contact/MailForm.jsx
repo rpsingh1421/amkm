@@ -13,6 +13,7 @@ const MailForm = () => {
       name:'',
       email:'',
       contact:'',
+      subject:'',
       message:''
     }
     const [visitorData,setVisitorData] = useState(visitorIntialData);
@@ -123,6 +124,36 @@ const MailForm = () => {
         }}
         error={errors.contact && errors.contact}
         helperText={errors.contact && errors.contact?.message}
+      />
+      <TextField
+          className='mb-[2%]' 
+        fullWidth
+        size='small'
+        label='Enter message topic*'
+        name='subject'
+        value={visitorData.subject}
+        onChange={inputChangeHandler}
+        inputProps={{
+          ...register(
+              'subject',{
+                  required:'empty not allowed',
+                  pattern:{
+                      value:/^[a-zA-Z ]*$/,
+                      message:"only alphabets allowed"
+                  },
+                  minLength:{
+                      value:3,
+                      message:"minimum 3 digit"
+                  },
+                  maxLength:{
+                      value:30,
+                      message:"maximum 30 digit"
+                  }
+              }
+          )
+        }}
+        error={errors.subject && errors.subject}  
+        helperText={errors.subject && errors.subject?.message}                 
       />
        <TextField
           className='mb-[3%]'
