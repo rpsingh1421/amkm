@@ -1,6 +1,6 @@
 "use client"
 import { Box } from '@mui/material'
-import React, { createContext, useEffect, useState } from 'react'
+import React, { Suspense, createContext, useEffect, useState } from 'react'
 import AllMessage from '../../component/visitor/AllMessage'
 import ReadMessage from '../../component/visitor/ReadMessage'
 import ComposeMessage from '../../component/visitor/ComposeMessage'
@@ -37,7 +37,11 @@ const Inbox = () => {
         <Box className='flex gap-[2%]'>
             <AllMessage/>
             {selectsection == 'read' && <ReadMessage/>}
-            {selectsection == 'compose' && <ComposeMessage/>}
+            {selectsection == 'compose' && 
+            <Suspense>
+                <ComposeMessage/>
+            </Suspense>
+            }
         </Box>
     </MessageContext.Provider>
   )
