@@ -1,5 +1,7 @@
 "use client"
 
+import LoadingDefault from '@/app/components/Layout/LoadingDefault'
+import NoRowsLayout from '@/app/components/Layout/NowRowsLayout'
 import { Mail } from '@mui/icons-material'
 import { Avatar, Badge, Box, Paper, Typography } from '@mui/material'
 import axios from 'axios'
@@ -17,21 +19,25 @@ const Visitor = () => {
       const fetchResponse = await axios.get('/rest-api/visitor?fetch=un-read');
       console.log("visitor list:",fetchResponse)
       setVisitorsData(fetchResponse.data.body);
+      setIsLoading(false);
     } catch (error) {
       console.error('error in fetching visitors data:',error);
+      setIsLoading(false);
     }
   }
   useEffect(()=>{
     fetchVisitorList();
   },[])
   return (
-    <Paper className='w-[40%]'>
+    <Paper className='w-[40%] h-fit'>
         <Box className='border-b border-borderGray p-[3%] flex justify-between'>
             <Typography className='font-semibold text-xl'>Visitor Messages</Typography>
               <Badge color="secondary" badgeContent={visitorsData.length}  className='cursor-pointer' onClick={()=>navigate.push('/admin-panel/visitor/inbox')}>
                 <Mail/>
               </Badge>
         </Box>
+        {isLoading && <LoadingDefault/>}
+        {!isLoading && visitorsData.length==0 && <NoRowsLayout/>}
         <Box>
         {visitorsData.map((visitor, key) => (
           <Link

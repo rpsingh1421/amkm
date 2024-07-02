@@ -5,15 +5,19 @@ import { Box, Button, Paper, Typography } from "@mui/material";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react"
 import { MessageContext } from "../../visitor/inbox/Inbox";
+import LoadingDefault from "@/app/components/Layout/LoadingDefault";
 
 const AllMessage = () => {
     const {visitorsMailList,setVisitorsMailList,setSelelctSection,selectedMessageData,setSelectedMessageData} = useContext(MessageContext);
+    const [isLoading,setIsLoading] = useState(true)
     const fetchAllvisitorMails =async()=>{
         try{
             const response = await axios.get('/rest-api/visitor');
             setVisitorsMailList(response.data.body);
+            setIsLoading(false);
         }catch(error){
             console.error('error in fatching mailbox',error);
+            setIsLoading(false);
         }
         
     }
@@ -34,10 +38,11 @@ const AllMessage = () => {
         <Box className='border-b border-lightBorder p-[2%]'>
             <Typography className='font-bold text-base'>All Messages</Typography>
         </Box>
+        {isLoading && <LoadingDefault/>}
         <Box className='w-[90%] m-auto py-[3%]'>
             {visitorsMailList.map((item,key)=>{
                 return(
-                    <Box className={`${selectedMessageData && selectedMessageData._id == item._id && 'bg-lightBorder'} border-b border-lightBorder flex items-center justify-between cursor-pointer hover:bg-lightBorder`} onClick={()=>selectMessageHandler(item)}>
+                    <Box key={key} className={`${selectedMessageData && selectedMessageData._id == item._id && 'bg-lightBorder'} border-b border-lightBorder flex items-center justify-between cursor-pointer hover:bg-lightBorder`} onClick={()=>selectMessageHandler(item)}>
                         <Box className='flex justify-between w-[20%]'>
                             <Typography className={`${item.read ? 'font-medium':'font-bold'} text-sm text-black dark:text-white`}> {item.name.length > 10 ? item.name.slice(0, 10) : item.name}</Typography>
                             <Typography component={'span'}>:</Typography>
