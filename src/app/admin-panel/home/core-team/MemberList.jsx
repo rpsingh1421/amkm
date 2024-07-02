@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useContext, useEffect, useState } from "react"
 import Link from 'next/link'
 import { CoreTeamContext } from "./CoreTeam";
+import LoadingImageSkeleton from "@/app/gallery/LoadingImageSkeleton";
 
 const storePath = process.env.NEXT_PUBLIC_STORE;
 const MemberList = () => {
@@ -39,7 +40,7 @@ const MemberList = () => {
     }
   return (
     <Box className='flex gap-[1%] p-[3%]'>
-        {isLoading && <TableLoadingSkeleton/>}
+        {isLoading && <LoadingImageSkeleton/>}
         {teamList.map((team,index)=>{
             return (
                 <Box className='w-[24%] text-center' key={index}>

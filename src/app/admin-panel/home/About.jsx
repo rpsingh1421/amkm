@@ -81,6 +81,13 @@ const AboutSection = () => {
                 // console.log("file upload response:",fileUploadResponse)
                 if (fileUploadResponse.data.status) {
                     const filepath = fileUploadResponse.data.body.file_path;
+                    //save image data to image-gallery table as general category
+                    const imagGalleryData = {fileName:selectedFile.name,filePath:filepath,categoryName:'general'};
+                    try {
+                        await axios.post('/rest-api/photo-gallery',imagGalleryData)
+                    } catch (error) {
+                        console.error('error in saving data into image gallery database:',error);
+                    }
                     // setPageData(pre=>({...pre,image1:filepath}));
                     updatedPageData['image1'] = filepath;
                 }
@@ -95,7 +102,7 @@ const AboutSection = () => {
                 const updateRespose = await axios.put('/rest-api/home-page',updatedPageData);
                 console.log('about page data updated response:',updateRespose);
                 setPageData(initialContent);
-                setResponseDetails({status:false,message:updateRespose.data.message})
+                setResponseDetails({status:true,message:updateRespose.data.message})
             } catch (error) {
                 setResponseDetails({status:false,message:'failed to upload abut data'})
                 console.log('failed to update:',error)
@@ -107,7 +114,7 @@ const AboutSection = () => {
                 const createRespose = await axios.post('/rest-api/home-page',updatedPageData);
                 console.log('about page data saved response:',createRespose);
                 setPageData(initialContent);
-                setResponseDetails({status:false,message:createRespose.data.message})
+                setResponseDetails({status:true,message:createRespose.data.message})
             } catch (error) {
                 setResponseDetails({status:false,message:'failed to create about data'})
                 console.log('failed to create:',error)

@@ -45,6 +45,7 @@ module.exports = {
         gray: "#EFF4FB",
         graydark: "#333A48",
         borderGray:"#939497",
+        lightBorder:'#93949769',
         bgRed:"#c62828",
         "gray-2": "#F7F9FC",
         "gray-3": "#FAFAFA",

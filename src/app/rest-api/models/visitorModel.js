@@ -16,15 +16,15 @@ const visitorSchema = new mongoose.Schema({
         max: [9999999999,'should not exceed 10 digit'],
         required:true
     },
+    subject:{
+        type:String,
+        required:true
+    },
     message:{
         type:String,
         required:true
     },
     read: {
-        type: Boolean,
-        default: false
-    },
-    view: {
         type: Boolean,
         default: false
     },

@@ -33,7 +33,7 @@ export async function GET(request,{params}){
                 response = NextResponse.json({status:true,message:'visitor reading status changed'},{status:200});
                 break;
             case 'view-status':
-                visitor.view = !visitor.view;
+                visitor.read = true;
                 visitor.save();
                 response = NextResponse.json({status:true,message:'visitor visibility status changed'},{status:200});
                 break;

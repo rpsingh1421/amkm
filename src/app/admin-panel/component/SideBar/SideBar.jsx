@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Box, List, ListItem, Typography } from "@mui/material";
 import SidebarLinkGroup from "./SidebarLinkGroup";
-import { Dashboard, ExpandLess, ExpandMore, Group, Home, Collections } from "@mui/icons-material";
+import { Dashboard, ExpandLess, ExpandMore, Group, Home, Collections, Inbox, Message, Email } from "@mui/icons-material";
 
 const Sidebar = () => {
   const pathname = usePathname(); 
@@ -46,6 +46,15 @@ const Sidebar = () => {
               >
                 <Dashboard/>
                 Dashboard
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link
+                href="/admin-panel/visitor/inbox"
+                className={` w-full group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-300 ease-in-out hover:text-white text-whiten hover:bg-slate-800 ${pathname=='/admin-panel/visitor/inbox' && 'bg-slate-800'}`}
+              >
+                <Email/>
+                Inbox
               </Link>
             </ListItem>
           </Box>

@@ -55,6 +55,7 @@ const SearchAccount = () => {
             value={userCredentials.email}
             onChange={inputChangeHandler}
             autoComplete='off'
+            disabled={userCredentials.phone}
             inputProps={{
                 ...register(
                     'email',{
@@ -90,6 +91,7 @@ const SearchAccount = () => {
                 value={userCredentials.phone}
                 onChange={inputChangeHandler}
                 autoComplete='off'
+                disabled={userCredentials.email}
                 inputProps={{
                     ...register(
                         'phone',{

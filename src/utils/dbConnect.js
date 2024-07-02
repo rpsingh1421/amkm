@@ -14,12 +14,11 @@ const connect = async () => {
         console.log("MongoDB is already connected.");
         return;
     }
-
     try {
         await mongoose.connect(MONGODB_URL)
         console.log("Mongo Connection successfully established.");
     } catch (error){
-        throw new Error("Error connecting to mongoose")
+        console.error("Error connecting to mongoose:",error);
     }
 }
 

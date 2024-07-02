@@ -16,7 +16,7 @@ const imageGallerySchema = new mongoose.Schema({
     },
     status: {
         type: Boolean,
-        default: true
+        default: false
     },
     trash: {
         type: Boolean,

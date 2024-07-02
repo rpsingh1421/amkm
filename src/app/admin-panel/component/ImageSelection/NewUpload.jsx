@@ -1,15 +1,14 @@
 "use client"
 
-import { CloudUpload, FileUpload } from "@mui/icons-material";
+import { CloudUpload } from "@mui/icons-material";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import Image from "next/image";
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import { useForm } from "react-hook-form";
-import { GalleryContext } from "../GallerySection";
 
-const UploadNew = () => {
-  const {fetchGalleryImage,selectedImage,setSelectedImage,newSelectedImage,setNewSelectedImage} = useContext(GalleryContext);
+const NewUpload = (props) => {
+  const {updateImageFilePath,selectedimage,action,closeDialog,sectionId} =props;
   const [selectedFile,setSelectedFile] = useState();
   const [previewImage,setPreviewImage] = useState();
   const { register, handleSubmit, formState: { errors, dirtyFields,isDirty  }, clearErrors, reset, watch } = useForm({
@@ -44,13 +43,29 @@ const UploadNew = () => {
         } catch (error) {
           console.error('error in saving data into image gallery database:',error);
         }
-
-        const response= await axios.put(`/rest-api/home-page/${selectedImage._id}`,{image1:filepath});
-        console.log("change image response:",response);
-        fetchGalleryImage();
-        setSelectedImage(undefined);
-        setSelectedFile();
-        setPreviewImage();
+        /**======== */
+        if (action == 'add') {
+          console.log("selected action :",action)
+          updateImageFilePath(filepath);
+          setSelectedFile();
+          setPreviewImage();
+          closeDialog();
+          
+        } else {
+          console.log("selected action :",action)
+          console.log("selected id :",sectionId)
+          console.log("selected section :",selectedimage)
+           try {
+            const response= await axios.put(`/rest-api/home-page/${sectionId}`,{[selectedimage]:filepath});
+            console.log("change image response:",response);
+            updateImageFilePath(filepath);
+            setSelectedFile();
+            setPreviewImage();
+            closeDialog();
+          } catch (error) {
+            console.error('failed to change image:',error)
+          }
+        }           
       }
     } catch (error) {
       console.error('failed to change image:',error)
@@ -110,4 +125,4 @@ const UploadNew = () => {
   )
 }
 
-export default UploadNew
+export default NewUpload
