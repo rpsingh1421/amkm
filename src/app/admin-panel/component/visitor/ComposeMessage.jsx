@@ -1,13 +1,13 @@
 
 import { Box, Button, InputAdornment, Paper, TextField, Typography } from '@mui/material'
-import React, { useContext, useState } from 'react'
+import React, { Suspense, useContext, useState } from 'react'
 import { Forward, Reply, Send } from "@mui/icons-material";
 import { useForm } from 'react-hook-form';
 import { MessageContext } from '../../visitor/inbox/Inbox';
 import axios from 'axios';
 // import { sendMail } from '@/utils/send-mail';
 
-const ComposeMessage = () => {
+const ComposeMessageContent = () => {
     const {selectedMessageData,setSelelctSection} = useContext(MessageContext);
     const mailDataInitial ={
         to:selectedMessageData && selectedMessageData.email || '',
@@ -119,4 +119,11 @@ const ComposeMessage = () => {
   )
 }
 
+const ComposeMessage = () => {
+    return(
+        <Suspense>
+            <ComposeMessageContent/>
+        </Suspense>
+    )
+}
 export default ComposeMessage
