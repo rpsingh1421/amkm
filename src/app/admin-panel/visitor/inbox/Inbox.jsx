@@ -1,6 +1,6 @@
 "use client"
 import { Box } from '@mui/material'
-import React, { createContext, useEffect, useState } from 'react'
+import React, { Suspense, createContext, useEffect, useState } from 'react'
 import AllMessage from '../../component/visitor/AllMessage'
 import ReadMessage from '../../component/visitor/ReadMessage'
 import ComposeMessage from '../../component/visitor/ComposeMessage'
@@ -8,7 +8,7 @@ import { useSearchParams } from 'next/navigation'
 import axios from 'axios'
 
 const MessageContext = createContext();
-const Inbox = () => {
+const InboxContent = () => {
     const searchParams = useSearchParams();
     const messageId =searchParams.get('id');//if some one clicked on dashboard to a message
     const [visitorsMailList,setVisitorsMailList] = useState([]);
@@ -43,5 +43,12 @@ const Inbox = () => {
   )
 }
 
+const Inbox=()=>{
+    return (
+        <Suspense>
+            <InboxContent/>
+        </Suspense>
+    )
+}
 export default Inbox
 export {MessageContext}
